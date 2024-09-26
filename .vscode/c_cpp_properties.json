@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${HOME}/github.com/mkreem_library/**",
-                "${HOME}/ac-library/**"
+                "${HOME}/github.com/mkreem_library/ac-library/atcoder/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

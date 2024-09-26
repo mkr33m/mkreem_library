@@ -11,8 +11,8 @@ header_files = []
 for filepath in header_dir.rglob('*.hpp'):
     if filepath.name == 'all_includes.hpp':
         continue
-    # if 'ac-library' in filepath.parts:
-    #    continue
+    if 'ac-library' in filepath.parts:
+        continue
     include_path = f'/home/pomelo/github.com/mkreem_library/{filepath.relative_to(header_dir).as_posix()}'
     header_files.append(include_path)
 
