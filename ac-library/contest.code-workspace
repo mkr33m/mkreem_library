@@ -1,0 +1,24 @@
+{
+	"folders": [
+        {
+            "path": "../kyopro"
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "any": "cpp",
+            "array": "cpp",
+            "charconv": "cpp",
+            "chrono": "cpp",
+            "compare": "cpp",
+            "functional": "cpp",
+            "memory_resource": "cpp",
+            "ratio": "cpp",
+            "scoped_allocator": "cpp",
+            "tuple": "cpp",
+            "type_traits": "cpp",
+            "utility": "cpp",
+            "variant": "cpp"
+        }
+    }
+}
