@@ -108,7 +108,7 @@ public:
             if(r < itr->second) s.emplace(r+1, itr->second);
             s.erase(itr);
             sum -= r - l + 1;
-            return r - l+1;
+            return r - l + 1;
         }
 
         T res = T(0);
