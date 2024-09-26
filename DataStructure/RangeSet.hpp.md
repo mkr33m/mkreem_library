@@ -53,8 +53,8 @@ data:
     \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
     \ 10 \"DataStructure/RangeSet.hpp\"\n\n/**\n * @brief \u9589\u533A\u9593\u3092\
     \ set \u3067\u7BA1\u7406\u3059\u308B\n */\ntemplate <typename T>\nclass RangeSet{\n\
-    private:\n    std::set<std::pair<T, T>> s;\n    /**\n     * @param sum RangeSet\u5185\
-    \u306E\u8981\u7D20\u6570\n     */\n    T sum;\n    T TINF = std::numeric_limits<T>::max()\
+    private:\n    std::set<std::pair<T, T>> s;\n    /**\n     * @param sum RangeSet\
+    \ \u5185\u306E\u8981\u7D20\u6570\n     */\n    T sum;\n    T TINF = std::numeric_limits<T>::max()\
     \ / 2;\n\npublic:\n    RangeSet() : sum(T(0)){\n        s.emplace(TINF, TINF);\n\
     \        s.emplace(-TINF, -TINF);\n    }\n\n    /**\n     * @brief \u533A\u9593\
     \ [l, r] \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\u3069\
@@ -113,29 +113,29 @@ data:
     \ s.emplace(r + 1, itr->second);\n            s.erase(itr);\n        }\n     \
     \   sum -= res;\n        return res;\n    }\n\n    T erase(const T x){\n     \
     \   return erase(x, x);\n    }\n\n    /**\n     * @brief \u533A\u9593\u306E\u6570\
-    \u3092\u8FD4\u3059\n     */\n    int size() const{\n        return (int)s.size()-2;\n\
-    \    }\n\n    /**\n     * x\u4EE5\u4E0A\u3067\u542B\u307E\u308C\u3066\u306A\u3044\
-    \u6700\u5C0F\u306E\u8981\u7D20\u306F\n     * \u30FBx\u304C\u542B\u307E\u308C\u3066\
-    \u3044\u306A\u3044\uFF1Ax\n     * \u30FBx\u304C\u542B\u307E\u308C\u3066\u3044\u308B\
-    \uFF1Ax \u3092\u542B\u3080\u533A\u9593\u306E\u672B\u7AEF\u306B 1 \u52A0\u3048\u305F\
-    \u3082\u306E\n     */\n    T mex(const T x = 0) const{\n        auto itr = std::prev(s.lower_bound({x\
-    \ + 1, x + 1}));\n        if(itr->first <= x && x <= itr->second) return itr->second\
-    \ + 1;\n        else return x;\n    }\n\n    // @brief RangeSet \u5185\u306E\u8981\
-    \u7D20\u6570\u3092\u8FD4\u3059\n    T sum_all() const{\n        return sum;\n\
-    \    }\n\n    // @brief \u5168\u533A\u9593\u3092\u4FDD\u6301\u3057\u305F set \u3092\
-    \u8FD4\u3059\n    std::set<std::pair<T, T>> get() const{\n\t\tstd::set<std::pair<T,\
-    \ T>> res;\n\t\tfor(auto& interval : s) {\n\t\t\tif(std::abs(interval.first) ==\
-    \ TINF) continue;\n\t\t\tres.emplace(interval.first, interval.second);\n\t\t}\n\
-    \t\treturn res;\n\t}\n\n    void output() const{\n        std::cout << \"RangeSet:\"\
-    ;\n        for(auto& interval : s){\n            if(interval.first == -INF ||\
-    \ interval.second == INF) continue;\n            std::cout << \"[\" << interval.first\
-    \ << \",\" << interval.second << \"]\";\n        }\n        std::cout << '\\n';\n\
-    \    }\n};\n\n\n"
+    \u3092\u8FD4\u3059\n     */\n    int size() const{\n        return (int)s.size()\
+    \ - 2;\n    }\n\n    /**\n     * x \u4EE5\u4E0A\u3067\u542B\u307E\u308C\u3066\u306A\
+    \u3044\u6700\u5C0F\u306E\u8981\u7D20\u306F\n     * \u30FBx \u304C\u542B\u307E\u308C\
+    \u3066\u3044\u306A\u3044\uFF1Ax\n     * \u30FBx \u304C\u542B\u307E\u308C\u3066\
+    \u3044\u308B\uFF1Ax \u3092\u542B\u3080\u533A\u9593\u306E\u672B\u7AEF\u306B 1 \u52A0\
+    \u3048\u305F\u3082\u306E\n     */\n    T mex(const T x = 0) const{\n        auto\
+    \ itr = std::prev(s.lower_bound({x + 1, x + 1}));\n        if(itr->first <= x\
+    \ && x <= itr->second) return itr->second + 1;\n        else return x;\n    }\n\
+    \n    // @brief RangeSet \u5185\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\n  \
+    \  T sum_all() const{\n        return sum;\n    }\n\n    // @brief \u5168\u533A\
+    \u9593\u3092\u4FDD\u6301\u3057\u305F set \u3092\u8FD4\u3059\n    std::set<std::pair<T,\
+    \ T>> get() const{\n\t\tstd::set<std::pair<T, T>> res;\n\t\tfor(auto& interval\
+    \ : s) {\n\t\t\tif(std::abs(interval.first) == TINF) continue;\n\t\t\tres.emplace(interval.first,\
+    \ interval.second);\n\t\t}\n\t\treturn res;\n\t}\n\n    void output() const{\n\
+    \        std::cout << \"RangeSet:\";\n        for(auto& interval : s){\n     \
+    \       if(interval.first == -INF || interval.second == INF) continue;\n     \
+    \       std::cout << \"[\" << interval.first << \",\" << interval.second << \"\
+    ]\";\n        }\n        std::cout << '\\n';\n    }\n};\n\n\n"
   code: "#ifndef RangeSet_HPP\n#define RangeSet_HPP\n\n#include <vector>\n#include\
     \ <set>\n#include <limits>\n#include <iostream>\n\n#include \"../Others/macros.hpp\"\
     \n\n/**\n * @brief \u9589\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B\
     \n */\ntemplate <typename T>\nclass RangeSet{\nprivate:\n    std::set<std::pair<T,\
-    \ T>> s;\n    /**\n     * @param sum RangeSet\u5185\u306E\u8981\u7D20\u6570\n\
+    \ T>> s;\n    /**\n     * @param sum RangeSet \u5185\u306E\u8981\u7D20\u6570\n\
     \     */\n    T sum;\n    T TINF = std::numeric_limits<T>::max() / 2;\n\npublic:\n\
     \    RangeSet() : sum(T(0)){\n        s.emplace(TINF, TINF);\n        s.emplace(-TINF,\
     \ -TINF);\n    }\n\n    /**\n     * @brief \u533A\u9593 [l, r] \u304C\u5B8C\u5168\
@@ -194,30 +194,30 @@ data:
     \ s.emplace(r + 1, itr->second);\n            s.erase(itr);\n        }\n     \
     \   sum -= res;\n        return res;\n    }\n\n    T erase(const T x){\n     \
     \   return erase(x, x);\n    }\n\n    /**\n     * @brief \u533A\u9593\u306E\u6570\
-    \u3092\u8FD4\u3059\n     */\n    int size() const{\n        return (int)s.size()-2;\n\
-    \    }\n\n    /**\n     * x\u4EE5\u4E0A\u3067\u542B\u307E\u308C\u3066\u306A\u3044\
-    \u6700\u5C0F\u306E\u8981\u7D20\u306F\n     * \u30FBx\u304C\u542B\u307E\u308C\u3066\
-    \u3044\u306A\u3044\uFF1Ax\n     * \u30FBx\u304C\u542B\u307E\u308C\u3066\u3044\u308B\
-    \uFF1Ax \u3092\u542B\u3080\u533A\u9593\u306E\u672B\u7AEF\u306B 1 \u52A0\u3048\u305F\
-    \u3082\u306E\n     */\n    T mex(const T x = 0) const{\n        auto itr = std::prev(s.lower_bound({x\
-    \ + 1, x + 1}));\n        if(itr->first <= x && x <= itr->second) return itr->second\
-    \ + 1;\n        else return x;\n    }\n\n    // @brief RangeSet \u5185\u306E\u8981\
-    \u7D20\u6570\u3092\u8FD4\u3059\n    T sum_all() const{\n        return sum;\n\
-    \    }\n\n    // @brief \u5168\u533A\u9593\u3092\u4FDD\u6301\u3057\u305F set \u3092\
-    \u8FD4\u3059\n    std::set<std::pair<T, T>> get() const{\n\t\tstd::set<std::pair<T,\
-    \ T>> res;\n\t\tfor(auto& interval : s) {\n\t\t\tif(std::abs(interval.first) ==\
-    \ TINF) continue;\n\t\t\tres.emplace(interval.first, interval.second);\n\t\t}\n\
-    \t\treturn res;\n\t}\n\n    void output() const{\n        std::cout << \"RangeSet:\"\
-    ;\n        for(auto& interval : s){\n            if(interval.first == -INF ||\
-    \ interval.second == INF) continue;\n            std::cout << \"[\" << interval.first\
-    \ << \",\" << interval.second << \"]\";\n        }\n        std::cout << '\\n';\n\
-    \    }\n};\n\n#endif // RangeSet_HPP"
+    \u3092\u8FD4\u3059\n     */\n    int size() const{\n        return (int)s.size()\
+    \ - 2;\n    }\n\n    /**\n     * x \u4EE5\u4E0A\u3067\u542B\u307E\u308C\u3066\u306A\
+    \u3044\u6700\u5C0F\u306E\u8981\u7D20\u306F\n     * \u30FBx \u304C\u542B\u307E\u308C\
+    \u3066\u3044\u306A\u3044\uFF1Ax\n     * \u30FBx \u304C\u542B\u307E\u308C\u3066\
+    \u3044\u308B\uFF1Ax \u3092\u542B\u3080\u533A\u9593\u306E\u672B\u7AEF\u306B 1 \u52A0\
+    \u3048\u305F\u3082\u306E\n     */\n    T mex(const T x = 0) const{\n        auto\
+    \ itr = std::prev(s.lower_bound({x + 1, x + 1}));\n        if(itr->first <= x\
+    \ && x <= itr->second) return itr->second + 1;\n        else return x;\n    }\n\
+    \n    // @brief RangeSet \u5185\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\n  \
+    \  T sum_all() const{\n        return sum;\n    }\n\n    // @brief \u5168\u533A\
+    \u9593\u3092\u4FDD\u6301\u3057\u305F set \u3092\u8FD4\u3059\n    std::set<std::pair<T,\
+    \ T>> get() const{\n\t\tstd::set<std::pair<T, T>> res;\n\t\tfor(auto& interval\
+    \ : s) {\n\t\t\tif(std::abs(interval.first) == TINF) continue;\n\t\t\tres.emplace(interval.first,\
+    \ interval.second);\n\t\t}\n\t\treturn res;\n\t}\n\n    void output() const{\n\
+    \        std::cout << \"RangeSet:\";\n        for(auto& interval : s){\n     \
+    \       if(interval.first == -INF || interval.second == INF) continue;\n     \
+    \       std::cout << \"[\" << interval.first << \",\" << interval.second << \"\
+    ]\";\n        }\n        std::cout << '\\n';\n    }\n};\n\n#endif // RangeSet_HPP"
   dependsOn:
   - Others/macros.hpp
   isVerificationFile: false
   path: DataStructure/RangeSet.hpp
   requiredBy: []
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2024-09-27 04:15:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/RangeSet.hpp
