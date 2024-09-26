@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${HOME}/github.com/mkreem_library/**",
-                "${HOME}/github.com/mkreem_library/ac-library/**"
+                "${HOME}/ac-library/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

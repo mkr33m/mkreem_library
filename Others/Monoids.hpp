@@ -2,7 +2,7 @@
 #define Monoids_HPP
 
 #include <cmath>
-#include <../ac-library/atcoder/modint>
+#include </home/pomelo/ac-library/atcoder/modint>
 
 // 加算モノイド
 template <typename T>
