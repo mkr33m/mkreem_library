@@ -99,8 +99,8 @@ data:
     \u542B\u3055\u308C\u3066\u3044\u308B\n        // \u306F\u307F\u51FA\u3057\u305F\
     \u533A\u9593\n            if(itr->first < l) s.emplace(itr->first, l - 1);\n \
     \           if(r < itr->second) s.emplace(r+1, itr->second);\n            s.erase(itr);\n\
-    \            sum -= r - l + 1;\n            return r - l+1;\n        }\n\n   \
-    \     T res = T(0);\n        if(itr->first <= l && l <= itr->second){ // l \u5074\
+    \            sum -= r - l + 1;\n            return r - l + 1;\n        }\n\n \
+    \       T res = T(0);\n        if(itr->first <= l && l <= itr->second){ // l \u5074\
     \u3067\u3001\u533A\u9593 itr \u3092\u6D88\u305B\u308B\u5834\u5408\n          \
     \  res += itr->second - l + 1;\n            // \u306F\u307F\u51FA\u3057\u305F\u533A\
     \u9593\n            if(itr->first < l) s.emplace(itr->first, l - 1);\n       \
@@ -180,8 +180,8 @@ data:
     \u5305\u542B\u3055\u308C\u3066\u3044\u308B\n        // \u306F\u307F\u51FA\u3057\
     \u305F\u533A\u9593\n            if(itr->first < l) s.emplace(itr->first, l - 1);\n\
     \            if(r < itr->second) s.emplace(r+1, itr->second);\n            s.erase(itr);\n\
-    \            sum -= r - l + 1;\n            return r - l+1;\n        }\n\n   \
-    \     T res = T(0);\n        if(itr->first <= l && l <= itr->second){ // l \u5074\
+    \            sum -= r - l + 1;\n            return r - l + 1;\n        }\n\n \
+    \       T res = T(0);\n        if(itr->first <= l && l <= itr->second){ // l \u5074\
     \u3067\u3001\u533A\u9593 itr \u3092\u6D88\u305B\u308B\u5834\u5408\n          \
     \  res += itr->second - l + 1;\n            // \u306F\u307F\u51FA\u3057\u305F\u533A\
     \u9593\n            if(itr->first < l) s.emplace(itr->first, l - 1);\n       \
@@ -217,7 +217,7 @@ data:
   isVerificationFile: false
   path: DataStructure/RangeSet.hpp
   requiredBy: []
-  timestamp: '2024-09-27 04:20:08+09:00'
+  timestamp: '2024-09-27 04:21:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/RangeSet.hpp
