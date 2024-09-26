@@ -16,7 +16,7 @@ class RangeSet{
 private:
     std::set<std::pair<T, T>> s;
     /**
-     * @param sum RangeSet内の要素数
+     * @param sum RangeSet 内の要素数
      */
     T sum;
     T TINF = std::numeric_limits<T>::max() / 2;
@@ -143,13 +143,13 @@ public:
      * @brief 区間の数を返す
      */
     int size() const{
-        return (int)s.size()-2;
+        return (int)s.size() - 2;
     }
 
     /**
-     * x以上で含まれてない最小の要素は
-     * ・xが含まれていない：x
-     * ・xが含まれている：x を含む区間の末端に 1 加えたもの
+     * x 以上で含まれてない最小の要素は
+     * ・x が含まれていない：x
+     * ・x が含まれている：x を含む区間の末端に 1 加えたもの
      */
     T mex(const T x = 0) const{
         auto itr = std::prev(s.lower_bound({x + 1, x + 1}));
