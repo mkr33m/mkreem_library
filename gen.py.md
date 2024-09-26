@@ -18,8 +18,8 @@ data:
     \u30C8\u30EA\u306E\u76F8\u5BFE\u30D1\u30B9\ngen_dir = Path(__file__).resolve().parent\n\
     \nheader_dir = Path('.')\nmaster_header = header_dir / 'all_includes.hpp'\n\n\
     header_files = []\nfor filepath in header_dir.rglob('*.hpp'):\n    if filepath.name\
-    \ == 'all_includes.hpp':\n        continue\n    if 'ac-library' in filepath.parts:\n\
-    \        continue\n    include_path = f'/home/pomelo/github.com/mkreem_library/{filepath.relative_to(header_dir).as_posix()}'\n\
+    \ == 'all_includes.hpp':\n        continue\n    # if 'ac-library' in filepath.parts:\n\
+    \    #    continue\n    include_path = f'/home/pomelo/github.com/mkreem_library/{filepath.relative_to(header_dir).as_posix()}'\n\
     \    header_files.append(include_path)\n\nwith master_header.open('w') as f:\n\
     \    f.write('#ifndef all_includes_HPP\\n')\n    f.write('#define all_includes_HPP\\\
     n\\n')\n\n    for header in sorted(header_files):\n        f.write(f'#include\

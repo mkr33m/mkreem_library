@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Others/Monoids.hpp\"\n\n\n\n#include <cmath>\n#include <../ac-library/atcoder/modint>\n\
+  bundledCode: "#line 1 \"Others/Monoids.hpp\"\n\n\n\n#include <cmath>\n#include </home/pomelo/ac-library/atcoder/modint>\n\
     \n// \u52A0\u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\nstruct AddMonoid\
     \ {\n    using S = T;\n    static S e(){\n        return 0;\n    }\n    static\
     \ S op(const S& l, const S& r){\n        return l + r;\n    }\n    static S inv(const\
@@ -37,7 +37,7 @@ data:
     \        return 0;\n    }\n    static S op(const S& l, const S& r){\n        return\
     \ l ^ r;\n    }\n    static S inv(const S& x){\n        return x;\n    }\n};\n\
     \n\n"
-  code: "#ifndef Monoids_HPP\n#define Monoids_HPP\n\n#include <cmath>\n#include <../ac-library/atcoder/modint>\n\
+  code: "#ifndef Monoids_HPP\n#define Monoids_HPP\n\n#include <cmath>\n#include </home/pomelo/ac-library/atcoder/modint>\n\
     \n// \u52A0\u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\nstruct AddMonoid\
     \ {\n    using S = T;\n    static S e(){\n        return 0;\n    }\n    static\
     \ S op(const S& l, const S& r){\n        return l + r;\n    }\n    static S inv(const\
@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: Others/Monoids.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2024-09-26 23:19:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/Monoids.hpp
