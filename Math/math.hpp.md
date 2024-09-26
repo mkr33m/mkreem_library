@@ -1,7 +1,14 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: Others/macros.hpp
+    title: Others/macros.hpp
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: Algorithm/next_pairing.hpp
+    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
+      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -11,9 +18,9 @@ data:
       \u305F\u3001x^n\u306E\u6C42\u5024"
     links: []
   bundledCode: "#line 1 \"Math/math.hpp\"\n\n\n\n#line 1 \"Others/macros.hpp\"\n\n\
-    \n\n#include <vector>\n#include <queue>\n#include <cmath>\n#include <../ac-library/atcoder/modint>\n\
-    \nusing ll = long long;\nusing lll = __int128_t;\nusing ld = long double;\n#define\
-    \ newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
+    \n\n#include <vector>\n#include <queue>\n#include <cmath>\n\nusing ll = long long;\n\
+    using lll = __int128_t;\nusing ld = long double;\n#define newl '\\n'\n#define\
+    \ REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
     #define IMAX INT_MAX\n#define IMIN INT_MIN\n#define LLMAX LONG_LONG_MAX\n#define\
     \ LLMIN LONG_LONG_MIN\n#define BIT(i) (1LL << (i))\n#define tbit(n, k) ((n >>\
     \ k) & 1) // n\u306E\uFF08\u4E0A\u304B\u3089\uFF09k\u30D3\u30C3\u30C8\u76EE\n\
@@ -79,11 +86,13 @@ data:
     \u3081\u308B\n     */\n    int log2_floor(long long N){\n        int res = -1;\n\
     \        while(N != 0){\n            res++;\n            N /= 2;\n        }\n\
     \        return res;\n    }\n\n} // namespace math\n\n#endif // math_HPP"
-  dependsOn: []
+  dependsOn:
+  - Others/macros.hpp
   isVerificationFile: false
   path: Math/math.hpp
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - Algorithm/next_pairing.hpp
+  timestamp: '2024-09-26 23:38:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/math.hpp

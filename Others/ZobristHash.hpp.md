@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: Others/macros.hpp
+    title: Others/macros.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,9 +16,9 @@ data:
   bundledCode: "#line 1 \"Others/ZobristHash.hpp\"\n\n\n\n#include <vector>\n#include\
     \ <set>\n#include <map>\n#include <unordered_set>\n#include <limits>\n#include\
     \ <algorithm>\n#include <random>\n\n#line 1 \"Others/macros.hpp\"\n\n\n\n#line\
-    \ 5 \"Others/macros.hpp\"\n#include <queue>\n#include <cmath>\n#include <../ac-library/atcoder/modint>\n\
-    \nusing ll = long long;\nusing lll = __int128_t;\nusing ld = long double;\n#define\
-    \ newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
+    \ 5 \"Others/macros.hpp\"\n#include <queue>\n#include <cmath>\n\nusing ll = long\
+    \ long;\nusing lll = __int128_t;\nusing ld = long double;\n#define newl '\\n'\n\
+    #define REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
     #define IMAX INT_MAX\n#define IMIN INT_MIN\n#define LLMAX LONG_LONG_MAX\n#define\
     \ LLMIN LONG_LONG_MIN\n#define BIT(i) (1LL << (i))\n#define tbit(n, k) ((n >>\
     \ k) & 1) // n\u306E\uFF08\u4E0A\u304B\u3089\uFF09k\u30D3\u30C3\u30C8\u76EE\n\
@@ -126,11 +129,12 @@ data:
     \ std::vector<ll> hashed_vec(N + 1);\n\n        for(int i = 0; i < N; i++){\n\
     \            hashed_vec[i + 1] = hashed_vec[i] + val(vec[i]);\n        }\n\n \
     \       return hashed_vec;\n    }\n};\n\n#endif // ZobristHash_HPP"
-  dependsOn: []
+  dependsOn:
+  - Others/macros.hpp
   isVerificationFile: false
   path: Others/ZobristHash.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-09-26 23:38:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/ZobristHash.hpp

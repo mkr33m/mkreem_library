@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: Others/macros.hpp
+    title: Others/macros.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -9,9 +12,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"Geometry/Point.hpp\"\n\n\n\n#line 1 \"Others/macros.hpp\"\
-    \n\n\n\n#include <vector>\n#include <queue>\n#include <cmath>\n#include <../ac-library/atcoder/modint>\n\
-    \nusing ll = long long;\nusing lll = __int128_t;\nusing ld = long double;\n#define\
-    \ newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
+    \n\n\n\n#include <vector>\n#include <queue>\n#include <cmath>\n\nusing ll = long\
+    \ long;\nusing lll = __int128_t;\nusing ld = long double;\n#define newl '\\n'\n\
+    #define REF const auto&\n#define INF 1000390039\n#define LLINF 1000000039000000039\n\
     #define IMAX INT_MAX\n#define IMIN INT_MIN\n#define LLMAX LONG_LONG_MAX\n#define\
     \ LLMIN LONG_LONG_MIN\n#define BIT(i) (1LL << (i))\n#define tbit(n, k) ((n >>\
     \ k) & 1) // n\u306E\uFF08\u4E0A\u304B\u3089\uFF09k\u30D3\u30C3\u30C8\u76EE\n\
@@ -133,11 +136,12 @@ data:
     \n        return x * p.x + y * p.y;\n    }\n    long long cross(const Point& p)\
     \ const { // \u5916\u7A4D\uFF08cross product\uFF09\n        return x * p.y - y\
     \ * p.x;\n    }\n};\n\n#endif // H_Point"
-  dependsOn: []
+  dependsOn:
+  - Others/macros.hpp
   isVerificationFile: false
   path: Geometry/Point.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-09-26 23:38:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Geometry/Point.hpp
