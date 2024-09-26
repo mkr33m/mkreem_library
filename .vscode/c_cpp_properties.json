@@ -3,7 +3,9 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${HOME}/github.com/mkreem_library/**",
+                "${HOME}/github.com/mkreem_library/ac-library/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
