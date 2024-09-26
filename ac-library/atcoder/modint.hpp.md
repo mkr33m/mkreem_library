@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: Others/Monoids.hpp
-    title: Others/Monoids.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -198,8 +195,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/modint.hpp
-  requiredBy:
-  - Others/Monoids.hpp
+  requiredBy: []
   timestamp: '2024-09-27 02:37:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
