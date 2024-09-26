@@ -14,8 +14,8 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "import os\nfrom pathlib import Path\n\n# gen.py \u306E\u30C7\u30A3\u30EC\u30AF\
-    \u30C8\u30EA\u306E\u76F8\u5BFE\u30D1\u30B9\ngen_dir = Path(__file__).resolve().parent\n\
+  code: "from pathlib import Path\n\n# gen.py \u306E\u30C7\u30A3\u30EC\u30AF\u30C8\
+    \u30EA\u306E\u76F8\u5BFE\u30D1\u30B9\ngen_dir = Path(__file__).resolve().parent\n\
     \nheader_dir = Path('.')\nmaster_header = header_dir / 'all_includes.hpp'\n\n\
     header_files = []\nfor filepath in header_dir.rglob('*.hpp'):\n    if filepath.name\
     \ == 'all_includes.hpp':\n        continue\n    if 'ac-library' in filepath.parts:\n\
