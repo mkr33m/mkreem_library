@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -212,12 +209,11 @@ data:
     \ interval.second == INF) continue;\n            std::cout << \"[\" << interval.first\
     \ << \",\" << interval.second << \"]\";\n        }\n        std::cout << '\\n';\n\
     \    }\n};\n\n#endif // RangeSet_HPP"
-  dependsOn:
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: DataStructure/RangeSet.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/RangeSet.hpp

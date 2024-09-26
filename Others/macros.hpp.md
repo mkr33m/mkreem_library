@@ -1,36 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: Algorithm/next_pairing.hpp
-    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
-      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
-  - icon: ':warning:'
-    path: Algorithm/next_pairing.hpp
-    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
-      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
-  - icon: ':warning:'
-    path: DataStructure/RangeSet.hpp
-    title: "\u9589\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
-  - icon: ':warning:'
-    path: Geometry/Point.hpp
-    title: Geometry/Point.hpp
-  - icon: ':warning:'
-    path: Math/binom.cpp
-    title: Math/binom.cpp
-  - icon: ':warning:'
-    path: Math/binom_mod_ll.cpp
-    title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
-      \u308B"
-  - icon: ':warning:'
-    path: Math/math.hpp
-    title: "\u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\u7528\u3057\u305F\
-      \u3001x^n\u306E\u6C42\u5024"
-  - icon: ':warning:'
-    path: Others/ZobristHash.hpp
-    title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\
-      \u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -117,16 +88,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: Others/macros.hpp
-  requiredBy:
-  - Geometry/Point.hpp
-  - DataStructure/RangeSet.hpp
-  - Math/math.hpp
-  - Math/binom.cpp
-  - Math/binom_mod_ll.cpp
-  - Algorithm/next_pairing.hpp
-  - Algorithm/next_pairing.hpp
-  - Others/ZobristHash.hpp
-  timestamp: '2024-09-26 18:45:24+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/macros.hpp

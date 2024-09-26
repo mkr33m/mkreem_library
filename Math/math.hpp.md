@@ -1,14 +1,7 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: Algorithm/next_pairing.hpp
-    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
-      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -86,13 +79,11 @@ data:
     \u3081\u308B\n     */\n    int log2_floor(long long N){\n        int res = -1;\n\
     \        while(N != 0){\n            res++;\n            N /= 2;\n        }\n\
     \        return res;\n    }\n\n} // namespace math\n\n#endif // math_HPP"
-  dependsOn:
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Math/math.hpp
-  requiredBy:
-  - Algorithm/next_pairing.hpp
-  timestamp: '2024-09-26 18:45:24+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/math.hpp

@@ -1,13 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Math/extended_gcd.hpp
-    title: "a * x + b * y == gcd(a, b)\u3092\u6E80\u305F\u3059 x, y \u3092\u898B\u3064\
-      \u3051\u308B"
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -103,13 +96,11 @@ data:
     \n    ll val(int N, int K){\n        if(N < K || N < 0 || K < 0){\n          \
     \  return 0;\n        }\n        return factorial[N] * (factorial_inv[K] * factorial_inv[N\
     \ - K] % MOD) % MOD;\n    }\n};\n\n#endif //binom_mod_ll_HPP"
-  dependsOn:
-  - Others/macros.hpp
-  - Math/extended_gcd.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Math/binom_mod_ll.cpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/binom_mod_ll.cpp

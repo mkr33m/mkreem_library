@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -136,12 +133,11 @@ data:
     \n        return x * p.x + y * p.y;\n    }\n    long long cross(const Point& p)\
     \ const { // \u5916\u7A4D\uFF08cross product\uFF09\n        return x * p.y - y\
     \ * p.x;\n    }\n};\n\n#endif // H_Point"
-  dependsOn:
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Geometry/Point.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Geometry/Point.hpp

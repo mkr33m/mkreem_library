@@ -1,16 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Math/math.hpp
-    title: "\u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\u7528\u3057\u305F\
-      \u3001x^n\u306E\u6C42\u5024"
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -101,14 +91,11 @@ data:
     \     for(int j = i + 1; j < N; j++){\n                vec[j] = __builtin_ctzll(used);\n\
     \                used ^= (1 << vec[j]);\n            }\n            return true;\n\
     \        }\n    }\n    return false;\n}\n\n#endif // next_pairing_HPP"
-  dependsOn:
-  - Others/macros.hpp
-  - Math/math.hpp
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Algorithm/next_pairing.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/next_pairing.hpp

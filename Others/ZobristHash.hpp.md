@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -129,12 +126,11 @@ data:
     \ std::vector<ll> hashed_vec(N + 1);\n\n        for(int i = 0; i < N; i++){\n\
     \            hashed_vec[i + 1] = hashed_vec[i] + val(vec[i]);\n        }\n\n \
     \       return hashed_vec;\n    }\n};\n\n#endif // ZobristHash_HPP"
-  dependsOn:
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Others/ZobristHash.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/ZobristHash.hpp

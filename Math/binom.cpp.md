@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: Others/macros.hpp
-    title: Others/macros.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -69,12 +66,11 @@ data:
     \     }\n    }\n\n    ll val(int i, int j){\n        if(i < j || i < 0 || j <\
     \ 0){\n            return 0LL;\n        }\n        return C[i][j];\n    }\n};\n\
     \n#endif // binom_HPP"
-  dependsOn:
-  - Others/macros.hpp
+  dependsOn: []
   isVerificationFile: false
   path: Math/binom.cpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/binom.cpp

@@ -1,11 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: Math/binom_mod_ll.cpp
-    title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
-      \u308B"
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -37,8 +33,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: Math/extended_gcd.hpp
-  requiredBy:
-  - Math/binom_mod_ll.cpp
+  requiredBy: []
   timestamp: '2024-09-26 18:45:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
