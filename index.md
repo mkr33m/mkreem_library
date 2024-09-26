@@ -126,9 +126,6 @@ data:
       path: all_includes.hpp
       title: all_includes.hpp
     - icon: ':warning:'
-      path: empty.cpp
-      title: empty.cpp
-    - icon: ':warning:'
       path: gen.py
       title: gen.py
   verificationCategories: []
