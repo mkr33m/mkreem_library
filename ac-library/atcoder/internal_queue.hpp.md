@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: ac-library/atcoder/maxflow.hpp
+    title: ac-library/atcoder/maxflow.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -29,7 +32,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/internal_queue.hpp
-  requiredBy: []
+  requiredBy:
+  - ac-library/atcoder/maxflow.hpp
   timestamp: '2024-09-27 02:37:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

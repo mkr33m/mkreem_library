@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: ac-library/atcoder/scc.hpp
+    title: ac-library/atcoder/scc.hpp
+  - icon: ':warning:'
+    path: ac-library/atcoder/twosat.hpp
+    title: ac-library/atcoder/twosat.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -85,7 +91,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/internal_scc.hpp
-  requiredBy: []
+  requiredBy:
+  - ac-library/atcoder/twosat.hpp
+  - ac-library/atcoder/scc.hpp
   timestamp: '2024-09-27 02:37:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

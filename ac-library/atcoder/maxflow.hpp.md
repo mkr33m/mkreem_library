@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: ac-library/atcoder/internal_queue.hpp
+    title: ac-library/atcoder/internal_queue.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -9,18 +12,27 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"ac-library/atcoder/maxflow.hpp\"\n\n\n\n#include <algorithm>\n\
-    #include <atcoder/internal_queue>\n#include <cassert>\n#include <limits>\n#include\
-    \ <queue>\n#include <vector>\n\nnamespace atcoder {\n\ntemplate <class Cap> struct\
-    \ mf_graph {\n  public:\n    mf_graph() : _n(0) {}\n    mf_graph(int n) : _n(n),\
-    \ g(n) {}\n\n    int add_edge(int from, int to, Cap cap) {\n        assert(0 <=\
-    \ from && from < _n);\n        assert(0 <= to && to < _n);\n        assert(0 <=\
-    \ cap);\n        int m = int(pos.size());\n        pos.push_back({from, int(g[from].size())});\n\
-    \        int from_id = int(g[from].size());\n        int to_id = int(g[to].size());\n\
-    \        if (from == to) to_id++;\n        g[from].push_back(_edge{to, to_id,\
-    \ cap});\n        g[to].push_back(_edge{from, from_id, 0});\n        return m;\n\
-    \    }\n\n    struct edge {\n        int from, to;\n        Cap cap, flow;\n \
-    \   };\n\n    edge get_edge(int i) {\n        int m = int(pos.size());\n     \
-    \   assert(0 <= i && i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n\
+    #line 1 \"ac-library/atcoder/internal_queue.hpp\"\n\n\n\n#include <vector>\n\n\
+    namespace atcoder {\n\nnamespace internal {\n\ntemplate <class T> struct simple_queue\
+    \ {\n    std::vector<T> payload;\n    int pos = 0;\n    void reserve(int n) {\
+    \ payload.reserve(n); }\n    int size() const { return int(payload.size()) - pos;\
+    \ }\n    bool empty() const { return pos == int(payload.size()); }\n    void push(const\
+    \ T& t) { payload.push_back(t); }\n    T& front() { return payload[pos]; }\n \
+    \   void clear() {\n        payload.clear();\n        pos = 0;\n    }\n    void\
+    \ pop() { pos++; }\n};\n\n}  // namespace internal\n\n}  // namespace atcoder\n\
+    \n\n#line 6 \"ac-library/atcoder/maxflow.hpp\"\n#ifndef ATCODER_INTERNAL_QUEUE_HPP\n\
+    #define ATCODER_INTERNAL_QUEUE_HPP\n#endif\n#include <cassert>\n#include <limits>\n\
+    #include <queue>\n#line 13 \"ac-library/atcoder/maxflow.hpp\"\n\nnamespace atcoder\
+    \ {\n\ntemplate <class Cap> struct mf_graph {\n  public:\n    mf_graph() : _n(0)\
+    \ {}\n    mf_graph(int n) : _n(n), g(n) {}\n\n    int add_edge(int from, int to,\
+    \ Cap cap) {\n        assert(0 <= from && from < _n);\n        assert(0 <= to\
+    \ && to < _n);\n        assert(0 <= cap);\n        int m = int(pos.size());\n\
+    \        pos.push_back({from, int(g[from].size())});\n        int from_id = int(g[from].size());\n\
+    \        int to_id = int(g[to].size());\n        if (from == to) to_id++;\n  \
+    \      g[from].push_back(_edge{to, to_id, cap});\n        g[to].push_back(_edge{from,\
+    \ from_id, 0});\n        return m;\n    }\n\n    struct edge {\n        int from,\
+    \ to;\n        Cap cap, flow;\n    };\n\n    edge get_edge(int i) {\n        int\
+    \ m = int(pos.size());\n        assert(0 <= i && i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n\
     \        auto _re = g[_e.to][_e.rev];\n        return edge{pos[i].first, _e.to,\
     \ _e.cap + _re.cap, _re.cap};\n    }\n    std::vector<edge> edges() {\n      \
     \  int m = int(pos.size());\n        std::vector<edge> result;\n        for (int\
@@ -65,18 +77,18 @@ data:
     \ cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
     \ g;\n};\n\n}  // namespace atcoder\n\n\n"
   code: "#ifndef ATCODER_MAXFLOW_HPP\n#define ATCODER_MAXFLOW_HPP 1\n\n#include <algorithm>\n\
-    #include <atcoder/internal_queue>\n#include <cassert>\n#include <limits>\n#include\
-    \ <queue>\n#include <vector>\n\nnamespace atcoder {\n\ntemplate <class Cap> struct\
-    \ mf_graph {\n  public:\n    mf_graph() : _n(0) {}\n    mf_graph(int n) : _n(n),\
-    \ g(n) {}\n\n    int add_edge(int from, int to, Cap cap) {\n        assert(0 <=\
-    \ from && from < _n);\n        assert(0 <= to && to < _n);\n        assert(0 <=\
-    \ cap);\n        int m = int(pos.size());\n        pos.push_back({from, int(g[from].size())});\n\
-    \        int from_id = int(g[from].size());\n        int to_id = int(g[to].size());\n\
-    \        if (from == to) to_id++;\n        g[from].push_back(_edge{to, to_id,\
-    \ cap});\n        g[to].push_back(_edge{from, from_id, 0});\n        return m;\n\
-    \    }\n\n    struct edge {\n        int from, to;\n        Cap cap, flow;\n \
-    \   };\n\n    edge get_edge(int i) {\n        int m = int(pos.size());\n     \
-    \   assert(0 <= i && i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n\
+    #include \"internal_queue.hpp\"\n#ifndef ATCODER_INTERNAL_QUEUE_HPP\n#define ATCODER_INTERNAL_QUEUE_HPP\n\
+    #endif\n#include <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\
+    \nnamespace atcoder {\n\ntemplate <class Cap> struct mf_graph {\n  public:\n \
+    \   mf_graph() : _n(0) {}\n    mf_graph(int n) : _n(n), g(n) {}\n\n    int add_edge(int\
+    \ from, int to, Cap cap) {\n        assert(0 <= from && from < _n);\n        assert(0\
+    \ <= to && to < _n);\n        assert(0 <= cap);\n        int m = int(pos.size());\n\
+    \        pos.push_back({from, int(g[from].size())});\n        int from_id = int(g[from].size());\n\
+    \        int to_id = int(g[to].size());\n        if (from == to) to_id++;\n  \
+    \      g[from].push_back(_edge{to, to_id, cap});\n        g[to].push_back(_edge{from,\
+    \ from_id, 0});\n        return m;\n    }\n\n    struct edge {\n        int from,\
+    \ to;\n        Cap cap, flow;\n    };\n\n    edge get_edge(int i) {\n        int\
+    \ m = int(pos.size());\n        assert(0 <= i && i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n\
     \        auto _re = g[_e.to][_e.rev];\n        return edge{pos[i].first, _e.to,\
     \ _e.cap + _re.cap, _re.cap};\n    }\n    std::vector<edge> edges() {\n      \
     \  int m = int(pos.size());\n        std::vector<edge> result;\n        for (int\
@@ -120,11 +132,12 @@ data:
     \n  private:\n    int _n;\n    struct _edge {\n        int to, rev;\n        Cap\
     \ cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
     \ g;\n};\n\n}  // namespace atcoder\n\n#endif  // ATCODER_MAXFLOW_HPP\n"
-  dependsOn: []
+  dependsOn:
+  - ac-library/atcoder/internal_queue.hpp
   isVerificationFile: false
   path: ac-library/atcoder/maxflow.hpp
   requiredBy: []
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 01:53:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/maxflow.hpp

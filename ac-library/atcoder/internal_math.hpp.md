@@ -1,7 +1,16 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: ac-library/atcoder/convolution.hpp
+    title: ac-library/atcoder/convolution.hpp
+  - icon: ':warning:'
+    path: ac-library/atcoder/math.hpp
+    title: ac-library/atcoder/math.hpp
+  - icon: ':warning:'
+    path: ac-library/atcoder/modint.hpp
+    title: ac-library/atcoder/modint.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -138,7 +147,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/internal_math.hpp
-  requiredBy: []
+  requiredBy:
+  - ac-library/atcoder/modint.hpp
+  - ac-library/atcoder/math.hpp
+  - ac-library/atcoder/convolution.hpp
   timestamp: '2024-09-27 02:37:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

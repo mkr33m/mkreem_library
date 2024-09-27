@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: ac-library/atcoder/internal_bit.hpp
+    title: ac-library/atcoder/internal_bit.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -9,12 +12,21 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"ac-library/atcoder/lazysegtree.hpp\"\n\n\n\n#include <algorithm>\n\
-    #include <atcoder/internal_bit>\n#include <cassert>\n#include <iostream>\n#include\
-    \ <vector>\nnamespace atcoder {\n\ntemplate <class S,\n          S (*op)(S, S),\n\
-    \          S (*e)(),\n          class F,\n          S (*mapping)(F, S),\n    \
-    \      F (*composition)(F, F),\n          F (*id)()>\nstruct lazy_segtree {\n\
-    \  public:\n    lazy_segtree() : lazy_segtree(0) {}\n    lazy_segtree(int n) :\
-    \ lazy_segtree(std::vector<S>(n, e())) {}\n    lazy_segtree(const std::vector<S>&\
+    #line 1 \"ac-library/atcoder/internal_bit.hpp\"\n\n\n\n#ifdef _MSC_VER\n#include\
+    \ <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace internal {\n\n// @param\
+    \ n `0 <= n`\n// @return minimum non-negative `x` s.t. `n <= 2**x`\nint ceil_pow2(int\
+    \ n) {\n    int x = 0;\n    while ((1U << x) < (unsigned int)(n)) x++;\n    return\
+    \ x;\n}\n\n// @param n `1 <= n`\n// @return minimum non-negative `x` s.t. `(n\
+    \ & (1 << x)) != 0`\nint bsf(unsigned int n) {\n#ifdef _MSC_VER\n    unsigned\
+    \ long index;\n    _BitScanForward(&index, n);\n    return index;\n#else\n   \
+    \ return __builtin_ctz(n);\n#endif\n}\n\n}  // namespace internal\n\n}  // namespace\
+    \ atcoder\n\n\n#line 6 \"ac-library/atcoder/lazysegtree.hpp\"\n#ifndef ATCODER_INTERNAL_BITOP_HPP\n\
+    #define ATCODER_INTERNAL_BITOP_HPP\n#endif\n#include <cassert>\n#include <iostream>\n\
+    #include <vector>\nnamespace atcoder {\n\ntemplate <class S,\n          S (*op)(S,\
+    \ S),\n          S (*e)(),\n          class F,\n          S (*mapping)(F, S),\n\
+    \          F (*composition)(F, F),\n          F (*id)()>\nstruct lazy_segtree\
+    \ {\n  public:\n    lazy_segtree() : lazy_segtree(0) {}\n    lazy_segtree(int\
+    \ n) : lazy_segtree(std::vector<S>(n, e())) {}\n    lazy_segtree(const std::vector<S>&\
     \ v) : _n(int(v.size())) {\n        log = internal::ceil_pow2(_n);\n        size\
     \ = 1 << log;\n        d = std::vector<S>(2 * size, e());\n        lz = std::vector<F>(size,\
     \ id());\n        for (int i = 0; i < _n; i++) d[size + i] = v[i];\n        for\
@@ -74,7 +86,8 @@ data:
     \ * k, lz[k]);\n        all_apply(2 * k + 1, lz[k]);\n        lz[k] = id();\n\
     \    }\n};\n\n}  // namespace atcoder\n\n\n"
   code: "#ifndef ATCODER_LAZYSEGTREE_HPP\n#define ATCODER_LAZYSEGTREE_HPP 1\n\n#include\
-    \ <algorithm>\n#include <atcoder/internal_bit>\n#include <cassert>\n#include <iostream>\n\
+    \ <algorithm>\n#include \"internal_bit.hpp\"\n#ifndef ATCODER_INTERNAL_BITOP_HPP\n\
+    #define ATCODER_INTERNAL_BITOP_HPP\n#endif\n#include <cassert>\n#include <iostream>\n\
     #include <vector>\nnamespace atcoder {\n\ntemplate <class S,\n          S (*op)(S,\
     \ S),\n          S (*e)(),\n          class F,\n          S (*mapping)(F, S),\n\
     \          F (*composition)(F, F),\n          F (*id)()>\nstruct lazy_segtree\
@@ -138,11 +151,12 @@ data:
     \ lz[k] = composition(f, lz[k]);\n    }\n    void push(int k) {\n        all_apply(2\
     \ * k, lz[k]);\n        all_apply(2 * k + 1, lz[k]);\n        lz[k] = id();\n\
     \    }\n};\n\n}  // namespace atcoder\n\n#endif  // ATCODER_LAZYSEGTREE_HPP\n"
-  dependsOn: []
+  dependsOn:
+  - ac-library/atcoder/internal_bit.hpp
   isVerificationFile: false
   path: ac-library/atcoder/lazysegtree.hpp
   requiredBy: []
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 01:53:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/lazysegtree.hpp
