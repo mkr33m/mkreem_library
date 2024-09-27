@@ -3,8 +3,10 @@
 
 #include <cmath>
 
-#include "/home/pomelo/ac-library/atcoder/modint.hpp"
+#include "/home/pomelo/github.com/mkreem_library/ac-library/atcoder/modint.hpp"
+#ifndef ATCODER_MODINT_HPP
 #define ATCODER_MODINT_HPP // <- #include <ac-library/all> したときに重複してしまうから必須
+#endif
 
 // 加算モノイド
 template <typename T>

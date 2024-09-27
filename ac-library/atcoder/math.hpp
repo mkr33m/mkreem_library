@@ -5,7 +5,10 @@
 #include <cassert>
 #include <tuple>
 #include <vector>
-#include <atcoder/internal_math>
+#include "internal_math.hpp"
+#ifndef ATCODER_INTERNAL_MATH_HPP
+#define ATCODER_INTERNAL_MATH_HPP
+#endif
 
 namespace atcoder {
 

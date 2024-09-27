@@ -3,8 +3,14 @@
 
 #include <algorithm>
 #include <array>
-#include <atcoder/internal_bit>
-#include <atcoder/modint>
+#include "internal_bit.hpp"
+#ifndef ATCODER_INTERNAL_BITOP_HPP
+#define ATCODER_INTERNAL_BITOP_HPP
+#endif
+#include "modint.hpp"
+#ifndef ATCODER_MODINT_HPP
+#define ATCODER_MODINT_HPP
+#endif
 #include <cassert>
 #include <type_traits>
 #include <vector>

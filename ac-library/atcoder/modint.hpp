@@ -1,8 +1,14 @@
 #ifndef ATCODER_MODINT_HPP
 #define ATCODER_MODINT_HPP 1
 
-#include <atcoder/internal_math>
-#include <atcoder/internal_type_traits>
+#include "internal_math.hpp"
+#ifndef ATCODER_INTERNAL_MATH_HPP
+#define ATCODER_INTERNAL_MATH_HPP
+#endif
+#include "internal_type_traits.hpp"
+#ifndef ATCODER_INTERNAL_TYPE_TRAITS_HPP
+#define ATCODER_INTERNAL_TYPE_TRAITS_HPP
+#endif
 #include <cassert>
 #include <numeric>
 #include <type_traits>
