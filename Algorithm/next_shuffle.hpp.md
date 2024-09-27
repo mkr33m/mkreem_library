@@ -7,12 +7,12 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "(K, N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\
+    document_title: "(K,N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\
       \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
     links: []
   bundledCode: "#line 1 \"Algorithm/next_shuffle.hpp\"\n\n\n\n#include <vector>\n\
     #include <limits>\n#include <algorithm>\n\ntemplate <typename T>\n/**\n * @brief\
-    \ (K, N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A \u3092\
+    \ (K,N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A \u3092\
     \u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B\n */\nbool next_shuffle(std::vector<T>&\
     \ vec, const int& K){\n    int N = vec.size();\n    if(N <= K){\n        return\
     \ false;\n    }\n\n    // \u524D K \u9805 := L\n    // \u5F8C\u308DN - K\u9805\
@@ -44,7 +44,7 @@ data:
     \    return true;\n}\n\n\n"
   code: "#ifndef next_shuffle_HPP\n#define next_shuffle_HPP\n\n#include <vector>\n\
     #include <limits>\n#include <algorithm>\n\ntemplate <typename T>\n/**\n * @brief\
-    \ (K, N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A \u3092\
+    \ (K,N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A \u3092\
     \u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B\n */\nbool next_shuffle(std::vector<T>&\
     \ vec, const int& K){\n    int N = vec.size();\n    if(N <= K){\n        return\
     \ false;\n    }\n\n    // \u524D K \u9805 := L\n    // \u5F8C\u308DN - K\u9805\
@@ -78,7 +78,7 @@ data:
   isVerificationFile: false
   path: Algorithm/next_shuffle.hpp
   requiredBy: []
-  timestamp: '2024-09-27 21:05:06+09:00'
+  timestamp: '2024-09-26 18:45:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/next_shuffle.hpp
@@ -86,6 +86,6 @@ layout: document
 redirect_from:
 - /library/Algorithm/next_shuffle.hpp
 - /library/Algorithm/next_shuffle.hpp.html
-title: "(K, N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A\
+title: "(K,N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A\
   \ \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
 ---
