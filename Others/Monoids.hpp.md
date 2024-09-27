@@ -18,21 +18,21 @@ data:
     \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
     \ File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: /home/pomelo/github.com/mkreem_library/ac-library/atcoder/modint.hpp:\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: /home/pomelo/ac-library/atcoder/modint.hpp:\
     \ line -1: no such header\n"
   code: "#ifndef Monoids_HPP\n#define Monoids_HPP\n\n#include <cmath>\n\n#include\
-    \ \"/home/pomelo/github.com/mkreem_library/ac-library/atcoder/modint.hpp\"\n#define\
-    \ ATCODER_MODINT_HPP // <- #include <ac-library/all> \u3057\u305F\u3068\u304D\u306B\
-    \u91CD\u8907\u3057\u3066\u3057\u307E\u3046\u304B\u3089\u5FC5\u9808\n\n// \u52A0\
-    \u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\nstruct AddMonoid {\n  \
-    \  using S = T;\n    static S e(){\n        return 0;\n    }\n    static S op(const\
-    \ S& l, const S& r){\n        return l + r;\n    }\n    static S inv(const S&\
-    \ x){\n        return -x;\n    }\n};\n\n// \u639B\u7B97\u30E2\u30CE\u30A4\u30C9\
-    \ntemplate <typename T = atcoder::modint998244353>\nstruct MultiplyMonoid_998\
-    \ {\n    using S = T;\n    static S e(){\n        return 1;\n    }\n    static\
-    \ S op(const S& l, const S& r){\n        return l * r;\n    }\n    static S inv(const\
-    \ S& x){\n        return x.inv();\n    }\n};\n\n// \u639B\u7B97\u30E2\u30CE\u30A4\
-    \u30C9\ntemplate <typename T = atcoder::modint1000000007>\nstruct MultiplyMonoid_100\
+    \ \"/home/pomelo/ac-library/atcoder/modint.hpp\"\n#define ATCODER_MODINT_HPP //\
+    \ <- #include <ac-library/all> \u3057\u305F\u3068\u304D\u306B\u91CD\u8907\u3057\
+    \u3066\u3057\u307E\u3046\u304B\u3089\u5FC5\u9808\n\n// \u52A0\u7B97\u30E2\u30CE\
+    \u30A4\u30C9\ntemplate <typename T>\nstruct AddMonoid {\n    using S = T;\n  \
+    \  static S e(){\n        return 0;\n    }\n    static S op(const S& l, const\
+    \ S& r){\n        return l + r;\n    }\n    static S inv(const S& x){\n      \
+    \  return -x;\n    }\n};\n\n// \u639B\u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate\
+    \ <typename T = atcoder::modint998244353>\nstruct MultiplyMonoid_998 {\n    using\
+    \ S = T;\n    static S e(){\n        return 1;\n    }\n    static S op(const S&\
+    \ l, const S& r){\n        return l * r;\n    }\n    static S inv(const S& x){\n\
+    \        return x.inv();\n    }\n};\n\n// \u639B\u7B97\u30E2\u30CE\u30A4\u30C9\
+    \ntemplate <typename T = atcoder::modint1000000007>\nstruct MultiplyMonoid_100\
     \ {\n    using S = T;\n    static S e(){\n        return 1;\n    }\n    static\
     \ S op(const S& l, const S& r){\n        return l * r;\n    }\n    static S inv(const\
     \ S& x){\n        return x.inv();\n    }\n};\n\n// \u6700\u5927\u5024\u30E2\u30CE\
