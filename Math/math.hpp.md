@@ -59,40 +59,46 @@ data:
     \u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\u7528\u3057\u305F\u3001x^n\u306E\u6C42\
     \u5024\n     */\n    ll pow(ll x, ll n){\n        ll res = 1;\n\n        while(n){\n\
     \            if(n & 1) res *= x;\n            x *= x;\n            n >>= 1;\n\
-    \        }\n\n        return res;\n    }\n\n    /**\n     * @brief x/m\u306Efloor\uFF08\
-    x/m\u4EE5\u4E0B\u306E\u6700\u5927\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\
-    \n     */\n    ll floor(const ll& x, const ll& m){\n        ll r = (x % m + m)\
-    \ % m; // x\u3092m\u3067\u5272\u3063\u305F\u4F59\u308A\n        return (x - r)\
-    \ / m;\n    }\n\n    /**\n     * @brief x/m\u306Eceil\uFF08x/m\u4EE5\u4E0A\u306E\
-    \u6700\u5C0F\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\n     */\n    ll\
-    \ ceil(const ll& x, const ll& m){\n        return floor(x + m - 1, m); // x/m\
-    \ + (m-1)/m\n    }\n\n    /**\n     * @brief log(2)N \u306E\u6574\u6570\u90E8\u5206\
-    \u3092\u6C42\u3081\u308B\n     */\n    int log2_floor(long long N){\n        int\
-    \ res = -1;\n        while(N != 0){\n            res++;\n            N /= 2;\n\
-    \        }\n        return res;\n    }\n\n} // namespace math\n\n\n"
+    \        }\n\n        return res;\n    }\n\n    /**\n     * @brief x/m \u306E\
+    \ floor\uFF08x/m \u4EE5\u4E0B\u306E\u6700\u5927\u306E\u6574\u6570\uFF09\u3092\u6C42\
+    \u3081\u308B\n     */\n    ll floor(const ll& x, const ll& m){\n        ll r =\
+    \ (x % m + m) % m; // x \u3092 m \u3067\u5272\u3063\u305F\u4F59\u308A\n      \
+    \  return (x - r) / m;\n    }\n\n    /**\n     * @brief x/m \u306Eceil\uFF08x/m\
+    \ \u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\
+    \n     */\n    ll ceil(const ll& x, const ll& m){\n        return floor(x + m\
+    \ - 1, m); // x/m + (m-1)/m\n    }\n\n    /**\n     * @brief log(2)N \u306E\u6574\
+    \u6570\u90E8\u5206\uFF08:= 2 \u9032\u6570\u306B\u304A\u3044\u3066\u30011 \u3067\
+    \u3042\u308B\u30D3\u30C3\u30C8\u306E\u3046\u3061\u6700\u3082\u5DE6\u306B\u3042\
+    \u308B\u3082\u306E\u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\uFF09\u3092\u6C42\
+    \u3081\u308B\n     */\n    int log2_floor(long long N){\n        int res = -1;\n\
+    \        while(N != 0){\n            res++;\n            N /= 2;\n        }\n\
+    \        return res;\n    }\n\n} // namespace math\n\n\n"
   code: "#ifndef math_HPP\n#define math_HPP\n\n#include \"../Others/macros.hpp\"\n\
     \nnamespace math {\n\n    /**\n     * @brief \u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\
     \u6CD5\u3092\u5229\u7528\u3057\u305F\u3001x^n\u306E\u6C42\u5024\n     */\n   \
     \ ll pow(ll x, ll n){\n        ll res = 1;\n\n        while(n){\n            if(n\
     \ & 1) res *= x;\n            x *= x;\n            n >>= 1;\n        }\n\n   \
-    \     return res;\n    }\n\n    /**\n     * @brief x/m\u306Efloor\uFF08x/m\u4EE5\
+    \     return res;\n    }\n\n    /**\n     * @brief x/m \u306E floor\uFF08x/m \u4EE5\
     \u4E0B\u306E\u6700\u5927\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\n   \
     \  */\n    ll floor(const ll& x, const ll& m){\n        ll r = (x % m + m) % m;\
-    \ // x\u3092m\u3067\u5272\u3063\u305F\u4F59\u308A\n        return (x - r) / m;\n\
-    \    }\n\n    /**\n     * @brief x/m\u306Eceil\uFF08x/m\u4EE5\u4E0A\u306E\u6700\
-    \u5C0F\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\n     */\n    ll ceil(const\
-    \ ll& x, const ll& m){\n        return floor(x + m - 1, m); // x/m + (m-1)/m\n\
-    \    }\n\n    /**\n     * @brief log(2)N \u306E\u6574\u6570\u90E8\u5206\u3092\u6C42\
-    \u3081\u308B\n     */\n    int log2_floor(long long N){\n        int res = -1;\n\
-    \        while(N != 0){\n            res++;\n            N /= 2;\n        }\n\
-    \        return res;\n    }\n\n} // namespace math\n\n#endif // math_HPP"
+    \ // x \u3092 m \u3067\u5272\u3063\u305F\u4F59\u308A\n        return (x - r) /\
+    \ m;\n    }\n\n    /**\n     * @brief x/m \u306Eceil\uFF08x/m \u4EE5\u4E0A\u306E\
+    \u6700\u5C0F\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\n     */\n    ll\
+    \ ceil(const ll& x, const ll& m){\n        return floor(x + m - 1, m); // x/m\
+    \ + (m-1)/m\n    }\n\n    /**\n     * @brief log(2)N \u306E\u6574\u6570\u90E8\u5206\
+    \uFF08:= 2 \u9032\u6570\u306B\u304A\u3044\u3066\u30011 \u3067\u3042\u308B\u30D3\
+    \u30C3\u30C8\u306E\u3046\u3061\u6700\u3082\u5DE6\u306B\u3042\u308B\u3082\u306E\
+    \u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\uFF09\u3092\u6C42\u3081\u308B\n   \
+    \  */\n    int log2_floor(long long N){\n        int res = -1;\n        while(N\
+    \ != 0){\n            res++;\n            N /= 2;\n        }\n        return res;\n\
+    \    }\n\n} // namespace math\n\n#endif // math_HPP"
   dependsOn:
   - Others/macros.hpp
   isVerificationFile: false
   path: Math/math.hpp
   requiredBy:
   - Algorithm/next_pairing.hpp
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2024-09-27 21:05:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/math.hpp
