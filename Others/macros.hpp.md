@@ -12,7 +12,8 @@ data:
       \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
   - icon: ':warning:'
     path: DataStructure/RangeSet.hpp
-    title: "\u958B\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
+    title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\
+      \u3069\u3046\u304B\u3092\u8FD4\u3059"
   - icon: ':warning:'
     path: Geometry/Point.hpp
     title: Geometry/Point.hpp

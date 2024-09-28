@@ -10,7 +10,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "\u958B\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
+    document_title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\
+      \u308B\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059"
     links:
     - https://atcoder.jp/contests/abc330/tasks/abc330_e
   bundledCode: "#line 1 \"DataStructure/RangeSet.hpp\"\n\n\n\n/*\nverify\n\u30FBhttps://atcoder.jp/contests/abc330/tasks/abc330_e\n\
@@ -52,8 +53,7 @@ data:
     \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
     \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
     \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 15 \"DataStructure/RangeSet.hpp\"\n\n/**\n * @brief \u958B\u533A\u9593\u3092\
-    \ set \u3067\u7BA1\u7406\u3059\u308B\n */\ntemplate <typename T>\nstruct RangeSet\
+    \ 15 \"DataStructure/RangeSet.hpp\"\n\ntemplate <typename T>\nstruct RangeSet\
     \ {\nprivate:\n    std::set<std::pair<T, T>> intervals;\n    T sum_width;\n  \
     \  T TINF = std::numeric_limits<T>::max() / 2;\n\npublic:\n    RangeSet() : sum_width(T(0)){\n\
     \        intervals.emplace(TINF, TINF); // \u756A\u5175\n        intervals.emplace(-TINF,\
@@ -151,8 +151,7 @@ data:
     \ << \")\" << '\\n';\n        }\n    }\n};\n\n\n"
   code: "#ifndef RangeSet_HPP\n#define RangeSet_HPP\n\n/*\nverify\n\u30FBhttps://atcoder.jp/contests/abc330/tasks/abc330_e\n\
     */\n\n#include <vector>\n#include <set>\n#include <limits>\n#include <iostream>\n\
-    \n#include \"../Others/macros.hpp\"\n\n/**\n * @brief \u958B\u533A\u9593\u3092\
-    \ set \u3067\u7BA1\u7406\u3059\u308B\n */\ntemplate <typename T>\nstruct RangeSet\
+    \n#include \"../Others/macros.hpp\"\n\ntemplate <typename T>\nstruct RangeSet\
     \ {\nprivate:\n    std::set<std::pair<T, T>> intervals;\n    T sum_width;\n  \
     \  T TINF = std::numeric_limits<T>::max() / 2;\n\npublic:\n    RangeSet() : sum_width(T(0)){\n\
     \        intervals.emplace(TINF, TINF); // \u756A\u5175\n        intervals.emplace(-TINF,\
@@ -253,7 +252,7 @@ data:
   isVerificationFile: false
   path: DataStructure/RangeSet.hpp
   requiredBy: []
-  timestamp: '2024-09-29 06:50:07+09:00'
+  timestamp: '2024-09-29 07:20:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/RangeSet.hpp
@@ -261,5 +260,6 @@ layout: document
 redirect_from:
 - /library/DataStructure/RangeSet.hpp
 - /library/DataStructure/RangeSet.hpp.html
-title: "\u958B\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
+title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\u3069\
+  \u3046\u304B\u3092\u8FD4\u3059"
 ---
