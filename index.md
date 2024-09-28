@@ -18,7 +18,7 @@ data:
       title: DataStructure/Potentialized_UnionFind.cpp
     - icon: ':warning:'
       path: DataStructure/RangeSet.hpp
-      title: "\u9589\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
+      title: "\u958B\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
     - icon: ':warning:'
       path: DataStructure/Segtree.hpp
       title: "seg[i] = x  \u914D\u5217\u306E i \u756A\u76EE\u306B\u5BFE\u5FDC\u3059\
