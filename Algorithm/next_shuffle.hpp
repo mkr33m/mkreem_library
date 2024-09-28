@@ -3,7 +3,7 @@
 
 /*
 verify
-https://atcoder.jp/contests/abc328/tasks/abc328_e
+・https://atcoder.jp/contests/abc328/tasks/abc328_e
 */
 
 #include <vector>
