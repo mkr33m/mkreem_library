@@ -1,6 +1,11 @@
 #ifndef next_pairing_HPP
 #define next_pairing_HPP
 
+/*
+verify
+https://atcoder.jp/contests/abc236/tasks/abc236_d
+*/
+
 #include <vector>
 
 #include "../Others/macros.hpp"

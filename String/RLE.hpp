@@ -9,7 +9,7 @@ std::vector<std::pair<char, int>> encode(const std::string& S){
     int N = (int)S.size();
     std::vector<std::pair<char, int>> res;
     int l = 0, r;
-    while(r < N){
+    while(l < N){
         r = l + 1;
         while(r < N && S[l] == S[r]) r++;
         res.emplace_back(S[l], r - l);

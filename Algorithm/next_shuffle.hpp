@@ -1,6 +1,11 @@
 #ifndef next_shuffle_HPP
 #define next_shuffle_HPP
 
+/*
+verify
+https://atcoder.jp/contests/abc328/tasks/abc328_e
+*/
+
 #include <vector>
 #include <limits>
 #include <algorithm>

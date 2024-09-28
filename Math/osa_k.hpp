@@ -48,7 +48,7 @@ public:
      * @remark O(log(N))
      */
     void dfs(std::vector<std::pair<ll, ll>>& pf_N, std::vector<ll>& divs_N, ll div = 1, int idx = 0){
-        if(idx == pf_N.size()){
+        if(idx == (int)pf_N.size()){
             divs_N.emplace_back(div);
             return;
         }
