@@ -135,6 +135,9 @@ data:
       path: ac-library/atcoder/internal_bit.hpp
       title: ac-library/atcoder/internal_bit.hpp
     - icon: ':warning:'
+      path: ac-library/atcoder/internal_csr.hpp
+      title: ac-library/atcoder/internal_csr.hpp
+    - icon: ':warning:'
       path: ac-library/atcoder/internal_math.hpp
       title: ac-library/atcoder/internal_math.hpp
     - icon: ':warning:'

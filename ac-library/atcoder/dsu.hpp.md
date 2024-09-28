@@ -12,7 +12,7 @@ data:
     #include <cassert>\n#include <vector>\n\nnamespace atcoder {\n\n// Implement (union\
     \ by size) + (path compression)\n// Reference:\n// Zvi Galil and Giuseppe F. Italiano,\n\
     // Data structures and algorithms for disjoint set union problems\nstruct dsu\
-    \ {\n  public:\n    dsu() : _n(0) {}\n    dsu(int n) : _n(n), parent_or_size(n,\
+    \ {\n  public:\n    dsu() : _n(0) {}\n    explicit dsu(int n) : _n(n), parent_or_size(n,\
     \ -1) {}\n\n    int merge(int a, int b) {\n        assert(0 <= a && a < _n);\n\
     \        assert(0 <= b && b < _n);\n        int x = leader(a), y = leader(b);\n\
     \        if (x == y) return x;\n        if (-parent_or_size[x] < -parent_or_size[y])\
@@ -38,7 +38,7 @@ data:
     #include <cassert>\n#include <vector>\n\nnamespace atcoder {\n\n// Implement (union\
     \ by size) + (path compression)\n// Reference:\n// Zvi Galil and Giuseppe F. Italiano,\n\
     // Data structures and algorithms for disjoint set union problems\nstruct dsu\
-    \ {\n  public:\n    dsu() : _n(0) {}\n    dsu(int n) : _n(n), parent_or_size(n,\
+    \ {\n  public:\n    dsu() : _n(0) {}\n    explicit dsu(int n) : _n(n), parent_or_size(n,\
     \ -1) {}\n\n    int merge(int a, int b) {\n        assert(0 <= a && a < _n);\n\
     \        assert(0 <= b && b < _n);\n        int x = leader(a), y = leader(b);\n\
     \        if (x == y) return x;\n        if (-parent_or_size[x] < -parent_or_size[y])\
@@ -59,12 +59,12 @@ data:
     \ v.empty(); }),\n            result.end());\n        return result;\n    }\n\n\
     \  private:\n    int _n;\n    // root node: -1 * component size\n    // otherwise:\
     \ parent\n    std::vector<int> parent_or_size;\n};\n\n}  // namespace atcoder\n\
-    \n#endif  // ATCODER_DSU_HPP\n"
+    \n#endif  // ATCODER_DSU_HPP"
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/dsu.hpp
   requiredBy: []
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/dsu.hpp

@@ -104,7 +104,7 @@ data:
     template <class T>\nusing is_signed_int_t = std::enable_if_t<is_signed_int<T>::value>;\n\
     \ntemplate <class T>\nusing is_unsigned_int_t = std::enable_if_t<is_unsigned_int<T>::value>;\n\
     \ntemplate <class T> using to_unsigned_t = typename to_unsigned<T>::type;\n\n\
-    }  // namespace internal\n\n}  // namespace atcoder\n\n#endif  // ATCODER_INTERNAL_TYPE_TRAITS_HPP\n"
+    }  // namespace internal\n\n}  // namespace atcoder\n\n#endif  // ATCODER_INTERNAL_TYPE_TRAITS_HPP"
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/internal_type_traits.hpp
@@ -112,7 +112,7 @@ data:
   - ac-library/atcoder/modint.hpp
   - ac-library/atcoder/convolution.hpp
   - ac-library/atcoder/fenwicktree.hpp
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/internal_type_traits.hpp

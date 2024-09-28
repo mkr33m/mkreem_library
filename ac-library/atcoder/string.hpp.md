@@ -203,12 +203,12 @@ data:
     \ + z[i]) j = i;\n    }\n    z[0] = n;\n    return z;\n}\n\nstd::vector<int> z_algorithm(const\
     \ std::string& s) {\n    int n = int(s.size());\n    std::vector<int> s2(n);\n\
     \    for (int i = 0; i < n; i++) {\n        s2[i] = s[i];\n    }\n    return z_algorithm(s2);\n\
-    }\n\n}  // namespace atcoder\n\n#endif  // ATCODER_STRING_HPP\n"
+    }\n\n}  // namespace atcoder\n\n#endif  // ATCODER_STRING_HPP"
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/string.hpp
   requiredBy: []
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/string.hpp

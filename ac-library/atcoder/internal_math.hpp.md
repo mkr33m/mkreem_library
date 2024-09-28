@@ -19,37 +19,38 @@ data:
     links:
     - https://en.wikipedia.org/wiki/Barrett_reduction
   bundledCode: "#line 1 \"ac-library/atcoder/internal_math.hpp\"\n\n\n\n#include <utility>\n\
-    \nnamespace atcoder {\n\nnamespace internal {\n\n// @param m `1 <= m`\n// @return\
-    \ x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n    x %=\
-    \ m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication\
-    \ by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
-    // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
-    \   unsigned long long im;\n\n    // @param m `1 <= m < 2^31`\n    barrett(unsigned\
-    \ int m) : _m(m), im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n\
-    \    unsigned int umod() const { return _m; }\n\n    // @param a `0 <= a < m`\n\
-    \    // @param b `0 <= b < m`\n    // @return `a * b % m`\n    unsigned int mul(unsigned\
-    \ int a, unsigned int b) const {\n        // [1] m = 1\n        // a = b = im\
-    \ = 0, so okay\n\n        // [2] m >= 2\n        // im = ceil(2^64 / m)\n    \
-    \    // -> im * m = 2^64 + r (0 <= r < m)\n        // let z = a*b = c*m + d (0\
-    \ <= c, d < m)\n        // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64\
-    \ + c*r + d*im\n        // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64\
-    \ + m * (m + 1) < 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n     \
-    \   unsigned long long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned\
-    \ long long x;\n        _umul128(z, im, &x);\n#else\n        unsigned long long\
-    \ x =\n            (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n\
-    #endif\n        unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <=\
-    \ v) v += _m;\n        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param\
-    \ m `1 <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
-    \ long x, long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m\
-    \ = (unsigned int)(m);\n    unsigned long long r = 1;\n    unsigned long long\
-    \ y = safe_mod(x, m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n\
-    \        y = (y * y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n\
-    // M. Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit\
-    \ into a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
-    \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
-    \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
-    \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
-    \ (long long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
+    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
+    \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
+    \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
+    \    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n// Reference:\
+    \ https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider after Ice\
+    \ Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long im;\n\n\
+    \    // @param m `1 <= m`\n    explicit barrett(unsigned int m) : _m(m), im((unsigned\
+    \ long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int umod() const\
+    \ { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b `0 <= b < m`\n\
+    \    // @return `a * b % m`\n    unsigned int mul(unsigned int a, unsigned int\
+    \ b) const {\n        // [1] m = 1\n        // a = b = im = 0, so okay\n\n   \
+    \     // [2] m >= 2\n        // im = ceil(2^64 / m)\n        // -> im * m = 2^64\
+    \ + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c, d < m)\n       \
+    \ // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r + d*im\n     \
+    \   // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 + m * (m + 1) <\
+    \ 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n        unsigned long\
+    \ long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x =\n       \
+    \     (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n     \
+    \   unsigned long long y = x * _m;\n        return (unsigned int)(z - y + (z <\
+    \ y ? _m : 0));\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1 <= m`\n// @return\
+    \ `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long long x, long long\
+    \ n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned int)(m);\n\
+    \    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x, m);\n \
+    \   while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y * y) % _m;\n\
+    \        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n// M. Forisek and\
+    \ J. Jancina,\n// Fast Primality Testing for Integers That Fit into a Machine\
+    \ Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int n) {\n   \
+    \ if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return true;\n\
+    \    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while (d % 2\
+    \ == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for (long\
+    \ long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
     \ t, n);\n        while (t != n - 1 && y != 1 && y != n - 1) {\n            y\
     \ = y * y % n;\n            t <<= 1;\n        }\n        if (y != n - 1 && t %\
     \ 2 == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
@@ -79,15 +80,27 @@ data:
     \ {\n            if (pow_mod_constexpr(g, (m - 1) / divs[i], m) == 1) {\n    \
     \            ok = false;\n                break;\n            }\n        }\n \
     \       if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
-    \ = primitive_root_constexpr(m);\n\n}  // namespace internal\n\n}  // namespace\
-    \ atcoder\n\n\n"
+    \ = primitive_root_constexpr(m);\n\n// @param n `n < 2^32`\n// @param m `1 <=\
+    \ m < 2^32`\n// @return sum_{i=0}^{n-1} floor((ai + b) / m) (mod 2^64)\nunsigned\
+    \ long long floor_sum_unsigned(unsigned long long n,\n                       \
+    \               unsigned long long m,\n                                      unsigned\
+    \ long long a,\n                                      unsigned long long b) {\n\
+    \    unsigned long long ans = 0;\n    while (true) {\n        if (a >= m) {\n\
+    \            ans += n * (n - 1) / 2 * (a / m);\n            a %= m;\n        }\n\
+    \        if (b >= m) {\n            ans += n * (b / m);\n            b %= m;\n\
+    \        }\n\n        unsigned long long y_max = a * n + b;\n        if (y_max\
+    \ < m) break;\n        // y_max < m * (n + 1)\n        // floor(y_max / m) <=\
+    \ n\n        n = (unsigned long long)(y_max / m);\n        b = (unsigned long\
+    \ long)(y_max % m);\n        std::swap(m, a);\n    }\n    return ans;\n}\n\n}\
+    \  // namespace internal\n\n}  // namespace atcoder\n\n\n"
   code: "#ifndef ATCODER_INTERNAL_MATH_HPP\n#define ATCODER_INTERNAL_MATH_HPP 1\n\n\
-    #include <utility>\n\nnamespace atcoder {\n\nnamespace internal {\n\n// @param\
-    \ m `1 <= m`\n// @return x mod m\nconstexpr long long safe_mod(long long x, long\
-    \ long m) {\n    x %= m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast\
-    \ modular multiplication by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
+    #include <utility>\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace\
+    \ atcoder {\n\nnamespace internal {\n\n// @param m `1 <= m`\n// @return x mod\
+    \ m\nconstexpr long long safe_mod(long long x, long long m) {\n    x %= m;\n \
+    \   if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication by\
+    \ barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
     // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
-    \   unsigned long long im;\n\n    // @param m `1 <= m < 2^31`\n    barrett(unsigned\
+    \   unsigned long long im;\n\n    // @param m `1 <= m`\n    explicit barrett(unsigned\
     \ int m) : _m(m), im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n\
     \    unsigned int umod() const { return _m; }\n\n    // @param a `0 <= a < m`\n\
     \    // @param b `0 <= b < m`\n    // @return `a * b % m`\n    unsigned int mul(unsigned\
@@ -100,9 +113,9 @@ data:
     \   unsigned long long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned\
     \ long long x;\n        _umul128(z, im, &x);\n#else\n        unsigned long long\
     \ x =\n            (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n\
-    #endif\n        unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <=\
-    \ v) v += _m;\n        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param\
-    \ m `1 <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
+    #endif\n        unsigned long long y = x * _m;\n        return (unsigned int)(z\
+    \ - y + (z < y ? _m : 0));\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1\
+    \ <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
     \ long x, long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m\
     \ = (unsigned int)(m);\n    unsigned long long r = 1;\n    unsigned long long\
     \ y = safe_mod(x, m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n\
@@ -142,8 +155,19 @@ data:
     \ {\n            if (pow_mod_constexpr(g, (m - 1) / divs[i], m) == 1) {\n    \
     \            ok = false;\n                break;\n            }\n        }\n \
     \       if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
-    \ = primitive_root_constexpr(m);\n\n}  // namespace internal\n\n}  // namespace\
-    \ atcoder\n\n#endif  // ATCODER_INTERNAL_MATH_HPP\n"
+    \ = primitive_root_constexpr(m);\n\n// @param n `n < 2^32`\n// @param m `1 <=\
+    \ m < 2^32`\n// @return sum_{i=0}^{n-1} floor((ai + b) / m) (mod 2^64)\nunsigned\
+    \ long long floor_sum_unsigned(unsigned long long n,\n                       \
+    \               unsigned long long m,\n                                      unsigned\
+    \ long long a,\n                                      unsigned long long b) {\n\
+    \    unsigned long long ans = 0;\n    while (true) {\n        if (a >= m) {\n\
+    \            ans += n * (n - 1) / 2 * (a / m);\n            a %= m;\n        }\n\
+    \        if (b >= m) {\n            ans += n * (b / m);\n            b %= m;\n\
+    \        }\n\n        unsigned long long y_max = a * n + b;\n        if (y_max\
+    \ < m) break;\n        // y_max < m * (n + 1)\n        // floor(y_max / m) <=\
+    \ n\n        n = (unsigned long long)(y_max / m);\n        b = (unsigned long\
+    \ long)(y_max % m);\n        std::swap(m, a);\n    }\n    return ans;\n}\n\n}\
+    \  // namespace internal\n\n}  // namespace atcoder\n\n#endif  // ATCODER_INTERNAL_MATH_HPP"
   dependsOn: []
   isVerificationFile: false
   path: ac-library/atcoder/internal_math.hpp
@@ -151,7 +175,7 @@ data:
   - ac-library/atcoder/modint.hpp
   - ac-library/atcoder/math.hpp
   - ac-library/atcoder/convolution.hpp
-  timestamp: '2024-09-27 02:37:21+09:00'
+  timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ac-library/atcoder/internal_math.hpp
