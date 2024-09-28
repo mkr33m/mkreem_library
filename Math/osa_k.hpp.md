@@ -26,11 +26,11 @@ data:
     \u7D04\u6570\u3092\u5217\u6319\u3059\u308B\n     * @param idx \u4F55\u756A\u76EE\
     \u306E\u7D20\u56E0\u6570\u3092\u898B\u3066\u3044\u308B\u304B\n     * @remark O(log(N))\n\
     \     */\n    void dfs(std::vector<std::pair<ll, ll>>& pf_N, std::vector<ll>&\
-    \ divs_N, ll div = 1, int idx = 0){\n        if(idx == pf_N.size()){\n       \
-    \     divs_N.emplace_back(div);\n            return;\n        }\n\n        ll\
-    \ mult = 1;\n        for(int i = 0; i < pf_N[idx].second; i++){// idx\u756A\u76EE\
-    \u306E\u7D20\u56E0\u6570\u3092\u4F55\u500B\u542B\u3080\u7D04\u6570\u304B\n   \
-    \         dfs(pf_N, divs_N, div * mult, idx + 1);\n            mult *= pf_N[idx].first;\n\
+    \ divs_N, ll div = 1, int idx = 0){\n        if(idx == (int)pf_N.size()){\n  \
+    \          divs_N.emplace_back(div);\n            return;\n        }\n\n     \
+    \   ll mult = 1;\n        for(int i = 0; i < pf_N[idx].second; i++){// idx\u756A\
+    \u76EE\u306E\u7D20\u56E0\u6570\u3092\u4F55\u500B\u542B\u3080\u7D04\u6570\u304B\
+    \n            dfs(pf_N, divs_N, div * mult, idx + 1);\n            mult *= pf_N[idx].first;\n\
     \        }\n    }\n\n    std::vector<ll> enum_divisors(ll N){\n        std::map<ll,\
     \ ll> pf_N_map = prime_factorize(N);\n        std::vector<std::pair<ll, ll>> pf_N;\n\
     \        std::vector<ll> divs_N;\n        for(const auto& x : pf_N_map){\n   \
@@ -52,11 +52,11 @@ data:
     \u7D04\u6570\u3092\u5217\u6319\u3059\u308B\n     * @param idx \u4F55\u756A\u76EE\
     \u306E\u7D20\u56E0\u6570\u3092\u898B\u3066\u3044\u308B\u304B\n     * @remark O(log(N))\n\
     \     */\n    void dfs(std::vector<std::pair<ll, ll>>& pf_N, std::vector<ll>&\
-    \ divs_N, ll div = 1, int idx = 0){\n        if(idx == pf_N.size()){\n       \
-    \     divs_N.emplace_back(div);\n            return;\n        }\n\n        ll\
-    \ mult = 1;\n        for(int i = 0; i < pf_N[idx].second; i++){// idx\u756A\u76EE\
-    \u306E\u7D20\u56E0\u6570\u3092\u4F55\u500B\u542B\u3080\u7D04\u6570\u304B\n   \
-    \         dfs(pf_N, divs_N, div * mult, idx + 1);\n            mult *= pf_N[idx].first;\n\
+    \ divs_N, ll div = 1, int idx = 0){\n        if(idx == (int)pf_N.size()){\n  \
+    \          divs_N.emplace_back(div);\n            return;\n        }\n\n     \
+    \   ll mult = 1;\n        for(int i = 0; i < pf_N[idx].second; i++){// idx\u756A\
+    \u76EE\u306E\u7D20\u56E0\u6570\u3092\u4F55\u500B\u542B\u3080\u7D04\u6570\u304B\
+    \n            dfs(pf_N, divs_N, div * mult, idx + 1);\n            mult *= pf_N[idx].first;\n\
     \        }\n    }\n\n    std::vector<ll> enum_divisors(ll N){\n        std::map<ll,\
     \ ll> pf_N_map = prime_factorize(N);\n        std::vector<std::pair<ll, ll>> pf_N;\n\
     \        std::vector<ll> divs_N;\n        for(const auto& x : pf_N_map){\n   \
@@ -67,7 +67,7 @@ data:
   isVerificationFile: false
   path: Math/osa_k.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2024-09-29 05:00:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/osa_k.hpp

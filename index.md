@@ -14,6 +14,9 @@ data:
   - name: DataStructure
     pages:
     - icon: ':warning:'
+      path: DataStructure/Potentialized_UnionFind.cpp
+      title: DataStructure/Potentialized_UnionFind.cpp
+    - icon: ':warning:'
       path: DataStructure/RangeSet.hpp
       title: "\u9589\u533A\u9593\u3092 set \u3067\u7BA1\u7406\u3059\u308B"
     - icon: ':warning:'
