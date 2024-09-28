@@ -13,9 +13,6 @@ verify
 
 #include "../Others/macros.hpp"
 
-/**
- * @brief 開区間を set で管理する
- */
 template <typename T>
 struct RangeSet {
 private:
