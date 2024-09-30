@@ -15,7 +15,8 @@ data:
     pages:
     - icon: ':warning:'
       path: DataStructure/Potentialized_UnionFind.cpp
-      title: DataStructure/Potentialized_UnionFind.cpp
+      title: "root_u \u304B\u3089\u898B\u305F u \u306E\u30DD\u30C6\u30F3\u30B7\u30E3\
+        \u30EB\u3092\u8FD4\u3059"
     - icon: ':warning:'
       path: DataStructure/RangeSet.hpp
       title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\
@@ -26,9 +27,11 @@ data:
         \u308B\u30CE\u30FC\u30C9\u3092 x \u3067\u30BB\u30C3\u30C8\u3057\u3001\u4E0A\
         \u306B\u3042\u308B\u30CE\u30FC\u30C9\u3092\u66F4\u65B0"
     - icon: ':warning:'
+      path: DataStructure/UF_ComponentSum.hpp
+      title: DataStructure/UF_ComponentSum.hpp
+    - icon: ':warning:'
       path: DataStructure/UnionFind.hpp
-      title: "\u9802\u70B9 x \u304C\u6240\u5C5E\u3059\u308B\u9023\u7D50\u6210\u5206\
-        \u306E\u6839\u3092\u8FD4\u3059\u3002"
+      title: DataStructure/UnionFind.hpp
   - name: Geometry
     pages:
     - icon: ':warning:'
@@ -78,6 +81,9 @@ data:
         \ \u7A2E\u985E\u306A\u3089\u7D20\u6570\uFF09"
   - name: Others
     pages:
+    - icon: ':warning:'
+      path: Others/AbelianGroup.cpp
+      title: Others/AbelianGroup.cpp
     - icon: ':warning:'
       path: Others/Debug.hpp
       title: Others/Debug.hpp

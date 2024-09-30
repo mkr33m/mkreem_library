@@ -33,6 +33,8 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/Segtree.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/DataStructure/UF_ComponentSum.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/UnionFind.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Geometry/Point.hpp"
