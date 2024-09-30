@@ -16,10 +16,10 @@ private:
     using S = typename Abel::S;
     std::vector<int> parent;
     std::vector<S> potential_from_parent; // 親から見たポテンシャル
-    std::vector<int> size;
+    std::vector<int> size_;
 
 public:
-    Potentialized_UnionFind(int N) : parent(N), potential_from_parent(N, Abel::e()), size(N, 1) {
+    Potentialized_UnionFind(int N) : parent(N), potential_from_parent(N, Abel::e()), size_(N, 1) {
         std::iota(parent.begin(), parent.end(), 0);
     }
 
@@ -54,27 +54,29 @@ public:
     /**
      * @param delta v から見た u のポテンシャル
      */
-    bool merge(int v, int u, S delta){
+    bool merge(int u, int v, S delta){
         int root_u = root(u), root_v = root(v);
         // root_v から見た root_u のポテンシャルに変換
         /*
         v から見た u のポテンシャル -> w
-        v から見た root_u のポテンシャル -> w -（v から見た root_v のポテンシャル）
-        root_u から見た v のポテンシャル -> w +（u から見た root_u のポテンシャル）
+        v から見た root_u のポテンシャル -> w -（root_u から見た u のポテンシャル）
+        root_u から見た v のポテンシャル -> w +（root_v から見た v のポテンシャル）
         */
-        delta = delta + weight(u) - weight(v);
+        delta = Abel::op(delta, weight(v));
+        delta = Abel::op(delta, Abel::inv(weight(u)));
 
         if(root_u == root_v){
             return false;
         }
 
-        if(size[root_u] < size[root_v]){
+        if(size_[root_u] > size_[root_v]){
             std::swap(root_u, root_v); // マージテク
-            delta = -delta;
+            delta = Abel::inv(delta);
+            //delta = -delta;
         }
-        size[root_u] += size[root_v];
-        parent[root_v] = root_u;
-        potential_from_parent[root_v] = delta;
+        size_[root_v] += size_[root_u];
+        parent[root_u] = root_v;
+        potential_from_parent[root_u] = delta;
         return true;
     }
 
@@ -84,6 +86,10 @@ public:
     S weight(int u, int v){
         assert(same(u, v));
         return Abel::op(weight(u), Abel::inv(weight(v)));
+    }
+
+    int size(int v){
+        return size_[v];
     }
 };
 

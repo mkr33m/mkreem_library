@@ -1,4 +1,4 @@
-#ifndef UF_ComponetSum_HPP
+#ifndef UF_ComponentSum_HPP
 #define UF_ComponentSum_HPP
 
 #include <vector>
