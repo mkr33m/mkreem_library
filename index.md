@@ -14,7 +14,7 @@ data:
   - name: DataStructure
     pages:
     - icon: ':warning:'
-      path: DataStructure/Potentialized_UnionFind.cpp
+      path: DataStructure/Potentialized_UnionFind.hpp
       title: "root_u \u304B\u3089\u898B\u305F u \u306E\u30DD\u30C6\u30F3\u30B7\u30E3\
         \u30EB\u3092\u8FD4\u3059"
     - icon: ':warning:'
@@ -82,8 +82,8 @@ data:
   - name: Others
     pages:
     - icon: ':warning:'
-      path: Others/AbelianGroup.cpp
-      title: Others/AbelianGroup.cpp
+      path: Others/AbelianGroups.hpp
+      title: Others/AbelianGroups.hpp
     - icon: ':warning:'
       path: Others/Debug.hpp
       title: Others/Debug.hpp

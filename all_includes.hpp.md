@@ -29,6 +29,8 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/DataStructure/Potentialized_UnionFind.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/RangeSet.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/Segtree.hpp"
@@ -52,6 +54,8 @@ data:
     #include "/home/pomelo/github.com/mkreem_library/Math/prime_factorize.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Math/sieve.hpp"
+
+    #include "/home/pomelo/github.com/mkreem_library/Others/AbelianGroups.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/Debug.hpp"
 

@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: DataStructure/UF_ComponentSum.hpp
   requiredBy: []
-  timestamp: '2024-09-30 17:42:17+09:00'
+  timestamp: '2024-09-30 21:30:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/UF_ComponentSum.hpp
