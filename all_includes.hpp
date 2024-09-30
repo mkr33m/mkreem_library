@@ -5,6 +5,7 @@
 #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/RangeSet.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/Segtree.hpp"
+#include "/home/pomelo/github.com/mkreem_library/DataStructure/UF_ComponentSum.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/UnionFind.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Geometry/Point.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Graph/Graph_template.hpp"

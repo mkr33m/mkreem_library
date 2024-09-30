@@ -3,7 +3,7 @@
 
 #include <vector>
 
-template <typename M>
+template <typename Monoid>
 struct Segtree {
 private:
     /**
@@ -11,7 +11,7 @@ private:
      * @param siz 管理する vector のサイズ以上の最小の 2 冪（葉の数）
      * @param N vector のサイズ
      */
-    using T = typename M::S;
+    using T = typename Monoid::S;
     std::vector<T> seg;
     int N;
     int siz = 1;
@@ -36,7 +36,7 @@ private:
         i += siz;
         seg[i] = x;
         while(i >>= 1){
-            seg[i] = M::op(seg[(i << 1) + 0], seg[(i << 1) + 1]);
+            seg[i] = Monoid::op(seg[(i << 1) + 0], seg[(i << 1) + 1]);
         }
     }
 
@@ -44,7 +44,7 @@ public:
     // vector サイズを渡して、単位元で初期化
     Segtree(const int N) : N(N) {
         while(siz < N) siz <<= 1;
-        seg.resize(2 * siz, M::e());
+        seg.resize(2 * siz, Monoid::e());
     }
     // vector サイズと初期値を渡して、初期値で初期化
     Segtree(const int N, const T init) : N(N) {
@@ -54,12 +54,12 @@ public:
     // vector を渡して初期化
     Segtree(const std::vector<T>& vec) : N(vec.size()) {
         while(siz < N) siz <<= 1;
-        seg.resize(2 * siz, M::e());
+        seg.resize(2 * siz, Monoid::e());
         for(int i = 0; i < N; i++){
             seg[i + siz] = vec[i];
         }
         for(int i = siz - 1; i >= 0; i--){
-            seg[i] = M::op(seg[(i << 1) + 0], seg[(i << 1) + 1]);
+            seg[i] = Monoid::op(seg[(i << 1) + 0], seg[(i << 1) + 1]);
         }
     }
 
@@ -81,14 +81,14 @@ public:
      * @brief 区間 [l, r) での値を取得
      */
     T prod(int l, int r){
-        T ansl = M::e(), ansr = M::e();
+        T ansl = Monoid::e(), ansr = Monoid::e();
         l += siz, r += siz;
         while(l < r){
-            if(l & 1) ansl = M::op(ansl, seg[l++]);
-            if(r & 1) ansr = M::op(seg[--r], ansr);
+            if(l & 1) ansl = Monoid::op(ansl, seg[l++]);
+            if(r & 1) ansr = Monoid::op(seg[--r], ansr);
             l >>= 1, r >>= 1;
         }
-        return M::op(ansl, ansr);
+        return Monoid::op(ansl, ansr);
     }
 
     T prod(const int& i){
