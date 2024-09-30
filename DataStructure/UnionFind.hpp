@@ -1,8 +1,14 @@
 #ifndef UnionFind_HPP
 #define UnionFind_HPP
 
+/*
+verify
+・https://judge.yosupo.jp/problem/unionfind
+*/
+
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 struct UnionFind {
 private:
@@ -13,9 +19,7 @@ private:
 public:
     UnionFind() = default;
     UnionFind(int N) : N(N), parent(N), size_(N, 1) {
-        for(int i = 0; i < N; i++){
-            parent[i] = i;
-        }
+        std::iota(parent.begin(), parent.end(), 0);
     }
 
     int root(int v){
@@ -36,7 +40,7 @@ public:
     }
 
     bool merge(int u, int v){
-        int root_u = root(u), root_v = root(v); // <- 根
+        int root_u = root(u), root_v = root(v);
 
         if(root_u == root_v){
             return false; // 根が同じなら、既に同じ集合
@@ -46,7 +50,7 @@ public:
             std::swap(root_u, root_v); // マージテク
         }
         size_[root_u] += size_[root_v];
-        size_[root_v] = root_u;
+        parent[root_v] = root_u;
         return true;
     }
 

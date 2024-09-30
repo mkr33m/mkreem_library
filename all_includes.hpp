@@ -3,6 +3,7 @@
 
 #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_pairing.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
+#include "/home/pomelo/github.com/mkreem_library/DataStructure/Potentialized_UnionFind.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/RangeSet.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/Segtree.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/UF_ComponentSum.hpp"
@@ -15,6 +16,7 @@
 #include "/home/pomelo/github.com/mkreem_library/Math/osa_k.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Math/prime_factorize.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Math/sieve.hpp"
+#include "/home/pomelo/github.com/mkreem_library/Others/AbelianGroups.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Others/Debug.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Others/Grid.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Others/INT128.hpp"
