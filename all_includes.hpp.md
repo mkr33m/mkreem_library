@@ -43,6 +43,12 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Graph/Graph_template.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/Math/binom.hpp"
+
+    #include "/home/pomelo/github.com/mkreem_library/Math/binom_mod.hpp"
+
+    #include "/home/pomelo/github.com/mkreem_library/Math/binom_mod_ll.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/Math/enum_divisors.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Math/extended_gcd.hpp"

@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Math/binom_mod.cpp\"\n\n\n\n#include <vector>\n\ntemplate\
+  bundledCode: "#line 1 \"Math/binom_mod.hpp\"\n\n\n\n#include <vector>\n\ntemplate\
     \ <typename T>\nstruct binom_mod {\nprivate:\n    int MAX_N;\n    int mod;\n \
     \   std::vector<T> factorial, factorial_inv;\n\npublic:\n    binom_mod() = default;\n\
     \    binom_mod(int MAX_N = 10000000) : MAX_N(MAX_N), mod(mod), factorial(MAX_N\
@@ -33,15 +33,15 @@ data:
     \ // binom_mod_HPP"
   dependsOn: []
   isVerificationFile: false
-  path: Math/binom_mod.cpp
+  path: Math/binom_mod.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2024-10-01 02:12:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Math/binom_mod.cpp
+documentation_of: Math/binom_mod.hpp
 layout: document
 redirect_from:
-- /library/Math/binom_mod.cpp
-- /library/Math/binom_mod.cpp.html
-title: Math/binom_mod.cpp
+- /library/Math/binom_mod.hpp
+- /library/Math/binom_mod.hpp.html
+title: Math/binom_mod.hpp
 ---

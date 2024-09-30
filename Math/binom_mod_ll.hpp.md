@@ -11,13 +11,13 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\
       \u3081\u308B"
     links: []
-  bundledCode: "#line 1 \"Math/binom_mod_ll.cpp\"\n\n\n\n#include <vector>\n#include\
+  bundledCode: "#line 1 \"Math/binom_mod_ll.hpp\"\n\n\n\n#include <vector>\n#include\
     \ <cassert>\n\n#line 1 \"Others/macros.hpp\"\n\n\n\n#line 5 \"Others/macros.hpp\"\
     \n#include <queue>\n#include <cmath>\n\nusing ll = long long;\nusing lll = __int128_t;\n\
     using ld = long double;\n#define newl '\\n'\n#define REF const auto&\n#define\
@@ -64,7 +64,7 @@ data:
     \     y = 0;\n        return a;\n    }\n    long long nx, ny;\n    long long gcd\
     \ = extended_gcd(b, a % b, nx, ny);\n    // \u5E30\u308A\u304C\u3051\u306B\u4FC2\
     \u6570\u3092\u66F4\u65B0\n    x = ny;\n    y = nx - (a / b) * ny;\n    return\
-    \ gcd;\n}\n\n\n#line 9 \"Math/binom_mod_ll.cpp\"\n\nstruct binom_mod_ll {\nprivate:\n\
+    \ gcd;\n}\n\n\n#line 9 \"Math/binom_mod_ll.hpp\"\n\nstruct binom_mod_ll {\nprivate:\n\
     \    int MAX_N;\n    ll MOD;\n    std::vector<ll> factorial, factorial_inv;\n\n\
     \    /**\n     * @brief a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x\
     \ \u3092\u6C42\u3081\u308B\n     * a*x == 1 \u3092\u6E80\u305F\u3059 x \u3092\u6C42\
@@ -106,15 +106,15 @@ data:
   - Others/macros.hpp
   - Math/extended_gcd.hpp
   isVerificationFile: false
-  path: Math/binom_mod_ll.cpp
+  path: Math/binom_mod_ll.hpp
   requiredBy: []
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2024-10-01 02:12:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Math/binom_mod_ll.cpp
+documentation_of: Math/binom_mod_ll.hpp
 layout: document
 redirect_from:
-- /library/Math/binom_mod_ll.cpp
-- /library/Math/binom_mod_ll.cpp.html
+- /library/Math/binom_mod_ll.hpp
+- /library/Math/binom_mod_ll.hpp.html
 title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\u308B"
 ---

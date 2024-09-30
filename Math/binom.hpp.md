@@ -7,11 +7,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Math/binom.cpp\"\n\n\n\n#include <vector>\n\n#line 1 \"\
+  bundledCode: "#line 1 \"Math/binom.hpp\"\n\n\n\n#include <vector>\n\n#line 1 \"\
     Others/macros.hpp\"\n\n\n\n#line 5 \"Others/macros.hpp\"\n#include <queue>\n#include\
     \ <cmath>\n\nusing ll = long long;\nusing lll = __int128_t;\nusing ld = long double;\n\
     #define newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n#define LLINF\
@@ -49,7 +49,7 @@ data:
     \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
     \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
     \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 7 \"Math/binom.cpp\"\n\nstruct binom {\nprivate:\n    int N;\n    std::vector<std::vector<ll>>\
+    \ 7 \"Math/binom.hpp\"\n\nstruct binom {\nprivate:\n    int N;\n    std::vector<std::vector<ll>>\
     \ C;\n\npublic:\n    binom() = default;\n    binom(const int& N) : N(N), C(N +\
     \ 1, std::vector<ll>(N + 1, 0)) {\n        for(int i = 0; i <= N; i++){\n    \
     \        C[i][0] = 1;\n        }\n        // nCk = (n-1)C(k-1) + (n-1)Ck\n   \
@@ -71,15 +71,15 @@ data:
   dependsOn:
   - Others/macros.hpp
   isVerificationFile: false
-  path: Math/binom.cpp
+  path: Math/binom.hpp
   requiredBy: []
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2024-10-01 02:12:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Math/binom.cpp
+documentation_of: Math/binom.hpp
 layout: document
 redirect_from:
-- /library/Math/binom.cpp
-- /library/Math/binom.cpp.html
-title: Math/binom.cpp
+- /library/Math/binom.hpp
+- /library/Math/binom.hpp.html
+title: Math/binom.hpp
 ---

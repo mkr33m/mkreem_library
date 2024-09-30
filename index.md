@@ -46,13 +46,13 @@ data:
   - name: Math
     pages:
     - icon: ':warning:'
-      path: Math/binom.cpp
-      title: Math/binom.cpp
+      path: Math/binom.hpp
+      title: Math/binom.hpp
     - icon: ':warning:'
-      path: Math/binom_mod.cpp
-      title: Math/binom_mod.cpp
+      path: Math/binom_mod.hpp
+      title: Math/binom_mod.hpp
     - icon: ':warning:'
-      path: Math/binom_mod_ll.cpp
+      path: Math/binom_mod_ll.hpp
       title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
         \u308B"
     - icon: ':warning:'
