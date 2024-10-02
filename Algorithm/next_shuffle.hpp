@@ -9,7 +9,6 @@ verify
 #include <vector>
 #include <limits>
 #include <algorithm>
-#include <iostream>
 
 template <typename T>
 /**
