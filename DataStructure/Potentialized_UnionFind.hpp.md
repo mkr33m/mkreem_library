@@ -11,19 +11,20 @@ data:
       \u30E3\u30EB\u3092\u8FD4\u3059"
     links:
     - https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B
-  bundledCode: "#line 1 \"DataStructure/Potentialized_UnionFind.hpp\"\n\n\n\n/*\n\
-    verify\nhttps://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\n*/\n\n#include <vector>\n\
-    #include <cassert>\n#include <numeric>\n\ntemplate <typename Abel>\nstruct Potentialized_UnionFind\
-    \ {\nprivate:\n    using S = typename Abel::S;\n    std::vector<int> parent;\n\
-    \    std::vector<S> potential_from_parent; // \u89AA\u304B\u3089\u898B\u305F\u30DD\
-    \u30C6\u30F3\u30B7\u30E3\u30EB\n    std::vector<int> size_;\n\npublic:\n    Potentialized_UnionFind(int\
-    \ N) : parent(N), potential_from_parent(N, Abel::e()), size_(N, 1) {\n       \
-    \ std::iota(parent.begin(), parent.end(), 0);\n    }\n\n    int root(int v){\n\
-    \        static std::vector<int> tmp;\n        while(parent[v] != v){ // \u6839\
-    \u307E\u3067\u8FBF\u3063\u3066\u3044\u304F\n            tmp.push_back(v);\n  \
-    \          v = parent[v];\n        }\n        int par = v;\n        while(!tmp.empty()){\n\
-    \            int pos = tmp.back(); tmp.pop_back();\n            parent[pos] =\
-    \ v; // \u7D4C\u8DEF\u5727\u7E2E\n            potential_from_parent[pos] = Abel::op(potential_from_parent[pos],\
+  bundledCode: "#line 1 \"DataStructure/Potentialized_UnionFind.hpp\"\n\n\n\n/// aaaaa\n\
+    \n/*\nverify\nhttps://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\n*/\n\n#include\
+    \ <vector>\n#include <cassert>\n#include <numeric>\n\ntemplate <typename Abel>\n\
+    struct Potentialized_UnionFind {\nprivate:\n    using S = typename Abel::S;\n\
+    \    std::vector<int> parent;\n    std::vector<S> potential_from_parent; // \u89AA\
+    \u304B\u3089\u898B\u305F\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\n    std::vector<int>\
+    \ size_;\n\npublic:\n    Potentialized_UnionFind(int N) : parent(N), potential_from_parent(N,\
+    \ Abel::e()), size_(N, 1) {\n        std::iota(parent.begin(), parent.end(), 0);\n\
+    \    }\n\n    int root(int v){\n        static std::vector<int> tmp;\n       \
+    \ while(parent[v] != v){ // \u6839\u307E\u3067\u8FBF\u3063\u3066\u3044\u304F\n\
+    \            tmp.push_back(v);\n            v = parent[v];\n        }\n      \
+    \  int par = v;\n        while(!tmp.empty()){\n            int pos = tmp.back();\
+    \ tmp.pop_back();\n            parent[pos] = v; // \u7D4C\u8DEF\u5727\u7E2E\n\
+    \            potential_from_parent[pos] = Abel::op(potential_from_parent[pos],\
     \ potential_from_parent[par]);\n            par = pos;\n        }\n        return\
     \ v;\n    }\n\n    bool same(int u, int v){\n        return root(u) == root(v);\n\
     \    }\n\n    /**\n     * @brief root_u \u304B\u3089\u898B\u305F u \u306E\u30DD\
@@ -50,9 +51,9 @@ data:
     \        assert(same(u, v));\n        return Abel::op(weight(u), Abel::inv(weight(v)));\n\
     \    }\n\n    int size(int v){\n        return size_[v];\n    }\n};\n\n\n"
   code: "#ifndef Potentialized_UnionFind_HPP\n#define Potentialized_UnionFind_HPP\n\
-    \n/*\nverify\nhttps://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\n*/\n\n#include\
-    \ <vector>\n#include <cassert>\n#include <numeric>\n\ntemplate <typename Abel>\n\
-    struct Potentialized_UnionFind {\nprivate:\n    using S = typename Abel::S;\n\
+    \n/// aaaaa\n\n/*\nverify\nhttps://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\n\
+    */\n\n#include <vector>\n#include <cassert>\n#include <numeric>\n\ntemplate <typename\
+    \ Abel>\nstruct Potentialized_UnionFind {\nprivate:\n    using S = typename Abel::S;\n\
     \    std::vector<int> parent;\n    std::vector<S> potential_from_parent; // \u89AA\
     \u304B\u3089\u898B\u305F\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\n    std::vector<int>\
     \ size_;\n\npublic:\n    Potentialized_UnionFind(int N) : parent(N), potential_from_parent(N,\
@@ -93,7 +94,7 @@ data:
   isVerificationFile: false
   path: DataStructure/Potentialized_UnionFind.hpp
   requiredBy: []
-  timestamp: '2024-09-30 23:45:06+09:00'
+  timestamp: '2024-10-04 17:48:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/Potentialized_UnionFind.hpp
