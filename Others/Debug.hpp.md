@@ -9,11 +9,11 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"Others/Debug.hpp\"\n\n\n\n#include <iostream>\n#include\
-    \ <fstream>\n#include <vector>\n#include <set>\n#include <map>\n\n#ifdef LOCAL\n\
-    std::ofstream debug_outfile;\nstd::ostream* debug_out = &std::cout;\n\nvoid Initialize_DebugOutput(){\n\
+    \ <fstream>\n#include <vector>\n#include <set>\n#include <map>\n\nstd::ofstream\
+    \ debug_outfile;\nstd::ostream* debug_out = &std::cout;\n\nvoid Initialize_DebugOutput(){\n\
     \    debug_outfile.open(\"debug.txt\");\n    debug_out = &debug_outfile;\n}\n\n\
-    namespace debug {\n\n    template <typename T>\n    void debug_print(const T&\
-    \ t){\n        *debug_out << t;\n    }\n\n    template <typename T, typename...\
+    #ifdef LOCAL\n\nnamespace debug {\n\n    template <typename T>\n    void debug_print(const\
+    \ T& t){\n        *debug_out << t;\n    }\n\n    template <typename T, typename...\
     \ Args>\n    void debug_print(const T& t, const Args&... args){\n        *debug_out\
     \ << t << \", \";\n        debug_print(args...);\n    }\n\n    // pair\n    template\
     \ <typename T1, typename T2>\n    void debug_print(const std::pair<T1, T2>& p){\n\
@@ -47,13 +47,13 @@ data:
     ; \\\n    debug::debug_print(__VA_ARGS__); \\\n    *debug_out << '\\n'; \\\n}\
     \ while(0)\n#else\n#define debug(...) do {} while(0)\n#endif\n\n\n"
   code: "#ifndef Debug_HPP\n#define Debug_HPP\n\n#include <iostream>\n#include <fstream>\n\
-    #include <vector>\n#include <set>\n#include <map>\n\n#ifdef LOCAL\nstd::ofstream\
-    \ debug_outfile;\nstd::ostream* debug_out = &std::cout;\n\nvoid Initialize_DebugOutput(){\n\
-    \    debug_outfile.open(\"debug.txt\");\n    debug_out = &debug_outfile;\n}\n\n\
-    namespace debug {\n\n    template <typename T>\n    void debug_print(const T&\
-    \ t){\n        *debug_out << t;\n    }\n\n    template <typename T, typename...\
-    \ Args>\n    void debug_print(const T& t, const Args&... args){\n        *debug_out\
-    \ << t << \", \";\n        debug_print(args...);\n    }\n\n    // pair\n    template\
+    #include <vector>\n#include <set>\n#include <map>\n\nstd::ofstream debug_outfile;\n\
+    std::ostream* debug_out = &std::cout;\n\nvoid Initialize_DebugOutput(){\n    debug_outfile.open(\"\
+    debug.txt\");\n    debug_out = &debug_outfile;\n}\n\n#ifdef LOCAL\n\nnamespace\
+    \ debug {\n\n    template <typename T>\n    void debug_print(const T& t){\n  \
+    \      *debug_out << t;\n    }\n\n    template <typename T, typename... Args>\n\
+    \    void debug_print(const T& t, const Args&... args){\n        *debug_out <<\
+    \ t << \", \";\n        debug_print(args...);\n    }\n\n    // pair\n    template\
     \ <typename T1, typename T2>\n    void debug_print(const std::pair<T1, T2>& p){\n\
     \        *debug_out << \"{\" << p.first << \", \" << p.second << \"}\";\n    }\n\
     \n    // tuple\n    template <typename Tuple, std::size_t... Is>\n    void print_tuple(const\
@@ -88,7 +88,7 @@ data:
   isVerificationFile: false
   path: Others/Debug.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2024-10-08 16:08:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/Debug.hpp
