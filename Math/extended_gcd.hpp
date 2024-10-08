@@ -9,7 +9,8 @@
 long long extended_gcd(long long a, long long b, long long &x, long long &y){
     /*
     a * x0 + b * y0 == gcd(a, b)
-    -> b * x1 + r * b1 == gcd(a, b)
+    ↓ a = q * b + r（ユークリッドの互除法）
+    -> b * x1 + r * y1 == gcd(a, b)
     -> ...
     -> gcd(a, b) * xn + 0 * yn == gcd(a, b)
     */
@@ -18,11 +19,11 @@ long long extended_gcd(long long a, long long b, long long &x, long long &y){
         y = 0;
         return a;
     }
-    long long nx, ny;
-    long long gcd = extended_gcd(b, a % b, nx, ny);
+    long long prev_x, prev_y;
+    long long gcd = extended_gcd(b, a % b, prev_x, prev_y);
     // 帰りがけに係数を更新
-    x = ny;
-    y = nx - (a / b) * ny;
+    x = prev_y;
+    y = prev_x - (a / b) * prev_y;
     return gcd;
 }
 

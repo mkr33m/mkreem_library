@@ -7,7 +7,6 @@
 #include <set>
 #include <map>
 
-#ifdef LOCAL
 std::ofstream debug_outfile;
 std::ostream* debug_out = &std::cout;
 
@@ -15,6 +14,8 @@ void Initialize_DebugOutput(){
     debug_outfile.open("debug.txt");
     debug_out = &debug_outfile;
 }
+
+#ifdef LOCAL
 
 namespace debug {
 
