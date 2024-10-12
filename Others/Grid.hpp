@@ -51,7 +51,10 @@ bool OutOfGrid(const int& i, const int& j, const int& h, const int& w){
     return false;
 }
 
-void parse_vecstr(std::vector<std::string>& grid){
+/**
+ * @brief 全ての行の文字列の長さを統一するために、空白文字で埋める
+ */
+void pad_strings(std::vector<std::string>& grid){
     size_t maxlen = 0;
     for(const auto& row : grid){
         maxlen = std::max(maxlen, row.size());
@@ -59,6 +62,21 @@ void parse_vecstr(std::vector<std::string>& grid){
     for(auto& row : grid){
         row.resize(maxlen, ' ');
     }
+}
+
+template <typename T>
+std::vector<std::vector<T>> convert_to_matrix(std::vector<std::string>& grid){
+    int H = (int)grid.size();
+    int W = (int)grid[0].size();
+
+    pad_strings(grid);
+    std::vector<std::vector<T>> after_grid(H, std::vector<T>(W));
+    for(int i = 0; i < H; i++){
+        for(int j = 0; j < W; j++){
+            after_grid[i][j] = grid[i][j];
+        }
+    }
+    return after_grid;
 }
 
 // 反時計回りに 90 度回転
@@ -73,7 +91,7 @@ void rotate90(std::vector<std::vector<T>>& grid){
             after_grid[i][j] = grid[j][(W - 1) - i];
         }
     }
-    swap(grid, after_grid);
+    std::swap(grid, after_grid);
 }
 
 // 180 度回転
@@ -88,7 +106,7 @@ void rotate180(std::vector<std::vector<T>>& grid){
             after_grid[i][j] = grid[(H - 1) - i][(W - 1) - j];
         }
     }
-    swap(grid, after_grid);
+    std::swap(grid, after_grid);
 }
 
 // 時計回りに 90 度回転（270 度回転）
@@ -103,7 +121,7 @@ void rotate270(std::vector<std::vector<T>>& grid){
             after_grid[i][j] = grid[(H - 1) - j][i];
         }
     }
-    swap(grid, after_grid);
+    std::swap(grid, after_grid);
 }
 
 // 転置
@@ -118,67 +136,7 @@ void transpose(std::vector<std::vector<T>>& grid){
             after_grid[i][j] = grid[j][i];
         }
     }
-    swap(grid, after_grid);
-}
-
-// 反時計回りに 90 度回転 (文字列用)
-void rotate90(std::vector<std::string>& grid){
-    parse_vecstr(grid);
-    int H = (int)grid.size();
-    int W = (int)grid[0].size();
-
-    std::vector<std::string> after_grid(W, std::string(H, ' '));
-    for(int i = 0; i < W; i++){
-        for(int j = 0; j < H; j++){
-            after_grid[i][j] = grid[j][(W - 1) - i];
-        }
-    }
-    swap(grid, after_grid);
-}
-
-// 180 度回転 (文字列用)
-void rotate180(std::vector<std::string>& grid){
-    parse_vecstr(grid);
-    int H = (int)grid.size();
-    int W = (int)grid[0].size();
-
-    std::vector<std::string> after_grid(H, std::string(W, ' '));
-    for(int i = 0; i < H; i++){
-        for(int j = 0; j < W; j++){
-            after_grid[i][j] = grid[(H - 1) - i][(W - 1) - j];
-        }
-    }
-    swap(grid, after_grid);
-}
-
-// 時計回りに 90 度回転（270 度回転） (文字列用)
-void rotate270(std::vector<std::string>& grid){
-    parse_vecstr(grid);
-    int H = (int)grid.size();
-    int W = (int)grid[0].size();
-
-    std::vector<std::string> after_grid(W, std::string(H, ' '));
-    for(int i = 0; i < W; i++){
-        for(int j = 0; j < H; j++){
-            after_grid[i][j] = grid[(H - 1) - j][i];
-        }
-    }
-    swap(grid, after_grid);
-}
-
-// 転置 (文字列用)
-void transpose(std::vector<std::string>& grid){
-    parse_vecstr(grid);
-    int H = (int)grid.size();
-    int W = (int)grid[0].size();
-
-    std::vector<std::string> after_grid(W, std::string(H, ' '));
-    for(int i = 0; i < W; i++){
-        for(int j = 0; j < H; j++){
-            after_grid[i][j] = grid[j][i];
-        }
-    }
-    swap(grid, after_grid);
+    std::swap(grid, after_grid);
 }
 
 template<typename T>
@@ -192,13 +150,6 @@ void print(const std::vector<std::vector<T>>& grid, bool space = true){
             if(space && j < W - 1) std::cout << " ";
         }
         std::cout << '\n';
-    }
-}
-
-// 文字列用
-void print(const std::vector<std::string>& grid){
-    for(const auto& row : grid){
-        std::cout << row << '\n';
     }
 }
 
