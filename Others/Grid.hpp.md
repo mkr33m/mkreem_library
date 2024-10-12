@@ -26,60 +26,43 @@ data:
     \ i < N; i++){\n        diag2.push_back(i * N + (N - i - 1));\n    }\n    lines.push_back(diag2);\n\
     \n    return lines;\n}\n\nbool OutOfGrid(const int& i, const int& j, const int&\
     \ h, const int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n\
-    \    return false;\n}\n\nvoid parse_vecstr(std::vector<std::string>& grid){\n\
-    \    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen = std::max(maxlen,\
-    \ row.size());\n    }\n    for(auto& row : grid){\n        row.resize(maxlen,\
-    \ ' ');\n    }\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\
-    \ntemplate<typename T>\nvoid rotate90(std::vector<std::vector<T>>& grid){\n  \
-    \  int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
-    \ after_grid(W, std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n       \
-    \ for(int j = 0; j < H; j++){\n            after_grid[i][j] = grid[j][(W - 1)\
-    \ - i];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// 180 \u5EA6\u56DE\
-    \u8EE2\ntemplate<typename T>\nvoid rotate180(std::vector<std::vector<T>>& grid){\n\
-    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
+    \    return false;\n}\n\n/**\n * @brief \u5168\u3066\u306E\u884C\u306E\u6587\u5B57\
+    \u5217\u306E\u9577\u3055\u3092\u7D71\u4E00\u3059\u308B\u305F\u3081\u306B\u3001\
+    \u7A7A\u767D\u6587\u5B57\u3067\u57CB\u3081\u308B\n */\nvoid pad_strings(std::vector<std::string>&\
+    \ grid){\n    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen\
+    \ = std::max(maxlen, row.size());\n    }\n    for(auto& row : grid){\n       \
+    \ row.resize(maxlen, ' ');\n    }\n}\n\ntemplate <typename T>\nstd::vector<std::vector<T>>\
+    \ convert_to_matrix(std::vector<std::string>& grid){\n    int H = (int)grid.size();\n\
+    \    int W = (int)grid[0].size();\n\n    pad_strings(grid);\n    std::vector<std::vector<T>>\
     \ after_grid(H, std::vector<T>(W));\n    for(int i = 0; i < H; i++){\n       \
-    \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[(H - 1) - i][(W\
-    \ - 1) - j];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// \u6642\u8A08\
-    \u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\u8EE2\uFF09\ntemplate<typename\
-    \ T>\nvoid rotate270(std::vector<std::vector<T>>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>> after_grid(W,\
-    \ std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n        for(int j = 0;\
-    \ j < H; j++){\n            after_grid[i][j] = grid[(H - 1) - j][i];\n       \
-    \ }\n    }\n    swap(grid, after_grid);\n}\n\n// \u8EE2\u7F6E\ntemplate<typename\
-    \ T>\nvoid transpose(std::vector<std::vector<T>>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>> after_grid(W,\
-    \ std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n        for(int j = 0;\
-    \ j < H; j++){\n            after_grid[i][j] = grid[j][i];\n        }\n    }\n\
-    \    swap(grid, after_grid);\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\u306B 90\
-    \ \u5EA6\u56DE\u8EE2 (\u6587\u5B57\u5217\u7528)\nvoid rotate90(std::vector<std::string>&\
-    \ grid){\n    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W =\
-    \ (int)grid[0].size();\n\n    std::vector<std::string> after_grid(W, std::string(H,\
-    \ ' '));\n    for(int i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n\
-    \            after_grid[i][j] = grid[j][(W - 1) - i];\n        }\n    }\n    swap(grid,\
-    \ after_grid);\n}\n\n// 180 \u5EA6\u56DE\u8EE2 (\u6587\u5B57\u5217\u7528)\nvoid\
-    \ rotate180(std::vector<std::string>& grid){\n    parse_vecstr(grid);\n    int\
-    \ H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::string>\
-    \ after_grid(H, std::string(W, ' '));\n    for(int i = 0; i < H; i++){\n     \
-    \   for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[(H - 1) -\
-    \ i][(W - 1) - j];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// \u6642\
-    \u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\u8EE2\uFF09\
-    \ (\u6587\u5B57\u5217\u7528)\nvoid rotate270(std::vector<std::string>& grid){\n\
-    \    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\
-    \n    std::vector<std::string> after_grid(W, std::string(H, ' '));\n    for(int\
+    \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[i][j];\n  \
+    \      }\n    }\n    return after_grid;\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\
+    \u306B 90 \u5EA6\u56DE\u8EE2\ntemplate<typename T>\nvoid rotate90(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
     \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
-    \ = grid[(H - 1) - j][i];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n\
-    // \u8EE2\u7F6E (\u6587\u5B57\u5217\u7528)\nvoid transpose(std::vector<std::string>&\
-    \ grid){\n    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W =\
-    \ (int)grid[0].size();\n\n    std::vector<std::string> after_grid(W, std::string(H,\
-    \ ' '));\n    for(int i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n\
-    \            after_grid[i][j] = grid[j][i];\n        }\n    }\n    swap(grid,\
-    \ after_grid);\n}\n\ntemplate<typename T>\nvoid print(const std::vector<std::vector<T>>&\
-    \ grid, bool space = true){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\
-    \n    for(int i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n     \
-    \       std::cout << grid[i][j];\n            if(space && j < W - 1) std::cout\
-    \ << \" \";\n        }\n        std::cout << '\\n';\n    }\n}\n\n// \u6587\u5B57\
-    \u5217\u7528\nvoid print(const std::vector<std::string>& grid){\n    for(const\
-    \ auto& row : grid){\n        std::cout << row << '\\n';\n    }\n}\n\n\n"
+    \ = grid[j][(W - 1) - i];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// 180 \u5EA6\u56DE\u8EE2\ntemplate<typename T>\nvoid rotate180(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(H, std::vector<T>(W));\n    for(int\
+    \ i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n            after_grid[i][j]\
+    \ = grid[(H - 1) - i][(W - 1) - j];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// \u6642\u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\
+    \u8EE2\uFF09\ntemplate<typename T>\nvoid rotate270(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
+    \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
+    \ = grid[(H - 1) - j][i];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// \u8EE2\u7F6E\ntemplate<typename T>\nvoid transpose(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
+    \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
+    \ = grid[j][i];\n        }\n    }\n    std::swap(grid, after_grid);\n}\n\ntemplate<typename\
+    \ T>\nvoid print(const std::vector<std::vector<T>>& grid, bool space = true){\n\
+    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    for(int\
+    \ i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n            std::cout\
+    \ << grid[i][j];\n            if(space && j < W - 1) std::cout << \" \";\n   \
+    \     }\n        std::cout << '\\n';\n    }\n}\n\n\n"
   code: "#ifndef Grid_HPP\n#define Grid_HPP\n\n#include <vector>\n#include <string>\n\
     #include <iostream>\n\nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0,\
     \ 1, 0, -1};\nconst int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8]\
@@ -96,66 +79,48 @@ data:
     \ i < N; i++){\n        diag2.push_back(i * N + (N - i - 1));\n    }\n    lines.push_back(diag2);\n\
     \n    return lines;\n}\n\nbool OutOfGrid(const int& i, const int& j, const int&\
     \ h, const int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n\
-    \    return false;\n}\n\nvoid parse_vecstr(std::vector<std::string>& grid){\n\
-    \    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen = std::max(maxlen,\
-    \ row.size());\n    }\n    for(auto& row : grid){\n        row.resize(maxlen,\
-    \ ' ');\n    }\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\
-    \ntemplate<typename T>\nvoid rotate90(std::vector<std::vector<T>>& grid){\n  \
-    \  int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
-    \ after_grid(W, std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n       \
-    \ for(int j = 0; j < H; j++){\n            after_grid[i][j] = grid[j][(W - 1)\
-    \ - i];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// 180 \u5EA6\u56DE\
-    \u8EE2\ntemplate<typename T>\nvoid rotate180(std::vector<std::vector<T>>& grid){\n\
-    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
+    \    return false;\n}\n\n/**\n * @brief \u5168\u3066\u306E\u884C\u306E\u6587\u5B57\
+    \u5217\u306E\u9577\u3055\u3092\u7D71\u4E00\u3059\u308B\u305F\u3081\u306B\u3001\
+    \u7A7A\u767D\u6587\u5B57\u3067\u57CB\u3081\u308B\n */\nvoid pad_strings(std::vector<std::string>&\
+    \ grid){\n    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen\
+    \ = std::max(maxlen, row.size());\n    }\n    for(auto& row : grid){\n       \
+    \ row.resize(maxlen, ' ');\n    }\n}\n\ntemplate <typename T>\nstd::vector<std::vector<T>>\
+    \ convert_to_matrix(std::vector<std::string>& grid){\n    int H = (int)grid.size();\n\
+    \    int W = (int)grid[0].size();\n\n    pad_strings(grid);\n    std::vector<std::vector<T>>\
     \ after_grid(H, std::vector<T>(W));\n    for(int i = 0; i < H; i++){\n       \
-    \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[(H - 1) - i][(W\
-    \ - 1) - j];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// \u6642\u8A08\
-    \u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\u8EE2\uFF09\ntemplate<typename\
-    \ T>\nvoid rotate270(std::vector<std::vector<T>>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>> after_grid(W,\
-    \ std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n        for(int j = 0;\
-    \ j < H; j++){\n            after_grid[i][j] = grid[(H - 1) - j][i];\n       \
-    \ }\n    }\n    swap(grid, after_grid);\n}\n\n// \u8EE2\u7F6E\ntemplate<typename\
-    \ T>\nvoid transpose(std::vector<std::vector<T>>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>> after_grid(W,\
-    \ std::vector<T>(H));\n    for(int i = 0; i < W; i++){\n        for(int j = 0;\
-    \ j < H; j++){\n            after_grid[i][j] = grid[j][i];\n        }\n    }\n\
-    \    swap(grid, after_grid);\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\u306B 90\
-    \ \u5EA6\u56DE\u8EE2 (\u6587\u5B57\u5217\u7528)\nvoid rotate90(std::vector<std::string>&\
-    \ grid){\n    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W =\
-    \ (int)grid[0].size();\n\n    std::vector<std::string> after_grid(W, std::string(H,\
-    \ ' '));\n    for(int i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n\
-    \            after_grid[i][j] = grid[j][(W - 1) - i];\n        }\n    }\n    swap(grid,\
-    \ after_grid);\n}\n\n// 180 \u5EA6\u56DE\u8EE2 (\u6587\u5B57\u5217\u7528)\nvoid\
-    \ rotate180(std::vector<std::string>& grid){\n    parse_vecstr(grid);\n    int\
-    \ H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::string>\
-    \ after_grid(H, std::string(W, ' '));\n    for(int i = 0; i < H; i++){\n     \
-    \   for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[(H - 1) -\
-    \ i][(W - 1) - j];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n// \u6642\
-    \u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\u8EE2\uFF09\
-    \ (\u6587\u5B57\u5217\u7528)\nvoid rotate270(std::vector<std::string>& grid){\n\
-    \    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\
-    \n    std::vector<std::string> after_grid(W, std::string(H, ' '));\n    for(int\
+    \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[i][j];\n  \
+    \      }\n    }\n    return after_grid;\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\
+    \u306B 90 \u5EA6\u56DE\u8EE2\ntemplate<typename T>\nvoid rotate90(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
     \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
-    \ = grid[(H - 1) - j][i];\n        }\n    }\n    swap(grid, after_grid);\n}\n\n\
-    // \u8EE2\u7F6E (\u6587\u5B57\u5217\u7528)\nvoid transpose(std::vector<std::string>&\
-    \ grid){\n    parse_vecstr(grid);\n    int H = (int)grid.size();\n    int W =\
-    \ (int)grid[0].size();\n\n    std::vector<std::string> after_grid(W, std::string(H,\
-    \ ' '));\n    for(int i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n\
-    \            after_grid[i][j] = grid[j][i];\n        }\n    }\n    swap(grid,\
-    \ after_grid);\n}\n\ntemplate<typename T>\nvoid print(const std::vector<std::vector<T>>&\
-    \ grid, bool space = true){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\
-    \n    for(int i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n     \
-    \       std::cout << grid[i][j];\n            if(space && j < W - 1) std::cout\
-    \ << \" \";\n        }\n        std::cout << '\\n';\n    }\n}\n\n// \u6587\u5B57\
-    \u5217\u7528\nvoid print(const std::vector<std::string>& grid){\n    for(const\
-    \ auto& row : grid){\n        std::cout << row << '\\n';\n    }\n}\n\n#endif //\
-    \ Grid_HPP"
+    \ = grid[j][(W - 1) - i];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// 180 \u5EA6\u56DE\u8EE2\ntemplate<typename T>\nvoid rotate180(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(H, std::vector<T>(W));\n    for(int\
+    \ i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n            after_grid[i][j]\
+    \ = grid[(H - 1) - i][(W - 1) - j];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// \u6642\u8A08\u56DE\u308A\u306B 90 \u5EA6\u56DE\u8EE2\uFF08270 \u5EA6\u56DE\
+    \u8EE2\uFF09\ntemplate<typename T>\nvoid rotate270(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
+    \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
+    \ = grid[(H - 1) - j][i];\n        }\n    }\n    std::swap(grid, after_grid);\n\
+    }\n\n// \u8EE2\u7F6E\ntemplate<typename T>\nvoid transpose(std::vector<std::vector<T>>&\
+    \ grid){\n    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n\
+    \    std::vector<std::vector<T>> after_grid(W, std::vector<T>(H));\n    for(int\
+    \ i = 0; i < W; i++){\n        for(int j = 0; j < H; j++){\n            after_grid[i][j]\
+    \ = grid[j][i];\n        }\n    }\n    std::swap(grid, after_grid);\n}\n\ntemplate<typename\
+    \ T>\nvoid print(const std::vector<std::vector<T>>& grid, bool space = true){\n\
+    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    for(int\
+    \ i = 0; i < H; i++){\n        for(int j = 0; j < W; j++){\n            std::cout\
+    \ << grid[i][j];\n            if(space && j < W - 1) std::cout << \" \";\n   \
+    \     }\n        std::cout << '\\n';\n    }\n}\n\n#endif // Grid_HPP"
   dependsOn: []
   isVerificationFile: false
   path: Others/Grid.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2024-10-12 17:28:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/Grid.hpp
