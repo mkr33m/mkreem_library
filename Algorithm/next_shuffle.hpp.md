@@ -85,9 +85,8 @@ data:
   verifiedWith: []
 documentation_of: Algorithm/next_shuffle.hpp
 layout: document
-redirect_from:
-- /library/Algorithm/next_shuffle.hpp
-- /library/Algorithm/next_shuffle.hpp.html
-title: "(K,N - K)-shuffle \u3067\u3042\u308B0, 1, ..., N - 1 \u306E\u7F6E\u63DB A\
-  \ \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
+title: next_shuffle
 ---
+
+##機能
+(K, N - K)-shuffle である0, 1, ..., N - 1 の置換 A を、辞書順で列挙する。先頭 K 項が、N 個の中から K 個選ぶ場合を全列挙することになる。

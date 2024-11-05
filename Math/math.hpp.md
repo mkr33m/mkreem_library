@@ -7,7 +7,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: Algorithm/next_pairing.hpp
-    title: Algorithm/next_pairing.hpp
+    title: next_paring
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
