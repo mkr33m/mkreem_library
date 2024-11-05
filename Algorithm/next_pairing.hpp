@@ -12,9 +12,6 @@ verify
 #include "../Math/math.hpp"
 
 template <typename T>
-/**
- * @brief (2,...,2)-shuffle である 0, 1, ..., 2 * N - 1 の置換 A を、辞書順で列挙する
- */
 bool next_pairing(const std::vector<T>& vec){
     int N = vec.size();
     /**

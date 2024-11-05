@@ -24,6 +24,7 @@ long long extended_gcd(long long a, long long b, long long &x, long long &y){
     // 帰りがけに係数を更新
     x = prev_y;
     y = prev_x - (a / b) * prev_y;
+    
     return gcd;
 }
 

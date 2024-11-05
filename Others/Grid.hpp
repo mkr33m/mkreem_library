@@ -46,7 +46,7 @@ std::vector<std::vector<int>> lines(const int& N){
     return lines;
 }
 
-bool OutOfGrid(const int& i, const int& j, const int& h, const int& w){
+bool out_of_grid(const int& i, const int& j, const int& h, const int& w){
     if(i < 0 || j < 0 || i >= h || j >= w) return true;
     return false;
 }
@@ -66,10 +66,10 @@ void pad_strings(std::vector<std::string>& grid){
 
 template <typename T>
 std::vector<std::vector<T>> convert_to_matrix(std::vector<std::string>& grid){
+    pad_strings(grid);
     int H = (int)grid.size();
     int W = (int)grid[0].size();
 
-    pad_strings(grid);
     std::vector<std::vector<T>> after_grid(H, std::vector<T>(W));
     for(int i = 0; i < H; i++){
         for(int j = 0; j < W; j++){

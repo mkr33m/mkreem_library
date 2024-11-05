@@ -24,10 +24,10 @@ namespace input {
     input::read(__VA_ARGS__)
 #define INT(...) READ(int, __VA_ARGS__)
 #define LL(...) READ(long long, __VA_ARGS__)
-#define DBL(...) READ(double, __VA_ARGS__)
+#define DOUBLE(...) READ(double, __VA_ARGS__)
 #define LD(...) READ(long double, __VA_ARGS__)
-#define STR(...) READ(std::string, __VA_ARGS__)
-#define CHA(...) READ(char, __VA_ARGS__)
+#define STRING(...) READ(std::string, __VA_ARGS__)
+#define CHAR(...) READ(char, __VA_ARGS__)
 #define VI(vec, type, a) std::vector<type> vec(a); for(int i = 0; i < a; i++) std::cin >> vec[i]
 #define VI2(vec1, vec2, type, a, b) std::vector<type> vec1(a), vec2(b); for(int i = 0; i < a; i++) std::cin >> vec1[i]; for(int i = 0; i < b; i++) std::cin >> vec2[i]
 #define VI3(vec1, vec2, vec3, type, a, b, c) std::vector<type> vec1(a), vec2(b), vec3(c); for(int i = 0; i < a; i++) std::cin >> vec1[i]; for(int i = 0; i < b; i++) std::cin >> vec2[i]; for(int i = 0; i < c; i++) std::cin >> vec3[i]
