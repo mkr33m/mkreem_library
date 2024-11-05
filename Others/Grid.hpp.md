@@ -24,7 +24,7 @@ data:
     \    for(int i = 0; i < N; i++){\n        diag1.push_back(i * N + i);\n    }\n\
     \    lines.push_back(diag1);\n\n    std::vector<int> diag2;\n    for(int i = 0;\
     \ i < N; i++){\n        diag2.push_back(i * N + (N - i - 1));\n    }\n    lines.push_back(diag2);\n\
-    \n    return lines;\n}\n\nbool OutOfGrid(const int& i, const int& j, const int&\
+    \n    return lines;\n}\n\nbool out_of_grid(const int& i, const int& j, const int&\
     \ h, const int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n\
     \    return false;\n}\n\n/**\n * @brief \u5168\u3066\u306E\u884C\u306E\u6587\u5B57\
     \u5217\u306E\u9577\u3055\u3092\u7D71\u4E00\u3059\u308B\u305F\u3081\u306B\u3001\
@@ -32,8 +32,8 @@ data:
     \ grid){\n    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen\
     \ = std::max(maxlen, row.size());\n    }\n    for(auto& row : grid){\n       \
     \ row.resize(maxlen, ' ');\n    }\n}\n\ntemplate <typename T>\nstd::vector<std::vector<T>>\
-    \ convert_to_matrix(std::vector<std::string>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    pad_strings(grid);\n    std::vector<std::vector<T>>\
+    \ convert_to_matrix(std::vector<std::string>& grid){\n    pad_strings(grid);\n\
+    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
     \ after_grid(H, std::vector<T>(W));\n    for(int i = 0; i < H; i++){\n       \
     \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[i][j];\n  \
     \      }\n    }\n    return after_grid;\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\
@@ -77,7 +77,7 @@ data:
     \    for(int i = 0; i < N; i++){\n        diag1.push_back(i * N + i);\n    }\n\
     \    lines.push_back(diag1);\n\n    std::vector<int> diag2;\n    for(int i = 0;\
     \ i < N; i++){\n        diag2.push_back(i * N + (N - i - 1));\n    }\n    lines.push_back(diag2);\n\
-    \n    return lines;\n}\n\nbool OutOfGrid(const int& i, const int& j, const int&\
+    \n    return lines;\n}\n\nbool out_of_grid(const int& i, const int& j, const int&\
     \ h, const int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n\
     \    return false;\n}\n\n/**\n * @brief \u5168\u3066\u306E\u884C\u306E\u6587\u5B57\
     \u5217\u306E\u9577\u3055\u3092\u7D71\u4E00\u3059\u308B\u305F\u3081\u306B\u3001\
@@ -85,8 +85,8 @@ data:
     \ grid){\n    size_t maxlen = 0;\n    for(const auto& row : grid){\n        maxlen\
     \ = std::max(maxlen, row.size());\n    }\n    for(auto& row : grid){\n       \
     \ row.resize(maxlen, ' ');\n    }\n}\n\ntemplate <typename T>\nstd::vector<std::vector<T>>\
-    \ convert_to_matrix(std::vector<std::string>& grid){\n    int H = (int)grid.size();\n\
-    \    int W = (int)grid[0].size();\n\n    pad_strings(grid);\n    std::vector<std::vector<T>>\
+    \ convert_to_matrix(std::vector<std::string>& grid){\n    pad_strings(grid);\n\
+    \    int H = (int)grid.size();\n    int W = (int)grid[0].size();\n\n    std::vector<std::vector<T>>\
     \ after_grid(H, std::vector<T>(W));\n    for(int i = 0; i < H; i++){\n       \
     \ for(int j = 0; j < W; j++){\n            after_grid[i][j] = grid[i][j];\n  \
     \      }\n    }\n    return after_grid;\n}\n\n// \u53CD\u6642\u8A08\u56DE\u308A\
@@ -120,7 +120,7 @@ data:
   isVerificationFile: false
   path: Others/Grid.hpp
   requiredBy: []
-  timestamp: '2024-10-12 17:28:38+09:00'
+  timestamp: '2024-11-06 03:28:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/Grid.hpp

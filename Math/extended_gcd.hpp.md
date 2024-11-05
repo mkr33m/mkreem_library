@@ -24,7 +24,7 @@ data:
     \    */\n    if(b == 0){\n        x = 1;\n        y = 0;\n        return a;\n\
     \    }\n    long long prev_x, prev_y;\n    long long gcd = extended_gcd(b, a %\
     \ b, prev_x, prev_y);\n    // \u5E30\u308A\u304C\u3051\u306B\u4FC2\u6570\u3092\
-    \u66F4\u65B0\n    x = prev_y;\n    y = prev_x - (a / b) * prev_y;\n    return\
+    \u66F4\u65B0\n    x = prev_y;\n    y = prev_x - (a / b) * prev_y;\n    \n    return\
     \ gcd;\n}\n\n\n"
   code: "#ifndef H_extended_gcd\n#define H_extended_gcd\n\n/**\n * @brief a * x +\
     \ b * y == gcd(a, b)\u3092\u6E80\u305F\u3059 x, y \u3092\u898B\u3064\u3051\u308B\
@@ -36,14 +36,14 @@ data:
     \    */\n    if(b == 0){\n        x = 1;\n        y = 0;\n        return a;\n\
     \    }\n    long long prev_x, prev_y;\n    long long gcd = extended_gcd(b, a %\
     \ b, prev_x, prev_y);\n    // \u5E30\u308A\u304C\u3051\u306B\u4FC2\u6570\u3092\
-    \u66F4\u65B0\n    x = prev_y;\n    y = prev_x - (a / b) * prev_y;\n    return\
+    \u66F4\u65B0\n    x = prev_y;\n    y = prev_x - (a / b) * prev_y;\n    \n    return\
     \ gcd;\n}\n\n#endif\n"
   dependsOn: []
   isVerificationFile: false
   path: Math/extended_gcd.hpp
   requiredBy:
   - Math/binom_mod_ll.hpp
-  timestamp: '2024-10-08 16:08:45+09:00'
+  timestamp: '2024-11-06 03:28:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/extended_gcd.hpp

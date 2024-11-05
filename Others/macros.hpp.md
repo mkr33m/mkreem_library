@@ -4,12 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: Algorithm/next_pairing.hpp
-    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
-      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
+    title: Algorithm/next_pairing.hpp
   - icon: ':warning:'
     path: Algorithm/next_pairing.hpp
-    title: "(2,...,2)-shuffle \u3067\u3042\u308B 0, 1, ..., 2 * N - 1 \u306E\u7F6E\
-      \u63DB A \u3092\u3001\u8F9E\u66F8\u9806\u3067\u5217\u6319\u3059\u308B"
+    title: Algorithm/next_pairing.hpp
   - icon: ':warning:'
     path: DataStructure/RangeSet.hpp
     title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\
