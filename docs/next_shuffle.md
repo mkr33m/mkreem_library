@@ -1,6 +1,6 @@
 ---
 title: next_shuffle
-documentation_of: /Algorithm/next_shuffle.hpp
+documentation_of: //Algorithm/next_shuffle.hpp
 ---
 
 ##機能
