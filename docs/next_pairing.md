@@ -9,4 +9,3 @@ documentation_of: ../next_pairing.hpp
 
 ##注意点
 引数の vector は、あらかじめソートしておく必要がある。
-
