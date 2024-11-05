@@ -1,6 +1,6 @@
 ---
 title: next_paring
-documentation_of: ../next_pairing.hpp
+documentation_of: /Algorithm/next_pairing.hpp
 ---
 
 ##機能
