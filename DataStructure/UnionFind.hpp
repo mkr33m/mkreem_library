@@ -10,26 +10,26 @@ verify
 #include <algorithm>
 #include <numeric>
 
-struct UnionFind {
+class UnionFind {
 private:
-    int N;
-    std::vector<int> parent;
+    int N_;
+    std::vector<int> parent_;
     std::vector<int> size_;
 
 public:
     UnionFind() = default;
-    UnionFind(int N) : N(N), parent(N), size_(N, 1) {
-        std::iota(parent.begin(), parent.end(), 0);
+    UnionFind(int N) : N_(N), parent_(N), size_(N, 1) {
+        std::iota(parent_.begin(), parent_.end(), 0);
     }
 
     int root(int v){
         static std::vector<int> tmp;
-        while(parent[v] != v){ // 根まで辿っていく
+        while(parent_[v] != v){ // 根まで辿っていく
             tmp.push_back(v);
-            v = parent[v];
+            v = parent_[v];
         }
         while(!tmp.empty()){ // 経路圧縮
-            parent[tmp.back()] = v;
+            parent_[tmp.back()] = v;
             tmp.pop_back();
         }
         return v;
@@ -50,7 +50,7 @@ public:
             std::swap(root_u, root_v); // マージテク
         }
         size_[root_u] += size_[root_v];
-        parent[root_v] = root_u;
+        parent_[root_v] = root_u;
         return true;
     }
 
@@ -59,8 +59,8 @@ public:
     }
 
     std::vector<std::vector<int>> groups(){
-        std::vector<std::vector<int>> res(N);
-        for(int i = 0; i < N; i++){
+        std::vector<std::vector<int>> res(N_);
+        for(int i = 0; i < N_; i++){
             res[root(i)].push_back(i);
         }
         res.erase(std::remove_if(res.begin(), res.end(), [](const std::vector<int>& vec){ return vec.empty(); }), res.end());

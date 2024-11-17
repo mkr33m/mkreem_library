@@ -9,53 +9,33 @@
 /**
  * @brief 文字列の挿入・検索など、O(文字列の長さ)で行う。
  */
-template <int num_of_char, int base>
+template <int num_of_char, int base, bool use_accept = false>
 struct Trie {
 public:
     struct Node {
         /**
          * @param next 子の頂点番号を記録。next[c] の形式で、c に対応する文字を記録する子の頂点番号を返す。
          * @param accept 末端がこの頂点となる（= この頂点が表す）文字列の str_id を記録（str_id は、i 番目（0-indexed）に挿入された文字列なら、str_id == i となる）。
+         * @param accepted 末端がこの頂点となる文字列が存在するか（= accept.size() > 0 かどうか）
          * @param c この頂点が記録している文字の、base との距離。
          * @param share いくつの文字列がこの頂点を共有しているか。
          * @param depth 根からの距離。
          */
         std::vector<int> next;
         std::vector<int> accept;
+        bool accepted;
         int c, share, depth;
 
-        Node(int c, int depth) : c(c), share(0), depth(depth){
-            next.assign(num_of_char, -1);
-        };
+        Node(int c, int depth) : next(num_of_char, -1),
+                                accept(0),
+                                accepted(false),
+                                c(c),
+                                share(0),
+                                depth(depth) { };
     };
 
-    Trie() : root(0){
+    Trie() : root(0) {
         nodes.push_back(Node(root, 0)); // 根となる頂点を追加
-    }
-
-    /**
-     * @brief trie木に文字列を挿入する
-     * @remark 計算量：O(挿入する文字列の長さ)
-     * @param std::function<void(int)>& f  挿入するとき、すでに追加されているノードを訪れたときに実行する関数。引数として、訪れたノードの ID（node_id）が渡される（ただし、根は除く）。
-     */
-    void insert_(const std::string& word, const std::function<void(int)>& f, int word_id){
-        int node_id = 0; // -> ノードの ID は、vector "trie" における idx // 根から辿っていく
-        for(int i = 0; i < (int)word.size(); i++){
-            const char ch = word[i];
-            const int c = int(ch - base);
-            int& next_id = nodes[node_id].next[c];
-            if(next_id == -1){ // 次の頂点が存在しない（新たに頂点を追加する必要がある）。
-                next_id = (int)nodes.size();
-                nodes.push_back(Node(c, i + 1));
-            } else{
-                f(next_id);
-            }
-            nodes[node_id].share++;
-            node_id = next_id;
-        }
-        // この時点で、node_id は単語の終点を記録する頂点を指す。
-        nodes[node_id].share++;
-        nodes[node_id].accept.push_back(word_id);
     }
 
     void insert(const std::string& word, const std::function<void(int)>& f = [](int){}){
@@ -77,14 +57,7 @@ public:
             node_id = next_id;
         }
         // prefix == false の場合は、最後の頂点が受理状態かどうかを判定する。
-        return (prefix ? true : nodes[node_id].accept.size() > 0); 
-    }
-
-    /**
-     * @brief prefix が一致するものを検索する。
-     */
-    bool start_with(const std::string& prefix){
-        return search(prefix, true);
+        return (prefix ? true : nodes[node_id].accepted); 
     }
 
     /**
@@ -95,7 +68,7 @@ public:
         for(const auto& str_id : nodes[node_id].accept){
             f(str_id);
         }
-        if(word_idx == word.size()){
+        if(word_idx == (int)word.size()){
             return;
         } else{
             const int c = word[word_idx] - base;
@@ -113,10 +86,10 @@ public:
      * @remark word は、Trie 木に insert されていなければならない。
      */
     void scan(const std::string& word, const std::function<void(int)>& f, int word_idx = 0, int node_id = 0, bool inserted = false){
-        if(!inserted){
-            assert(search(word));
+        if(!inserted){ // 最初だけの処理
+            assert(search(word, false));
         }
-        if(word_idx == word.size()){
+        if(word_idx == (int)word.size()){
             return;
         } else{
             const int c = word[word_idx] - base;
@@ -154,6 +127,34 @@ public:
 private:
     std::vector<Node> nodes; // Trie木
     int root;
+
+    /**
+     * @brief trie木に文字列を挿入する
+     * @remark 計算量：O(挿入する文字列の長さ)
+     * @param std::function<void(int)>& f  挿入するとき、すでに追加されているノードを訪れたときに実行する関数。引数として、訪れたノードの ID（node_id）が渡される（ただし、根は除く）。
+     */
+    void insert_(const std::string& word, const std::function<void(int)>& f, int word_id){
+        int node_id = 0;
+        for(int i = 0; i < (int)word.size(); i++){
+            const char ch = word[i];
+            const int c = int(ch - base);
+            int& next_id = nodes[node_id].next[c];
+            if(next_id == -1){ // 次の頂点が存在しない（新たに頂点を追加する必要がある）。
+                next_id = (int)nodes.size();
+                nodes.push_back(Node(c, i + 1));
+            } else{
+                f(next_id);
+            }
+            nodes[node_id].share++;
+            node_id = next_id;
+        }
+        // この時点で、node_id は単語の終点を記録する頂点を指す。
+        nodes[node_id].share++;
+        nodes[node_id].accepted = true;
+        if(use_accept){
+            nodes[node_id].accept.push_back(word_id);
+        }
+    }
 };
 
 #endif // Trie_HPP

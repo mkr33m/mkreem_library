@@ -9,31 +9,46 @@
  * @param T モノイド（連結成分が持つ情報）の型
  */
 template <typename T>
-using merge_function = void(*)(T& parent_data, T child_data);
+using merge_function = void(*)(T& component_sum1, T component_sum2);
 
+// 型引数、非型引数（コンパイル時に定まるものに限る）
 template <typename T, merge_function<T> f>
-struct UF_ComponentSum : UnionFind {
-private:
+class UF_ComponentSum : UnionFind { // 継承
     std::vector<T> sum_;
 
 public:
-    UF_ComponentSum() : UF_ComponentSum(0) {}
-    UF_ComponentSum(int N, const T& init_value = T{}) : UF_ComponentSum(std::vector<T>(N, init_value)) {}
-    UF_ComponentSum(const std::vector<T>& init_values) : UnionFind(init_values.size()), sum_(init_values) {}
+    UF_ComponentSum() = default;
+    UF_ComponentSum(const std::vector<T>& init) : 
+        UnionFind((int)init.size()), sum_(init) {}
 
-    bool merge(int x, int y){
-        x = root(x), y = root(y); // <- 根
-        bool res = UnionFind::merge(x, y);
-        if(res){
-            if(root(x) == y) std::swap(x, y); // マージ後の連結成分の根が x となるよう調整
-            f(sum_[x], std::move(sum_[y]));
+    /**
+     * @brief u が所属する連結成分の sum と v が所属する連結成分の sum を統合する
+     */
+    bool merge (const int& u, const int& v) {
+        int prev_root_u = root(u), prev_root_v = root(v);
+        bool merged = merge(u, v);
+        if (merged) {
+            int root_u = root(u);
+            /*
+            merge 後、
+            ・prev_root_u == root_u -> 連結後の成分の根は prev_root_u
+            ・prev_root_u != root_u -> 連結後の成分の根は prev_root_v
+            */
+            if (prev_root_u != root_u) {
+                f(sum_[prev_root_v], std::move[prev_root_u]);
+            } else {
+                f(sum_[prev_root_u], std::move[prev_root_v]);
+            }
         }
-        return res;
+
+        return merged;
     }
 
-    const T& sum(int x){
-        return sum_[root(x)];
+    T sum (const int& v) const {
+        int root_v = root(v);
+        return sum_(v);
     }
+
 };
 
 #endif // UF_ComponentSum_HPP
