@@ -5,7 +5,7 @@ data:
     pages:
     - icon: ':warning:'
       path: Algorithm/next_pairing.hpp
-      title: next_paring
+      title: next_pairing
     - icon: ':warning:'
       path: Algorithm/next_shuffle.hpp
       title: next_shuffle
@@ -26,7 +26,7 @@ data:
         \u306B\u3042\u308B\u30CE\u30FC\u30C9\u3092\u66F4\u65B0"
     - icon: ':warning:'
       path: DataStructure/UF_ComponentSum.hpp
-      title: DataStructure/UF_ComponentSum.hpp
+      title: UF_ComponentSum
     - icon: ':warning:'
       path: DataStructure/UnionFind.hpp
       title: DataStructure/UnionFind.hpp
@@ -126,8 +126,7 @@ data:
         \u306A\u3057\u3067\u8A08\u7B97"
     - icon: ':warning:'
       path: String/Trie.hpp
-      title: "\u6587\u5B57\u5217\u306E\u633F\u5165\u30FB\u691C\u7D22\u306A\u3069\u3001\
-        O(\u6587\u5B57\u5217\u306E\u9577\u3055)\u3067\u884C\u3046\u3002"
+      title: Trie
   - name: ac-library/atcoder
     pages:
     - icon: ':warning:'

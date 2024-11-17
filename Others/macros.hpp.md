@@ -4,10 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: Algorithm/next_pairing.hpp
-    title: next_paring
+    title: next_pairing
   - icon: ':warning:'
     path: Algorithm/next_pairing.hpp
-    title: next_paring
+    title: next_pairing
   - icon: ':warning:'
     path: DataStructure/RangeSet.hpp
     title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\
