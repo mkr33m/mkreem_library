@@ -43,51 +43,52 @@ data:
     \ T component_sum2);\n\n// \u578B\u5F15\u6570\u3001\u975E\u578B\u5F15\u6570\uFF08\
     \u30B3\u30F3\u30D1\u30A4\u30EB\u6642\u306B\u5B9A\u307E\u308B\u3082\u306E\u306B\
     \u9650\u308B\uFF09\ntemplate <typename T, merge_function<T> f>\nclass UF_ComponentSum\
-    \ : UnionFind { // \u7D99\u627F\n    std::vector<T> sum_;\n\npublic:\n    UF_ComponentSum()\
-    \ = default;\n    UF_ComponentSum(const std::vector<T>& init) : \n        UnionFind((int)init.size()),\
-    \ sum_(init) {}\n\n    /**\n     * @brief u \u304C\u6240\u5C5E\u3059\u308B\u9023\
-    \u7D50\u6210\u5206\u306E sum \u3068 v \u304C\u6240\u5C5E\u3059\u308B\u9023\u7D50\
-    \u6210\u5206\u306E sum \u3092\u7D71\u5408\u3059\u308B\n     */\n    bool merge\
-    \ (const int& u, const int& v) {\n        int prev_root_u = root(u), prev_root_v\
-    \ = root(v);\n        bool merged = merge(u, v);\n        if (merged) {\n    \
-    \        int root_u = root(u);\n            /*\n            merge \u5F8C\u3001\
-    \n            \u30FBprev_root_u == root_u -> \u9023\u7D50\u5F8C\u306E\u6210\u5206\
-    \u306E\u6839\u306F prev_root_u\n            \u30FBprev_root_u != root_u -> \u9023\
-    \u7D50\u5F8C\u306E\u6210\u5206\u306E\u6839\u306F prev_root_v\n            */\n\
-    \            if (prev_root_u != root_u) {\n                f(sum_[prev_root_v],\
-    \ std::move[prev_root_u]);\n            } else {\n                f(sum_[prev_root_u],\
-    \ std::move[prev_root_v]);\n            }\n        }\n\n        return merged;\n\
-    \    }\n\n    T sum (const int& v) const {\n        int root_v = root(v);\n  \
-    \      return sum_(v);\n    }\n\n};\n\n\n"
+    \ : public UnionFind { // \u7D99\u627F\n    std::vector<T> sum_;\n\npublic:\n\
+    \    UF_ComponentSum() = default;\n    UF_ComponentSum(const std::vector<T>& init)\
+    \ : \n        UnionFind((int)init.size()), sum_(init) {}\n\n    /**\n     * @brief\
+    \ u \u304C\u6240\u5C5E\u3059\u308B\u9023\u7D50\u6210\u5206\u306E sum \u3068 v\
+    \ \u304C\u6240\u5C5E\u3059\u308B\u9023\u7D50\u6210\u5206\u306E sum \u3092\u7D71\
+    \u5408\u3059\u308B\n     */\n    bool merge(const int& u, const int& v) {\n  \
+    \      int prev_root_u = root(u), prev_root_v = root(v);\n        bool merged\
+    \ = UnionFind::merge(u, v);\n        if (merged) {\n            int root_u = root(u);\n\
+    \            /*\n            merge \u5F8C\u3001\n            \u30FBprev_root_u\
+    \ == root_u -> \u9023\u7D50\u5F8C\u306E\u6210\u5206\u306E\u6839\u306F prev_root_u\n\
+    \            \u30FBprev_root_u != root_u -> \u9023\u7D50\u5F8C\u306E\u6210\u5206\
+    \u306E\u6839\u306F prev_root_v\n            */\n            if (prev_root_u !=\
+    \ root_u) {\n                f(sum_[prev_root_v], std::move(sum_[prev_root_u]));\n\
+    \            } else {\n                f(sum_[prev_root_u], std::move(sum_[prev_root_v]));\n\
+    \            }\n        }\n\n        return merged;\n    }\n\n    T sum(const\
+    \ int& v) {\n        int root_v = root(v);\n        return sum_[root_v];\n   \
+    \ }\n\n};\n\n\n"
   code: "#ifndef UF_ComponentSum_HPP\n#define UF_ComponentSum_HPP\n\n#include <vector>\n\
     \n#include \"UnionFind.hpp\"\n\n/**\n * @param T \u30E2\u30CE\u30A4\u30C9\uFF08\
     \u9023\u7D50\u6210\u5206\u304C\u6301\u3064\u60C5\u5831\uFF09\u306E\u578B\n */\n\
     template <typename T>\nusing merge_function = void(*)(T& component_sum1, T component_sum2);\n\
     \n// \u578B\u5F15\u6570\u3001\u975E\u578B\u5F15\u6570\uFF08\u30B3\u30F3\u30D1\u30A4\
     \u30EB\u6642\u306B\u5B9A\u307E\u308B\u3082\u306E\u306B\u9650\u308B\uFF09\ntemplate\
-    \ <typename T, merge_function<T> f>\nclass UF_ComponentSum : UnionFind { // \u7D99\
-    \u627F\n    std::vector<T> sum_;\n\npublic:\n    UF_ComponentSum() = default;\n\
-    \    UF_ComponentSum(const std::vector<T>& init) : \n        UnionFind((int)init.size()),\
+    \ <typename T, merge_function<T> f>\nclass UF_ComponentSum : public UnionFind\
+    \ { // \u7D99\u627F\n    std::vector<T> sum_;\n\npublic:\n    UF_ComponentSum()\
+    \ = default;\n    UF_ComponentSum(const std::vector<T>& init) : \n        UnionFind((int)init.size()),\
     \ sum_(init) {}\n\n    /**\n     * @brief u \u304C\u6240\u5C5E\u3059\u308B\u9023\
     \u7D50\u6210\u5206\u306E sum \u3068 v \u304C\u6240\u5C5E\u3059\u308B\u9023\u7D50\
-    \u6210\u5206\u306E sum \u3092\u7D71\u5408\u3059\u308B\n     */\n    bool merge\
-    \ (const int& u, const int& v) {\n        int prev_root_u = root(u), prev_root_v\
-    \ = root(v);\n        bool merged = merge(u, v);\n        if (merged) {\n    \
-    \        int root_u = root(u);\n            /*\n            merge \u5F8C\u3001\
-    \n            \u30FBprev_root_u == root_u -> \u9023\u7D50\u5F8C\u306E\u6210\u5206\
+    \u6210\u5206\u306E sum \u3092\u7D71\u5408\u3059\u308B\n     */\n    bool merge(const\
+    \ int& u, const int& v) {\n        int prev_root_u = root(u), prev_root_v = root(v);\n\
+    \        bool merged = UnionFind::merge(u, v);\n        if (merged) {\n      \
+    \      int root_u = root(u);\n            /*\n            merge \u5F8C\u3001\n\
+    \            \u30FBprev_root_u == root_u -> \u9023\u7D50\u5F8C\u306E\u6210\u5206\
     \u306E\u6839\u306F prev_root_u\n            \u30FBprev_root_u != root_u -> \u9023\
     \u7D50\u5F8C\u306E\u6210\u5206\u306E\u6839\u306F prev_root_v\n            */\n\
     \            if (prev_root_u != root_u) {\n                f(sum_[prev_root_v],\
-    \ std::move[prev_root_u]);\n            } else {\n                f(sum_[prev_root_u],\
-    \ std::move[prev_root_v]);\n            }\n        }\n\n        return merged;\n\
-    \    }\n\n    T sum (const int& v) const {\n        int root_v = root(v);\n  \
-    \      return sum_(v);\n    }\n\n};\n\n#endif // UF_ComponentSum_HPP"
+    \ std::move(sum_[prev_root_u]));\n            } else {\n                f(sum_[prev_root_u],\
+    \ std::move(sum_[prev_root_v]));\n            }\n        }\n\n        return merged;\n\
+    \    }\n\n    T sum(const int& v) {\n        int root_v = root(v);\n        return\
+    \ sum_[root_v];\n    }\n\n};\n\n#endif // UF_ComponentSum_HPP"
   dependsOn:
   - DataStructure/UnionFind.hpp
   isVerificationFile: false
   path: DataStructure/UF_ComponentSum.hpp
   requiredBy: []
-  timestamp: '2024-11-18 02:37:40+09:00'
+  timestamp: '2024-11-27 20:14:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/UF_ComponentSum.hpp
