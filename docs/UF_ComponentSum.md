@@ -11,8 +11,8 @@ documentation_of: //DataStructure/UF_ComponentSum.hpp
 ```cpp
 template <typename T, merge_function<T> f>
 ```
-連結成分に持たせる sum の型と、merge のときの sum の計算を行う関数を渡す。
-**T は可換でないといけない**。
+連結成分に持たせる sum の型と、merge のときの sum の計算を行う関数を渡す。**T は可換でないといけない**。
+また、**ラムダ関数をテンプレート引数として使用することはできない**ため、外部引数を渡すこと。
 
 ## コンストラクタ
 
