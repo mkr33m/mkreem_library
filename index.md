@@ -21,9 +21,7 @@ data:
         \u3069\u3046\u304B\u3092\u8FD4\u3059"
     - icon: ':warning:'
       path: DataStructure/Segtree.hpp
-      title: "seg[i] = x  \u914D\u5217\u306E i \u756A\u76EE\u306B\u5BFE\u5FDC\u3059\
-        \u308B\u30CE\u30FC\u30C9\u3092 x \u3067\u30BB\u30C3\u30C8\u3057\u3001\u4E0A\
-        \u306B\u3042\u308B\u30CE\u30FC\u30C9\u3092\u66F4\u65B0"
+      title: DataStructure/Segtree.hpp
     - icon: ':warning:'
       path: DataStructure/UF_ComponentSum.hpp
       title: UF_ComponentSum
