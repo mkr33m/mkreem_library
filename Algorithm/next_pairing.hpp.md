@@ -73,35 +73,35 @@ data:
     \   */\n    int log2_floor(long long N){\n        int res = -1;\n        while(N\
     \ != 0){\n            res++;\n            N /= 2;\n        }\n        return res;\n\
     \    }\n\n} // namespace math\n\n\n#line 13 \"Algorithm/next_pairing.hpp\"\n\n\
-    template <typename T>\nbool next_pairing(const std::vector<T>& vec){\n    int\
+    template <typename T>\nbool next_pairing(const std::vector<T>& vec) {\n    int\
     \ N = vec.size();\n    /**\n     * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\
     \u3078\u8D70\u67FB\u3057\u305F\u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\
-    \u898B\u305F\u304B\n     */\n    ll used = 0;\n    for(int i = N - 1; i >= 0;\
-    \ i--){\n        used |= (1 << vec[i]);\n        if(i % 2 == 1 && vec[i] < math::log2_floor(used)){\n\
-    \            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1; // \u307E\
-    \u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001 vec[i]\
-    \ \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\u306E\
-    \u3082\u306E\n            used ^= (1 << vec[i]);\n            for(int j = i +\
-    \ 1; j < N; j++){ // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\u6700\u5C0F\
-    \u306B\n                vec[j] = __builtin_ctzll(used);\n                used\
-    \ ^= (1 << vec[j]);\n            }\n            return true;\n        }\n    }\n\
-    \    return false;\n}\n\n\n"
+    \u898B\u305F\u304B\n     */\n    ll used = 0;\n    for (int i = N - 1; i >= 0;\
+    \ i--) {\n        used |= (1 << vec[i]);\n        if (i % 2 == 1 && vec[i] < math::log2_floor(used))\
+    \ {\n            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1;\
+    \ // \u307E\u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001\
+    \ vec[i] \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\
+    \u306E\u3082\u306E\n            used ^= (1 << vec[i]);\n            for (int j\
+    \ = i + 1; j < N; j++) { // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\
+    \u6700\u5C0F\u306B\n                vec[j] = __builtin_ctzll(used);\n        \
+    \        used ^= (1 << vec[j]);\n            }\n            return true;\n   \
+    \     }\n    }\n    return false;\n}\n\n\n"
   code: "#ifndef next_pairing_HPP\n#define next_pairing_HPP\n\n/*\nverify\n\u30FB\
     https://atcoder.jp/contests/abc236/tasks/abc236_d\n*/\n\n#include <vector>\n\n\
     #include \"../Others/macros.hpp\"\n#include \"../Math/math.hpp\"\n\ntemplate <typename\
-    \ T>\nbool next_pairing(const std::vector<T>& vec){\n    int N = vec.size();\n\
+    \ T>\nbool next_pairing(const std::vector<T>& vec) {\n    int N = vec.size();\n\
     \    /**\n     * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\u3078\u8D70\u67FB\
     \u3057\u305F\u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\u898B\u305F\u304B\
-    \n     */\n    ll used = 0;\n    for(int i = N - 1; i >= 0; i--){\n        used\
-    \ |= (1 << vec[i]);\n        if(i % 2 == 1 && vec[i] < math::log2_floor(used)){\n\
-    \            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1; // \u307E\
-    \u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001 vec[i]\
-    \ \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\u306E\
-    \u3082\u306E\n            used ^= (1 << vec[i]);\n            for(int j = i +\
-    \ 1; j < N; j++){ // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\u6700\u5C0F\
-    \u306B\n                vec[j] = __builtin_ctzll(used);\n                used\
-    \ ^= (1 << vec[j]);\n            }\n            return true;\n        }\n    }\n\
-    \    return false;\n}\n\n#endif // next_pairing_HPP"
+    \n     */\n    ll used = 0;\n    for (int i = N - 1; i >= 0; i--) {\n        used\
+    \ |= (1 << vec[i]);\n        if (i % 2 == 1 && vec[i] < math::log2_floor(used))\
+    \ {\n            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1;\
+    \ // \u307E\u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001\
+    \ vec[i] \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\
+    \u306E\u3082\u306E\n            used ^= (1 << vec[i]);\n            for (int j\
+    \ = i + 1; j < N; j++) { // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\
+    \u6700\u5C0F\u306B\n                vec[j] = __builtin_ctzll(used);\n        \
+    \        used ^= (1 << vec[j]);\n            }\n            return true;\n   \
+    \     }\n    }\n    return false;\n}\n\n#endif // next_pairing_HPP"
   dependsOn:
   - Others/macros.hpp
   - Math/math.hpp
@@ -109,7 +109,7 @@ data:
   isVerificationFile: false
   path: Algorithm/next_pairing.hpp
   requiredBy: []
-  timestamp: '2024-11-06 03:28:25+09:00'
+  timestamp: '2025-02-14 18:32:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/next_pairing.hpp
