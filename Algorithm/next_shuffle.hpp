@@ -14,9 +14,9 @@ template <typename T>
 /**
  * @brief (K,N - K)-shuffle である0, 1, ..., N - 1 の置換 A を、辞書順で列挙する
  */
-bool next_shuffle(std::vector<T>& vec, const int& K){
+bool next_shuffle(std::vector<T>& vec, const int& K) {
     int N = vec.size();
-    if(N <= K){
+    if (N <= K){
         return false;
     }
 
@@ -30,14 +30,14 @@ bool next_shuffle(std::vector<T>& vec, const int& K){
      * @param i L の要素の中で、R の要素の最大値よりも小さいもののうち、最大のもののイテレータ (*i := L_(i))
      */
     auto tmpi = left, i = right;
-    while(tmpi != right){
-        if(tmp <= *tmpi && *tmpi < R_max){
+    while (tmpi != right) {
+        if (tmp <= *tmpi && *tmpi < R_max) {
             tmp = *tmpi;
             i = tmpi;
         }
         tmpi++;
     }
-    if(i == right){
+    if (i == right) {
         std::sort(vec.begin(), vec.end());
         return false;
     }
@@ -47,8 +47,8 @@ bool next_shuffle(std::vector<T>& vec, const int& K){
      */
     tmp = (std::numeric_limits<T>::max)();
     auto tmpj = right, j = vec.end();
-    while(tmpj != vec.end()){
-        if(tmp >= *tmpj && *tmpj > *i){
+    while (tmpj != vec.end()) {
+        if (tmp >= *tmpj && *tmpj > *i) {
             tmp = *tmpj;
             j = tmpj;
         }
@@ -63,10 +63,9 @@ bool next_shuffle(std::vector<T>& vec, const int& K){
     int swap_len = std::min(X_len, Y_len);
     // X の末尾 swap_len 項と Y の末尾 swap_len 項を swap する
     std::swap_ranges(right - swap_len, right, j);
-    if(swap_len == X_len){
+    if (swap_len == X_len) {
         std::rotate(j, j + swap_len, vec.end());
-    }
-    else{
+    } else {
         std::rotate(i, right - swap_len, right);
     }
 
