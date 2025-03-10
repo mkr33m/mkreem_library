@@ -49,14 +49,12 @@ private:
             if (finished[nv]) {
                 continue;
             }
-            if (visited[nv] && !finished[nv]) { // 始点
-                finished[nv] = true;
+            if (visited[nv]) { // 始点
                 return nv;
             }
 
             int start = dfs_for_detect_cycle(nv);
             if (start != -1) {
-                finished[v] = true;
                 return start; // サイクルがあれば、最終的に始点を返す
             }
         }
@@ -172,11 +170,10 @@ public:
      * @remark 頂点が 1 つだけの連結成分は、サイクルとみなさない
      */
     bool find_cycle(const int& v) {
-        if (finished[v]) {
+        if (visited[v]) {
             return false;
         }
 
-        cycle.clear();
         start = dfs_for_detect_cycle(v);
         if (start == -1) {
             return false;
@@ -189,11 +186,15 @@ public:
      */
     std::vector<int> get_cycle() {
         std::vector<int> res;
+        bool stop = false;
         while (!cycle.empty()) {
             int v = cycle.back(); cycle.pop_back();
-            res.push_back(v);
+            finished[v] = true;
+            if (!stop) {
+                res.push_back(v);
+            }
             if (v == start) {
-                break;
+                stop = true;
             }
         }
         std::reverse(res.begin(), res.end());
