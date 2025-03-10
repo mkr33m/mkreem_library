@@ -47,19 +47,23 @@ data:
     \ <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 13 \"Others/ZobristHash.hpp\"\n\ntemplate <typename T>\nstruct ZobristHash {\n\
-    private:\n    std::map<T, int> hash;\n\npublic:\n    /**\n     * @brief \u5404\
-    \u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\
-    \u5272\u308A\u5F53\u3066\u308B\n     * @remark \u8907\u6570\u306E vector \u3092\
-    \u540C\u6642\u306B\u6E21\u3059\u3053\u3068\u304C\u3067\u304D\u308B\n     */\n\
-    \    template <typename... Args>\n    ZobristHash(const Args&... vecs){\n    \
-    \    std::vector<T> merged;\n\n        (merged.insert(merged.end(), vecs.begin(),\
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n#line 13 \"Others/ZobristHash.hpp\"\n\ntemplate <typename T>\n\
+    struct ZobristHash {\nprivate:\n    std::map<T, int> hash;\n\npublic:\n    /**\n\
+    \     * @brief \u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B\n     * @remark \u8907\u6570\u306E\
+    \ vector \u3092\u540C\u6642\u306B\u6E21\u3059\u3053\u3068\u304C\u3067\u304D\u308B\
+    \n     */\n    template <typename... Args>\n    ZobristHash(const Args&... vecs){\n\
+    \        std::vector<T> merged;\n\n        (merged.insert(merged.end(), vecs.begin(),\
     \ vecs.end()), ...);\n\n        std::sort(merged.begin(), merged.end());\n   \
     \     merged.erase(std::unique(merged.begin(), merged.end()), merged.end());\n\
     \n        std::random_device rd;\n        std::mt19937 mt(rd());\n        std::uniform_int_distribution<int>\
@@ -134,7 +138,7 @@ data:
   isVerificationFile: false
   path: Others/ZobristHash.hpp
   requiredBy: []
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/ZobristHash.hpp

@@ -53,19 +53,17 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Math/extended_gcd.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/Math/is_prime.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/Math/math.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Math/osa_k.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Math/prime_factorize.hpp"
 
-    #include "/home/pomelo/github.com/mkreem_library/Math/sieve.hpp"
-
     #include "/home/pomelo/github.com/mkreem_library/Others/AbelianGroups.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/Debug.hpp"
-
-    #include "/home/pomelo/github.com/mkreem_library/Others/Grid.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/INT128.hpp"
 
@@ -75,7 +73,7 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Others/ZobristHash.hpp"
 
-    #include "/home/pomelo/github.com/mkreem_library/Others/bin_search.hpp"
+    #include "/home/pomelo/github.com/mkreem_library/Others/bisect.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/cum1D.hpp"
 
@@ -83,7 +81,7 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Others/macros.hpp"
 
-    #include "/home/pomelo/github.com/mkreem_library/String/RLE.hpp"
+    #include "/home/pomelo/github.com/mkreem_library/String/Grid.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/String/RollingHash.hpp"
 

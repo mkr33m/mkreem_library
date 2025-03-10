@@ -24,8 +24,7 @@ data:
       \u308B"
   - icon: ':warning:'
     path: Math/math.hpp
-    title: "\u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\u7528\u3057\u305F\
-      \u3001x^n\u306E\u6C42\u5024"
+    title: Math/math.hpp
   - icon: ':warning:'
     path: Others/ZobristHash.hpp
     title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\
@@ -67,12 +66,17 @@ data:
     }\ntemplate <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n"
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n"
   code: "#ifndef macros_HPP\n#define macros_HPP\n\n#include <vector>\n#include <queue>\n\
     #include <cmath>\n\nusing ll = long long;\nusing lll = __int128_t;\nusing ld =\
     \ long double;\n#define newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n\
@@ -104,26 +108,30 @@ data:
     }\ntemplate <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n#endif\
-    \ // macros"
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n#endif // macros_HPP"
   dependsOn: []
   isVerificationFile: false
   path: Others/macros.hpp
   requiredBy:
+  - Algorithm/next_pairing.hpp
+  - Algorithm/next_pairing.hpp
+  - Math/binom_mod_ll.hpp
+  - Math/math.hpp
+  - Math/binom.hpp
   - Others/ZobristHash.hpp
   - Geometry/Point.hpp
   - DataStructure/RangeSet.hpp
-  - Algorithm/next_pairing.hpp
-  - Algorithm/next_pairing.hpp
-  - Math/binom.hpp
-  - Math/math.hpp
-  - Math/binom_mod_ll.hpp
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/macros.hpp

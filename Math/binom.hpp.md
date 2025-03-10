@@ -43,37 +43,41 @@ data:
     }\ntemplate <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 7 \"Math/binom.hpp\"\n\nstruct binom {\nprivate:\n    int N;\n    std::vector<std::vector<ll>>\
-    \ C;\n\npublic:\n    binom() = default;\n    binom(const int& N) : N(N), C(N +\
-    \ 1, std::vector<ll>(N + 1, 0)) {\n        for(int i = 0; i <= N; i++){\n    \
-    \        C[i][0] = 1;\n        }\n        // nCk = (n-1)C(k-1) + (n-1)Ck\n   \
-    \     for(int i = 1; i <= N; i++){\n            for(int j = 1; j <= N; j++){\n\
-    \                C[i][j] = C[i - 1][j - 1] + C[i - 1][j];\n            }\n   \
-    \     }\n    }\n\n    ll val(int i, int j){\n        if(i < j || i < 0 || j <\
-    \ 0){\n            return 0LL;\n        }\n        return C[i][j];\n    }\n};\n\
-    \n\n"
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n#line 7 \"Math/binom.hpp\"\n\nstruct Binom {\nprivate:\n    int\
+    \ N;\n    std::vector<std::vector<ll>> C;\n\npublic:\n    Binom() = default;\n\
+    \    Binom(const int& N) : N(N), C(N + 1, std::vector<ll>(N + 1, 0)) {\n     \
+    \   for (int i = 0; i <= N; i++) {\n            C[i][0] = 1;\n        }\n    \
+    \    // nCk = (n-1)C(k-1) + (n-1)Ck\n        for (int i = 1; i <= N; i++) {\n\
+    \            for (int j = 1; j <= N; j++) {\n                C[i][j] = C[i - 1][j\
+    \ - 1] + C[i - 1][j];\n            }\n        }\n    }\n\n    ll val(int i, int\
+    \ j) {\n        if (i < j || i < 0 || j < 0) {\n            return 0LL;\n    \
+    \    }\n        return C[i][j];\n    }\n};\n\n\n"
   code: "#ifndef binom_HPP\n#define binom_HPP\n\n#include <vector>\n\n#include \"\
-    ../Others/macros.hpp\"\n\nstruct binom {\nprivate:\n    int N;\n    std::vector<std::vector<ll>>\
-    \ C;\n\npublic:\n    binom() = default;\n    binom(const int& N) : N(N), C(N +\
-    \ 1, std::vector<ll>(N + 1, 0)) {\n        for(int i = 0; i <= N; i++){\n    \
-    \        C[i][0] = 1;\n        }\n        // nCk = (n-1)C(k-1) + (n-1)Ck\n   \
-    \     for(int i = 1; i <= N; i++){\n            for(int j = 1; j <= N; j++){\n\
-    \                C[i][j] = C[i - 1][j - 1] + C[i - 1][j];\n            }\n   \
-    \     }\n    }\n\n    ll val(int i, int j){\n        if(i < j || i < 0 || j <\
-    \ 0){\n            return 0LL;\n        }\n        return C[i][j];\n    }\n};\n\
-    \n#endif // binom_HPP"
+    ../Others/macros.hpp\"\n\nstruct Binom {\nprivate:\n    int N;\n    std::vector<std::vector<ll>>\
+    \ C;\n\npublic:\n    Binom() = default;\n    Binom(const int& N) : N(N), C(N +\
+    \ 1, std::vector<ll>(N + 1, 0)) {\n        for (int i = 0; i <= N; i++) {\n  \
+    \          C[i][0] = 1;\n        }\n        // nCk = (n-1)C(k-1) + (n-1)Ck\n \
+    \       for (int i = 1; i <= N; i++) {\n            for (int j = 1; j <= N; j++)\
+    \ {\n                C[i][j] = C[i - 1][j - 1] + C[i - 1][j];\n            }\n\
+    \        }\n    }\n\n    ll val(int i, int j) {\n        if (i < j || i < 0 ||\
+    \ j < 0) {\n            return 0LL;\n        }\n        return C[i][j];\n    }\n\
+    };\n\n#endif // binom_HPP"
   dependsOn:
   - Others/macros.hpp
   isVerificationFile: false
   path: Math/binom.hpp
   requiredBy: []
-  timestamp: '2024-10-01 02:12:59+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/binom.hpp

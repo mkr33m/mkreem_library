@@ -3,8 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':warning:'
     path: Math/math.hpp
-    title: "\u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\u7528\u3057\u305F\
-      \u3001x^n\u306E\u6C42\u5024"
+    title: Math/math.hpp
   - icon: ':warning:'
     path: Others/macros.hpp
     title: Others/macros.hpp
@@ -51,48 +50,46 @@ data:
     }\ntemplate <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 1 \"Math/math.hpp\"\n\n\n\n#line 5 \"Math/math.hpp\"\n\nnamespace math {\n\n\
-    \    /**\n     * @brief \u7E70\u308A\u8FD4\u3057\u4E8C\u4E57\u6CD5\u3092\u5229\
-    \u7528\u3057\u305F\u3001x^n\u306E\u6C42\u5024\n     */\n    ll pow(ll x, ll n){\n\
-    \        ll res = 1;\n\n        while(n){\n            if(n & 1) res *= x;\n \
-    \           x *= x;\n            n >>= 1;\n        }\n\n        return res;\n\
-    \    }\n\n    /**\n     * @brief x/m\u306Efloor\uFF08x/m\u4EE5\u4E0B\u306E\u6700\
-    \u5927\u306E\u6574\u6570\uFF09\u3092\u6C42\u3081\u308B\n     */\n    ll floor(const\
-    \ ll& x, const ll& m){\n        ll r = (x % m + m) % m; // x\u3092m\u3067\u5272\
-    \u3063\u305F\u4F59\u308A\n        return (x - r) / m;\n    }\n\n    /**\n    \
-    \ * @brief x/m\u306Eceil\uFF08x/m\u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u6574\u6570\
-    \uFF09\u3092\u6C42\u3081\u308B\n     */\n    ll ceil(const ll& x, const ll& m){\n\
-    \        return floor(x + m - 1, m); // x/m + (m-1)/m\n    }\n\n    /**\n    \
-    \ * @brief log(2)N \u306E\u6574\u6570\u90E8\u5206\u3092\u6C42\u3081\u308B\n  \
-    \   */\n    int log2_floor(long long N){\n        int res = -1;\n        while(N\
-    \ != 0){\n            res++;\n            N /= 2;\n        }\n        return res;\n\
-    \    }\n\n} // namespace math\n\n\n#line 13 \"Algorithm/next_pairing.hpp\"\n\n\
-    template <typename T>\nbool next_pairing(const std::vector<T>& vec) {\n    int\
-    \ N = vec.size();\n    /**\n     * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\
-    \u3078\u8D70\u67FB\u3057\u305F\u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\
-    \u898B\u305F\u304B\n     */\n    ll used = 0;\n    for (int i = N - 1; i >= 0;\
-    \ i--) {\n        used |= (1 << vec[i]);\n        if (i % 2 == 1 && vec[i] < math::log2_floor(used))\
-    \ {\n            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1;\
-    \ // \u307E\u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001\
-    \ vec[i] \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\
-    \u306E\u3082\u306E\n            used ^= (1 << vec[i]);\n            for (int j\
-    \ = i + 1; j < N; j++) { // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\
-    \u6700\u5C0F\u306B\n                vec[j] = __builtin_ctzll(used);\n        \
-    \        used ^= (1 << vec[j]);\n            }\n            return true;\n   \
-    \     }\n    }\n    return false;\n}\n\n\n"
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n#line 1 \"Math/math.hpp\"\n\n\n\n#line 5 \"Math/math.hpp\"\n\n\
+    namespace math {\n\n    ll pow(ll N, ll e) {\n        ll res = 1;\n        while\
+    \ (e) {\n            if (e & 1) {\n                res *= N;\n            }\n\
+    \            N *= N;\n            e >>= 1;\n        }\n        return res;\n \
+    \   }\n\n    ll floor (const ll& x, const ll& m) {\n        ll r = (x % m + m)\
+    \ % m;\n        return (x - r) / m;\n    }\n\n    ll ceil (const ll& x, const\
+    \ ll& m) {\n        return floor(x + m - 1, m);\n    }\n\n    int log2_floor(ll\
+    \ N) {\n        int res = -1;\n        while (N != 0) {\n            res++;\n\
+    \            N /= 2;\n        }\n        return res;\n    }\n\n} // namespace\
+    \ math\n\n\n#line 13 \"Algorithm/next_pairing.hpp\"\n\ntemplate <typename T>\n\
+    bool next_pairing(std::vector<T>& vec) {\n    int N = vec.size();\n    /**\n \
+    \    * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\u3078\u8D70\u67FB\u3057\u305F\
+    \u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\u898B\u305F\u304B\n     */\n\
+    \    ll used = 0;\n    for (int i = N - 1; i >= 0; i--) {\n        used |= (1\
+    \ << vec[i]);\n        if (i % 2 == 1 && vec[i] < math::log2_floor(used)) {\n\
+    \            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1; // \u307E\
+    \u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001 vec[i]\
+    \ \u3088\u308A\u5927\u304D\u3044\u3082\u306E\u306E\u4E2D\u3067\u6700\u5C0F\u306E\
+    \u3082\u306E\n            used ^= (1 << vec[i]);\n            for (int j = i +\
+    \ 1; j < N; j++) { // i \u3088\u308A\u5F8C\u308D\u3092\u8F9E\u66F8\u9806\u6700\
+    \u5C0F\u306B\n                vec[j] = __builtin_ctzll(used);\n              \
+    \  used ^= (1 << vec[j]);\n            }\n            return true;\n        }\n\
+    \    }\n    return false;\n}\n\n\n"
   code: "#ifndef next_pairing_HPP\n#define next_pairing_HPP\n\n/*\nverify\n\u30FB\
     https://atcoder.jp/contests/abc236/tasks/abc236_d\n*/\n\n#include <vector>\n\n\
     #include \"../Others/macros.hpp\"\n#include \"../Math/math.hpp\"\n\ntemplate <typename\
-    \ T>\nbool next_pairing(const std::vector<T>& vec) {\n    int N = vec.size();\n\
-    \    /**\n     * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\u3078\u8D70\u67FB\
-    \u3057\u305F\u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\u898B\u305F\u304B\
-    \n     */\n    ll used = 0;\n    for (int i = N - 1; i >= 0; i--) {\n        used\
+    \ T>\nbool next_pairing(std::vector<T>& vec) {\n    int N = vec.size();\n    /**\n\
+    \     * @param used vec \u3092\u53F3\u304B\u3089\u5DE6\u3078\u8D70\u67FB\u3057\
+    \u305F\u3068\u304D\u3001\u3069\u306E\u6570\u5B57\u3092\u898B\u305F\u304B\n   \
+    \  */\n    ll used = 0;\n    for (int i = N - 1; i >= 0; i--) {\n        used\
     \ |= (1 << vec[i]);\n        if (i % 2 == 1 && vec[i] < math::log2_floor(used))\
     \ {\n            vec[i] = __builtin_ctzll(used >> (vec[i] + 1)) + vec[i] + 1;\
     \ // \u307E\u3060\u898B\u3066\u3044\u306A\u3044\u6570\u5B57\u306E\u3046\u3061\u3001\
@@ -109,7 +106,7 @@ data:
   isVerificationFile: false
   path: Algorithm/next_pairing.hpp
   requiredBy: []
-  timestamp: '2025-02-14 18:32:35+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/next_pairing.hpp

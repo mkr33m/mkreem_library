@@ -47,40 +47,45 @@ data:
     }\ntemplate <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 15 \"DataStructure/RangeSet.hpp\"\n\ntemplate <typename T>\nstruct RangeSet\
-    \ {\nprivate:\n    std::set<std::pair<T, T>> intervals;\n    T sum_width;\n  \
-    \  T TINF = std::numeric_limits<T>::max() / 2;\n\npublic:\n    RangeSet() : sum_width(T(0)){\n\
-    \        intervals.emplace(TINF, TINF); // \u756A\u5175\n        intervals.emplace(-TINF,\
-    \ -TINF); // \u756A\u5175\n    }\n\n    /**\n     * @brief [l, r) \u304C\u5B8C\
-    \u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\u3069\u3046\u304B\u3092\
-    \u8FD4\u3059\n     * @param itv \u5DE6\u7AEF\u304C l \u4EE5\u4E0B\u3067\u3042\u308B\
-    \u3088\u3046\u306A\u533A\u9593\u306E\u3046\u3061\u3001\u6700\u3082\u53F3\u5074\
-    \u306B\u3042\u308B\u3082\u306E\n     */\n    bool covered(const T& l, const T&\
-    \ r){\n        assert(l <= r);\n        if(l == r){\n            return true;\n\
-    \        }\n        auto itv = std::prev(intervals.upper_bound(std::make_pair(l,\
-    \ TINF)));\n        return (itv->first <= l) && (r <= itv->second);\n    }\n\n\
-    \    /**\n     * @brief x \u304C\u542B\u307E\u308C\u3066\u3044\u308B\u304B\u3069\
-    \u3046\u304B\u3092\u8FD4\u3059\n     */\n    bool contained(const T& x){\n   \
-    \     return covered(x, x + 1);\n    }\n\n    /**\n     * @brief [l, r) \u3092\
-    \u5305\u542B\u3059\u308B\u533A\u9593\u304C\u3042\u308C\u3070\u305D\u306E\u533A\
-    \u9593\u3092\u8FD4\u3057\u3001\u306A\u3051\u308C\u3070 [-INF, -INF) \u3092\u8FD4\
-    \u3059\n     */\n    std::pair<T, T> covered_by(const T& l, const T& r){\n   \
-    \     assert(l <= r);\n        if(l == r){\n            return std::make_pair(-TINF,\
-    \ -TINF);\n        }\n        auto itv = std::prev(intervals.upper_bound(std::make_pair(l,\
-    \ TINF)));\n        if(itv->first <= l && r <= itv->second){\n            return\
-    \ *itv;\n        }\n        return std::make_pair(-TINF, -TINF);\n    }\n\n  \
-    \  std::pair<T, T> covered_by(const T& x){\n        return covered_by(x, x + 1);\n\
-    \    }\n\n    /**\n     * @brief [l, r) \u3092\u633F\u5165\u3057\u3001\u533A\u9593\
-    \u5E45\u306E\u5897\u5206\u3092\u8FD4\u3059\n     * l \u3068 r \u305D\u308C\u305E\
-    \u308C\u3067\u3001l, r \u3092\u542B\u3080\u533A\u9593\u3068\u30DE\u30FC\u30B8\u3067\
-    \u304D\u308B\u304B\u3069\u3046\u304B\u3092\u898B\u308B\n     */\n    T insert(T\
-    \ l, T r){\n        assert(l <= r);\n        if(l == r){\n            return T(0);\n\
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n#line 15 \"DataStructure/RangeSet.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct RangeSet {\nprivate:\n    std::set<std::pair<T, T>> intervals;\n\
+    \    T sum_width;\n    T TINF = std::numeric_limits<T>::max() / 2;\n\npublic:\n\
+    \    RangeSet() : sum_width(T(0)){\n        intervals.emplace(TINF, TINF); //\
+    \ \u756A\u5175\n        intervals.emplace(-TINF, -TINF); // \u756A\u5175\n   \
+    \ }\n\n    /**\n     * @brief [l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\
+    \u3066\u3044\u308B\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\n     * @param itv\
+    \ \u5DE6\u7AEF\u304C l \u4EE5\u4E0B\u3067\u3042\u308B\u3088\u3046\u306A\u533A\u9593\
+    \u306E\u3046\u3061\u3001\u6700\u3082\u53F3\u5074\u306B\u3042\u308B\u3082\u306E\
+    \n     */\n    bool covered(const T& l, const T& r){\n        assert(l <= r);\n\
+    \        if(l == r){\n            return true;\n        }\n        auto itv =\
+    \ std::prev(intervals.upper_bound(std::make_pair(l, TINF)));\n        return (itv->first\
+    \ <= l) && (r <= itv->second);\n    }\n\n    /**\n     * @brief x \u304C\u542B\
+    \u307E\u308C\u3066\u3044\u308B\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\n   \
+    \  */\n    bool contained(const T& x){\n        return covered(x, x + 1);\n  \
+    \  }\n\n    /**\n     * @brief [l, r) \u3092\u5305\u542B\u3059\u308B\u533A\u9593\
+    \u304C\u3042\u308C\u3070\u305D\u306E\u533A\u9593\u3092\u8FD4\u3057\u3001\u306A\
+    \u3051\u308C\u3070 [-INF, -INF) \u3092\u8FD4\u3059\n     */\n    std::pair<T,\
+    \ T> covered_by(const T& l, const T& r){\n        assert(l <= r);\n        if(l\
+    \ == r){\n            return std::make_pair(-TINF, -TINF);\n        }\n      \
+    \  auto itv = std::prev(intervals.upper_bound(std::make_pair(l, TINF)));\n   \
+    \     if(itv->first <= l && r <= itv->second){\n            return *itv;\n   \
+    \     }\n        return std::make_pair(-TINF, -TINF);\n    }\n\n    std::pair<T,\
+    \ T> covered_by(const T& x){\n        return covered_by(x, x + 1);\n    }\n\n\
+    \    /**\n     * @brief [l, r) \u3092\u633F\u5165\u3057\u3001\u533A\u9593\u5E45\
+    \u306E\u5897\u5206\u3092\u8FD4\u3059\n     * l \u3068 r \u305D\u308C\u305E\u308C\
+    \u3067\u3001l, r \u3092\u542B\u3080\u533A\u9593\u3068\u30DE\u30FC\u30B8\u3067\u304D\
+    \u308B\u304B\u3069\u3046\u304B\u3092\u898B\u308B\n     */\n    T insert(T l, T\
+    \ r){\n        assert(l <= r);\n        if(l == r){\n            return T(0);\n\
     \        }\n        auto itv = std::prev(intervals.upper_bound(std::make_pair(l,\
     \ TINF)));\n\n        if(itv->first <= l && r <= itv->second) return T(0); //\
     \ [l, r) \u304C\u3059\u3067\u306B\u5305\u542B\u3055\u308C\u3066\u3044\u308B\u5834\
@@ -252,7 +257,7 @@ data:
   isVerificationFile: false
   path: DataStructure/RangeSet.hpp
   requiredBy: []
-  timestamp: '2024-09-29 07:20:52+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/RangeSet.hpp

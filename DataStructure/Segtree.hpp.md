@@ -61,10 +61,10 @@ data:
     \n        r -= seg_N_;\n\n        return r + 1; // \u958B\u533A\u9593\u306B\u623B\
     \u3059\n    }\n\n    template <typename F> \n    int min_left(int r, const F&\
     \ f) {\n        assert(0 <= r && r <= N_);\n        assert(f(Monoid::e()));\n\n\
-    \        if (!f(seg_[r - 1 + seg_N_])) { // l \u304C\u5B58\u5728\u3057\u306A\u3044\
-    \n            return r; // (== l)\n        }\n\n        r += seg_N_;\n       \
-    \ T prod = Monoid::e();\n        int l = r;\n        int next_l = l - 1;\n\n \
-    \       while (1) {\n            if (next_l & 1) { // \u5947\u6570\u306A\u3089\
+    \        if (r == 0 || !f(seg_[r - 1 + seg_N_])) { // l \u304C\u5B58\u5728\u3057\
+    \u306A\u3044\n            return r; // (== l)\n        }\n\n        r += seg_N_;\n\
+    \        T prod = Monoid::e();\n        int l = r;\n        int next_l = l - 1;\n\
+    \n        while (1) {\n            if (next_l & 1) { // \u5947\u6570\u306A\u3089\
     \u3001\u89AA\u30CE\u30FC\u30C9\u3078\n                next_l >>= 1;\n        \
     \    }\n            T next_prod = Monoid::op(prod, seg_[next_l]);\n          \
     \  if (!f(next_prod)) {\n                while (next_l < seg_N_ && !f(next_prod))\
@@ -134,10 +134,10 @@ data:
     \n        r -= seg_N_;\n\n        return r + 1; // \u958B\u533A\u9593\u306B\u623B\
     \u3059\n    }\n\n    template <typename F> \n    int min_left(int r, const F&\
     \ f) {\n        assert(0 <= r && r <= N_);\n        assert(f(Monoid::e()));\n\n\
-    \        if (!f(seg_[r - 1 + seg_N_])) { // l \u304C\u5B58\u5728\u3057\u306A\u3044\
-    \n            return r; // (== l)\n        }\n\n        r += seg_N_;\n       \
-    \ T prod = Monoid::e();\n        int l = r;\n        int next_l = l - 1;\n\n \
-    \       while (1) {\n            if (next_l & 1) { // \u5947\u6570\u306A\u3089\
+    \        if (r == 0 || !f(seg_[r - 1 + seg_N_])) { // l \u304C\u5B58\u5728\u3057\
+    \u306A\u3044\n            return r; // (== l)\n        }\n\n        r += seg_N_;\n\
+    \        T prod = Monoid::e();\n        int l = r;\n        int next_l = l - 1;\n\
+    \n        while (1) {\n            if (next_l & 1) { // \u5947\u6570\u306A\u3089\
     \u3001\u89AA\u30CE\u30FC\u30C9\u3078\n                next_l >>= 1;\n        \
     \    }\n            T next_prod = Monoid::op(prod, seg_[next_l]);\n          \
     \  if (!f(next_prod)) {\n                while (next_l < seg_N_ && !f(next_prod))\
@@ -158,7 +158,7 @@ data:
   isVerificationFile: false
   path: DataStructure/Segtree.hpp
   requiredBy: []
-  timestamp: '2024-11-27 20:13:16+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/Segtree.hpp

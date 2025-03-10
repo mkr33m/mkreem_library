@@ -43,36 +43,40 @@ data:
     \ <typename T>\nT max(const std::vector<T>& vec){ return *max_element(all(vec));\
     \ }\ntemplate <typename T>\nT min(const std::vector<T>& vec){ return *min_element(all(vec));\
     \ }\ntemplate <typename T>\nT rad(const T& x){ return x * PI/180; }\ntemplate\
-    \ <typename T>\nusing pq = std::priority_queue<T>;\ntemplate <typename T>\nusing\
-    \ pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\u5927\
-    \u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1, typename\
-    \ T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return 1; }\n  \
-    \  else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a, const\
-    \ T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\n\n#line\
-    \ 5 \"Geometry/Point.hpp\"\n\nstruct Point {\nprivate:\n    /**\n     * @remark\
-    \ \u5927\u307E\u304B\u306B\u306F\u3001\u30B0\u30EB\u30FC\u30D7\u306E\u6607\u9806\
-    \u3067\u30BD\u30FC\u30C8\u3002\n     * @remark \u539F\u70B9\u306E\u6271\u3044\u306B\
-    \u6CE8\u610F\u3002\u3069\u3053\u306B\u6301\u3063\u3066\u304F\u308B\u304B\u306B\
-    \u3088\u3063\u3066\u30B0\u30EB\u30FC\u30D4\u30F3\u30B0\u3092\u8A2D\u5B9A\u3059\
-    \u308B\u3002\n     */\n    int grouping(const Point& p) const {\n        /**\n\
-    \         * \u504F\u89D2\u306E\u7BC4\u56F2\uFF1A[0, 2\u03C0)\n         * \u5206\
-    \u5272\uFF1A[0, \u03C0/2], (\u03C0/2, \u03C0], (\u03C0, 2\u03C0)\n         * @remark\
-    \ \u539F\u70B9\u306F\u3001\u5148\u982D\u306B\u6301\u3063\u3066\u304F\u308B\u3088\
-    \u3046\u306B\u3057\u3066\u3044\u308B\uFF08\u3064\u307E\u308A\u3001\u504F\u89D2\
-    \u30920\u3068\u307F\u306A\u3057\u3066\u3044\u308B\uFF09\u3002\n         */\n \
-    \       if(p.x == 0 && p.y == 0){\n            return 0;\n        } else if(p.y\
-    \ < 0){ // (\u03C0, 2\u03C0)\n            return 3;\n        } else if(p.x < 0){\
-    \ // (\u03C0/2, \u03C0]\n            return 2;\n        } else{ // [0, \u03C0\
-    /2]\n            return 1;\n        }\n\n        /*\n        * \u504F\u89D2\u306E\
-    \u7BC4\u56F2\uFF1A(-\u03C0/2, \u03C0/2]\n        * \u5206\u5272 (-\u03C0/2, 0],\
-    \ (0, \u03C0/2]\n        * @remark \u539F\u70B9\u306E\u504F\u89D2\u306F\u3001\
-    0\u3068\u307F\u306A\u3057\u3066\u3044\u308B\u3002\n        */\n        /* if(p.x\
-    \ == 0 && p.y == 0){ // \u539F\u70B9\n            return 0;\n        } else if(p.y\
-    \ < 0 || (p.y == 0 && p.x > 0)){ // (-\u03C0/2, 0]\n            return -1;\n \
-    \       } else{ // (0, \u03C0/2]\n            return 1;\n        } */\n    }\n\
-    \npublic:\n    long long x, y;\n    Point() : x(0LL), y(0LL)  {}\n    Point(long\
-    \ long x, long long y) : x(x), y(y) {}\n\n    bool operator!=(const Point& q)\
-    \ const {\n        return x != q.x || y != q.y;\n    }\n    bool operator==(const\
+    \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
+    using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
+    \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
+    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
+    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
+    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
+    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
+    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
+    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
+    \ false;\n}\n\n\n#line 5 \"Geometry/Point.hpp\"\n\nstruct Point {\nprivate:\n\
+    \    /**\n     * @remark \u5927\u307E\u304B\u306B\u306F\u3001\u30B0\u30EB\u30FC\
+    \u30D7\u306E\u6607\u9806\u3067\u30BD\u30FC\u30C8\u3002\n     * @remark \u539F\u70B9\
+    \u306E\u6271\u3044\u306B\u6CE8\u610F\u3002\u3069\u3053\u306B\u6301\u3063\u3066\
+    \u304F\u308B\u304B\u306B\u3088\u3063\u3066\u30B0\u30EB\u30FC\u30D4\u30F3\u30B0\
+    \u3092\u8A2D\u5B9A\u3059\u308B\u3002\n     */\n    int grouping(const Point& p)\
+    \ const {\n        /**\n         * \u504F\u89D2\u306E\u7BC4\u56F2\uFF1A[0, 2\u03C0\
+    )\n         * \u5206\u5272\uFF1A[0, \u03C0/2], (\u03C0/2, \u03C0], (\u03C0, 2\u03C0\
+    )\n         * @remark \u539F\u70B9\u306F\u3001\u5148\u982D\u306B\u6301\u3063\u3066\
+    \u304F\u308B\u3088\u3046\u306B\u3057\u3066\u3044\u308B\uFF08\u3064\u307E\u308A\
+    \u3001\u504F\u89D2\u30920\u3068\u307F\u306A\u3057\u3066\u3044\u308B\uFF09\u3002\
+    \n         */\n        if(p.x == 0 && p.y == 0){\n            return 0;\n    \
+    \    } else if(p.y < 0){ // (\u03C0, 2\u03C0)\n            return 3;\n       \
+    \ } else if(p.x < 0){ // (\u03C0/2, \u03C0]\n            return 2;\n        }\
+    \ else{ // [0, \u03C0/2]\n            return 1;\n        }\n\n        /*\n   \
+    \     * \u504F\u89D2\u306E\u7BC4\u56F2\uFF1A(-\u03C0/2, \u03C0/2]\n        * \u5206\
+    \u5272 (-\u03C0/2, 0], (0, \u03C0/2]\n        * @remark \u539F\u70B9\u306E\u504F\
+    \u89D2\u306F\u30010\u3068\u307F\u306A\u3057\u3066\u3044\u308B\u3002\n        */\n\
+    \        /* if(p.x == 0 && p.y == 0){ // \u539F\u70B9\n            return 0;\n\
+    \        } else if(p.y < 0 || (p.y == 0 && p.x > 0)){ // (-\u03C0/2, 0]\n    \
+    \        return -1;\n        } else{ // (0, \u03C0/2]\n            return 1;\n\
+    \        } */\n    }\n\npublic:\n    long long x, y;\n    Point() : x(0LL), y(0LL)\
+    \  {}\n    Point(long long x, long long y) : x(x), y(y) {}\n\n    bool operator!=(const\
+    \ Point& q) const {\n        return x != q.x || y != q.y;\n    }\n    bool operator==(const\
     \ Point& q) const {\n        return !(*this == q);\n    }\n    /**\n     * \u70B9\
     \u306E\u6BD4\u8F03\u306F\u3001\u504F\u89D2\u306E\u5927\u304D\u3055\u306B\u3088\
     \u308B\n     */\n    bool operator<(const Point& q) const {\n        int group_p\
@@ -141,7 +145,7 @@ data:
   isVerificationFile: false
   path: Geometry/Point.hpp
   requiredBy: []
-  timestamp: '2024-09-26 23:38:07+09:00'
+  timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Geometry/Point.hpp

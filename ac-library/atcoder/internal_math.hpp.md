@@ -172,9 +172,9 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/internal_math.hpp
   requiredBy:
+  - ac-library/atcoder/modint.hpp
   - ac-library/atcoder/math.hpp
   - ac-library/atcoder/convolution.hpp
-  - ac-library/atcoder/modint.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
