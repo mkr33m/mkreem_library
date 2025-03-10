@@ -6,7 +6,7 @@
  * @return gcd(a, b)
  * x が a の逆元に相当
  */
-long long extended_gcd(long long a, long long b, long long &x, long long &y){
+long long extended_gcd(long long a, long long b, long long &x, long long &y) {
     /*
     a * x0 + b * y0 == gcd(a, b)
     ↓ a = q * b + r（ユークリッドの互除法）
@@ -14,7 +14,7 @@ long long extended_gcd(long long a, long long b, long long &x, long long &y){
     -> ...
     -> gcd(a, b) * xn + 0 * yn == gcd(a, b)
     */
-    if(b == 0){
+    if (b == 0) {
         x = 1;
         y = 0;
         return a;

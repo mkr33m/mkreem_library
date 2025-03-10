@@ -141,7 +141,7 @@ public:
         assert(0 <= r && r <= N_);
         assert(f(Monoid::e()));
 
-        if (!f(seg_[r - 1 + seg_N_])) { // l が存在しない
+        if (r == 0 || !f(seg_[r - 1 + seg_N_])) { // l が存在しない
             return r; // (== l)
         }
 

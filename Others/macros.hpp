@@ -54,9 +54,9 @@ T min(const std::vector<T>& vec){ return *min_element(all(vec)); }
 template <typename T>
 T rad(const T& x){ return x * PI/180; }
 template <typename T>
-using pq = std::priority_queue<T>;
+using maxpq = std::priority_queue<T>;
 template <typename T>
-using pqg = std::priority_queue<T, std::vector<T>, std::greater<T>>;
+using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;
 // 最大値・最小値の更新
 template <typename T1, typename T2>
 bool chmax(T1 &a, const T2& b){
@@ -69,4 +69,14 @@ bool chmin(T1 &a, const T2& b){
     else return 0;
 }
 
-#endif // macros
+const int di4[4] = {-1, 0, 1, 0};
+const int dj4[4] = {0, 1, 0, -1};
+const int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
+const int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+
+bool out_of_grid(const int& i, const int& j, const int& h, const int& w){
+    if(i < 0 || j < 0 || i >= h || j >= w) return true;
+    return false;
+}
+
+#endif // macros_HPP

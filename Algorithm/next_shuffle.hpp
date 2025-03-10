@@ -16,7 +16,7 @@ template <typename T>
  */
 bool next_shuffle(std::vector<T>& vec, const int& K) {
     int N = vec.size();
-    if (N <= K){
+    if (N <= K) {
         return false;
     }
 

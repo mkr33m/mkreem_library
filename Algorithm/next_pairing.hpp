@@ -12,7 +12,7 @@ verify
 #include "../Math/math.hpp"
 
 template <typename T>
-bool next_pairing(const std::vector<T>& vec) {
+bool next_pairing(std::vector<T>& vec) {
     int N = vec.size();
     /**
      * @param used vec を右から左へ走査したとき、どの数字を見たか
