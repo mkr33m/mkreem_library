@@ -10,6 +10,7 @@ template<typename T> // 各要素の型
 class Grid {
 private:
     std::vector<std::vector<T>> grid;
+    int offset_i_, offset_j_;
 
     static void pad_strings(std::vector<std::string>& grid_arg) {
         size_t maxlen = 0;
@@ -23,8 +24,8 @@ private:
 
 public:
     Grid() {}
-    Grid(const std::vector<std::vector<T>>& grid_arg) : grid(grid_arg) {}
-    Grid(std::vector<std::string> grid_arg) {
+    Grid(const std::vector<std::vector<T>>& grid_arg) : grid(grid_arg), offset_i_(0), offset_j_(0) {}
+    Grid(std::vector<std::string> grid_arg) : offset_i_(0), offset_j_(0) {
         pad_strings(grid_arg);
         int H = grid_arg.size();
         int W = grid_arg[0].size();
@@ -36,11 +37,15 @@ public:
         }
     }
 
-    T& get(size_t i, size_t j) const {
+    T& get(int i, int j) {
+        assert(0 <= i && i < (int)get_H());
+        assert(0 <= j && j < (int)get_W());
         return grid[i][j];
     }
 
-    void set(size_t i, size_t j, T x) const {
+    void set(int i, int j, T x) const {
+        assert(0 <= i && i < (int)get_H());
+        assert(0 <= j && j < (int)get_W());
         grid[i][j] = x;
     }
 
@@ -56,7 +61,7 @@ public:
         return grid;
     }
 
-    // グリッドを出力（オプションで各要素間に空白を挿入）
+    // グリッドを出力（space == true で各要素間に空白を挿入）
     void print(bool space = false) const {
         int H = (int)get_H();
         if(H == 0) return;
@@ -121,6 +126,37 @@ public:
             }
         }
         grid.swap(new_grid);
+    }
+
+    // 平行移動
+    void parallel_shift(int di, int dj) {
+        int H = (int)get_H();
+        int W = (int)get_W();
+        offset_i_ = (offset_i_ + di % H + H) % H;
+        offset_j_ = (offset_j_ + dj % W + W) % W;
+        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                int ni = (i + di) % H;
+                int nj = (j + dj) % W;
+                if (ni < 0) {
+                    ni += H;
+                }
+                if (nj < 0) {
+                    nj += W;
+                }
+                new_grid[ni][nj] = grid[i][j];
+            }
+        }
+        grid.swap(new_grid);
+    }
+
+    int offset_i() {
+        return offset_i_;
+    }
+
+    int offset_j() {
+        return offset_j_;
     }
 };
 
