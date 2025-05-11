@@ -46,8 +46,8 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/internal_bit.hpp
   requiredBy:
-  - ac-library/atcoder/lazysegtree.hpp
   - ac-library/atcoder/segtree.hpp
+  - ac-library/atcoder/lazysegtree.hpp
   - ac-library/atcoder/convolution.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS

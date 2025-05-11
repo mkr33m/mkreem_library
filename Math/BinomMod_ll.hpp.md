@@ -17,7 +17,7 @@ data:
     document_title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\
       \u3081\u308B"
     links: []
-  bundledCode: "#line 1 \"Math/binom_mod_ll.hpp\"\n\n\n\n#include <vector>\n#include\
+  bundledCode: "#line 1 \"Math/BinomMod_ll.hpp\"\n\n\n\n#include <vector>\n#include\
     \ <cassert>\n\n#line 1 \"Others/macros.hpp\"\n\n\n\n#line 5 \"Others/macros.hpp\"\
     \n#include <queue>\n#include <cmath>\n\nusing ll = long long;\nusing lll = __int128_t;\n\
     using ld = long double;\n#define newl '\\n'\n#define REF const auto&\n#define\
@@ -52,38 +52,38 @@ data:
     \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
     using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
     \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
-    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
-    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
-    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
-    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
-    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
-    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
-    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
-    \ false;\n}\n\n\n#line 1 \"Math/extended_gcd.hpp\"\n\n\n\n/**\n * @brief a * x\
-    \ + b * y == gcd(a, b)\u3092\u6E80\u305F\u3059 x, y \u3092\u898B\u3064\u3051\u308B\
-    \n * @return gcd(a, b)\n * x \u304C a \u306E\u9006\u5143\u306B\u76F8\u5F53\n */\n\
-    long long extended_gcd(long long a, long long b, long long &x, long long &y) {\n\
-    \    /*\n    a * x0 + b * y0 == gcd(a, b)\n    \u2193 a = q * b + r\uFF08\u30E6\
-    \u30FC\u30AF\u30EA\u30C3\u30C9\u306E\u4E92\u9664\u6CD5\uFF09\n    -> b * x1 +\
-    \ r * y1 == gcd(a, b)\n    -> ...\n    -> gcd(a, b) * xn + 0 * yn == gcd(a, b)\n\
-    \    */\n    if (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n\
-    \    }\n    long long prev_x, prev_y;\n    long long gcd = extended_gcd(b, a %\
-    \ b, prev_x, prev_y);\n    // \u5E30\u308A\u304C\u3051\u306B\u4FC2\u6570\u3092\
-    \u66F4\u65B0\n    x = prev_y;\n    y = prev_x - (a / b) * prev_y;\n    \n    return\
-    \ gcd;\n}\n\n\n#line 9 \"Math/binom_mod_ll.hpp\"\n\nstruct BinomModLL {\nprivate:\n\
-    \    int MAX_N;\n    ll MOD;\n    std::vector<ll> factorial, factorial_inv;\n\n\
-    \    /**\n     * @brief a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x\
-    \ \u3092\u6C42\u3081\u308B\n     * a*x == 1 \u3092\u6E80\u305F\u3059 x \u3092\u6C42\
-    \u3081\u305F\u3044\u3068\u3044\u3046\u3053\u3068\u306F\u3001a*x + b*y == 1 \u3092\
-    \u6E80\u305F\u3059 x \u3092\u6C42\u3081\u305F\u3044\u3068\u3044\u3046\u3053\u3068\
-    \n     */\n    ll mod_inverse(ll a, ll m) {\n        ll x, y;\n        ll g =\
-    \ extended_gcd(a, m, x, y);\n        assert(g == 1);\n        return (x % m +\
-    \ m) % m;\n    }\n\npublic:\n    BinomModLL(int MAX_N = 10000000, ll MOD = 998244353)\
-    \ : MAX_N(MAX_N), MOD(MOD) {\n        factorial[0] = 1;\n        for (int i =\
-    \ 1; i <= MAX_N; i++) {\n            factorial[i] = factorial[i - 1] * i % MOD;\n\
-    \        }\n        factorial_inv[MAX_N] = mod_inverse(factorial[MAX_N], MOD);\n\
-    \        for (int i = MAX_N - 1; i >= 0; i--) {\n            /*\n            ((i+1)!)^(-1)\
-    \ \u2261 (i+1)^(-1) * (i!)^(-1)\n            \u3088\u308A\u3001\n            (i!)^(-1)\
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
+    \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst int di8[8]\
+    \ = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};\n\
+    \nbool out_of_grid(const int& i, const int& j, const int& h, const int& w){\n\
+    \    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return false;\n\
+    }\n\n\n#line 1 \"Math/extended_gcd.hpp\"\n\n\n\n/**\n * @brief a * x + b * y ==\
+    \ gcd(a, b)\u3092\u6E80\u305F\u3059 x, y \u3092\u898B\u3064\u3051\u308B\n * @return\
+    \ gcd(a, b)\n * x \u304C a \u306E\u9006\u5143\u306B\u76F8\u5F53\n */\nlong long\
+    \ extended_gcd(long long a, long long b, long long &x, long long &y) {\n    /*\n\
+    \    a * x0 + b * y0 == gcd(a, b)\n    \u2193 a = q * b + r\uFF08\u30E6\u30FC\u30AF\
+    \u30EA\u30C3\u30C9\u306E\u4E92\u9664\u6CD5\uFF09\n    -> b * x1 + r * y1 == gcd(a,\
+    \ b)\n    -> ...\n    -> gcd(a, b) * xn + 0 * yn == gcd(a, b)\n    */\n    if\
+    \ (b == 0) {\n        x = 1;\n        y = 0;\n        return a;\n    }\n    long\
+    \ long prev_x, prev_y;\n    long long gcd = extended_gcd(b, a % b, prev_x, prev_y);\n\
+    \    // \u5E30\u308A\u304C\u3051\u306B\u4FC2\u6570\u3092\u66F4\u65B0\n    x =\
+    \ prev_y;\n    y = prev_x - (a / b) * prev_y;\n    \n    return gcd;\n}\n\n\n\
+    #line 9 \"Math/BinomMod_ll.hpp\"\n\nstruct BinomModLL {\nprivate:\n    int MAX_N;\n\
+    \    ll MOD;\n    std::vector<ll> factorial, factorial_inv;\n\n    /**\n     *\
+    \ @brief a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
+    \u308B\n     * a*x == 1 \u3092\u6E80\u305F\u3059 x \u3092\u6C42\u3081\u305F\u3044\
+    \u3068\u3044\u3046\u3053\u3068\u306F\u3001a*x + b*y == 1 \u3092\u6E80\u305F\u3059\
+    \ x \u3092\u6C42\u3081\u305F\u3044\u3068\u3044\u3046\u3053\u3068\n     */\n  \
+    \  ll mod_inverse(ll a, ll m) {\n        ll x, y;\n        ll g = extended_gcd(a,\
+    \ m, x, y);\n        assert(g == 1);\n        return (x % m + m) % m;\n    }\n\
+    \npublic:\n    BinomModLL(int MAX_N = 10000000, ll MOD = 998244353) : MAX_N(MAX_N),\
+    \ MOD(MOD) {\n        factorial[0] = 1;\n        for (int i = 1; i <= MAX_N; i++)\
+    \ {\n            factorial[i] = factorial[i - 1] * i % MOD;\n        }\n     \
+    \   factorial_inv[MAX_N] = mod_inverse(factorial[MAX_N], MOD);\n        for (int\
+    \ i = MAX_N - 1; i >= 0; i--) {\n            /*\n            ((i+1)!)^(-1) \u2261\
+    \ (i+1)^(-1) * (i!)^(-1)\n            \u3088\u308A\u3001\n            (i!)^(-1)\
     \ == ((i+1)!)^(-1) * (i+1)\n            */\n            factorial_inv[i] = factorial_inv[i\
     \ + 1] * (i + 1) % MOD;\n        }\n    }\n\n    ll val(int N, int K) {\n    \
     \    if (N < K || N < 0 || K < 0) {\n            return 0;\n        }\n      \
@@ -113,15 +113,15 @@ data:
   - Others/macros.hpp
   - Math/extended_gcd.hpp
   isVerificationFile: false
-  path: Math/binom_mod_ll.hpp
+  path: Math/BinomMod_ll.hpp
   requiredBy: []
-  timestamp: '2025-03-11 07:02:05+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Math/binom_mod_ll.hpp
+documentation_of: Math/BinomMod_ll.hpp
 layout: document
 redirect_from:
-- /library/Math/binom_mod_ll.hpp
-- /library/Math/binom_mod_ll.hpp.html
+- /library/Math/BinomMod_ll.hpp
+- /library/Math/BinomMod_ll.hpp.html
 title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\u308B"
 ---

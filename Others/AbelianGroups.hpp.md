@@ -27,20 +27,21 @@ data:
     \n#ifndef ATCODER_MODINT_HPP\n#define ATCODER_MODINT_HPP // <- #include <ac-library/all>\
     \ \u3057\u305F\u3068\u304D\u306B\u91CD\u8907\u3057\u3066\u3057\u307E\u3046\u304B\
     \u3089\u5FC5\u9808\n#endif\n\n// \u52A0\u7B97\u7FA4\ntemplate <typename T>\nstruct\
-    \ AdditiveGroup {\n    using S = T;\n    static S e(){\n        return 0;\n  \
-    \  }\n    static S op(const S& l, const S& r){\n        return l + r;\n    }\n\
+    \ AdditiveGroup {\n    using S = T;\n    static S e() {\n        return 0;\n \
+    \   }\n    static S op(const S& l, const S& r) {\n        return l + r;\n    }\n\
     \    static S inv(const S& x){\n        return -x;\n    }\n};\n\n// \u4E57\u7B97\
     \u7FA4\ntemplate <typename T = atcoder::modint998244353>\nstruct MultiplicativeGroup_998\
-    \ {\n    using S = T;\n    static S e(){\n        return 1;\n    }\n    static\
-    \ S op(const S& l, const S& r){\n        return l * r;\n    }\n    static S inv(const\
-    \ S& x){\n        return x.inv();\n    }\n};\n\n// \u4E57\u7B97\u7FA4\ntemplate\
+    \ {\n    using S = T;\n    static S e() {\n        return 1;\n    }\n    static\
+    \ S op(const S& l, const S& r) {\n        return l * r;\n    }\n    static S inv(const\
+    \ S& x) {\n        return x.inv();\n    }\n};\n\n// \u4E57\u7B97\u7FA4\ntemplate\
     \ <typename T = atcoder::modint1000000007>\nstruct MultiplicativeGroup_100 {\n\
-    \    using S = T;\n    static S e(){\n        return 1;\n    }\n    static S op(const\
-    \ S& l, const S& r){\n        return l * r;\n    }\n    static S inv(const S&\
-    \ x){\n        return x.inv();\n    }\n};\n\n// XOR \u7FA4\ntemplate <typename\
+    \    using S = T;\n    static S e() {\n        return 1;\n    }\n    static S\
+    \ op(const S& l, const S& r) {\n        return l * r;\n    }\n    static S inv(const\
+    \ S& x) {\n        return x.inv();\n    }\n};\n\n// XOR \u7FA4\ntemplate <typename\
     \ T>\nstruct XorGroup {\n    using S = T;\n    static S e(){\n        return 0;\n\
-    \    }\n    static S op(const S& l, const S& r){\n        return l ^ r;\n    }\n\
-    \    static S inv(const S& x){\n        return x;\n    }\n};\n\n\n#endif // AbelianGroup_HPP"
+    \    }\n    static S op(const S& l, const S& r) {\n        return l ^ r;\n   \
+    \ }\n    static S inv(const S& x){\n        return x;\n    }\n};\n\n\n#endif //\
+    \ AbelianGroup_HPP"
   dependsOn: []
   isVerificationFile: false
   path: Others/AbelianGroups.hpp

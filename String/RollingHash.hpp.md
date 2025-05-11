@@ -58,11 +58,12 @@ data:
     \        while(high - low > 1){\n            int mid = (low - high) / 2 + high;\n\
     \            if(get(l1, l1 + mid) == another_str.get(l2, l2 + mid)){\n       \
     \         low = mid;\n            }\n            else{\n                high =\
-    \ mid;\n            }\n        }\n        return low;\n    }\n};\n\n// \u57FA\u6570\
-    \u3092\u30E9\u30F3\u30C0\u30E0\u306B\u521D\u671F\u5316\nstd::mt19937_64 mt{(unsigned\
-    \ int)time(NULL)};\nRollingHash::ull RollingHash::base = mt() % RollingHash::mod;\
+    \ mid;\n            }\n        }\n        return low;\n    }\n};\n\n/* // \u57FA\
+    \u6570\u3092\u30E9\u30F3\u30C0\u30E0\u306B\u521D\u671F\u5316\nstd::mt19937_64\
+    \ mt{(unsigned int)time(NULL)};\nRollingHash::ull RollingHash::base = mt() % RollingHash::mod;\
     \ // \uFF08\u9759\u7684\u30E1\u30F3\u30D0\u5909\u6570\u306F\u306E\u521D\u671F\u5316\
-    \u306F\u3001\u30AF\u30E9\u30B9\u306E\u5916\u90E8\u3067\u884C\u3046\uFF09\n\n\n"
+    \u306F\u3001\u30AF\u30E9\u30B9\u306E\u5916\u90E8\u3067\u884C\u3046\uFF09 */\n\n\
+    \n"
   code: "#ifndef RollingHash_HPP\n#define RollingHash_HPP\n\n#include <vector>\n#include\
     \ <string>\n#include <random>\n\nstruct RollingHash {\nprivate:\n    using ull\
     \ = unsigned long long;\n    static const ull mod = 0x1fffffffffffffff; // 2^61-1\n\
@@ -111,17 +112,17 @@ data:
     \        while(high - low > 1){\n            int mid = (low - high) / 2 + high;\n\
     \            if(get(l1, l1 + mid) == another_str.get(l2, l2 + mid)){\n       \
     \         low = mid;\n            }\n            else{\n                high =\
-    \ mid;\n            }\n        }\n        return low;\n    }\n};\n\n// \u57FA\u6570\
-    \u3092\u30E9\u30F3\u30C0\u30E0\u306B\u521D\u671F\u5316\nstd::mt19937_64 mt{(unsigned\
-    \ int)time(NULL)};\nRollingHash::ull RollingHash::base = mt() % RollingHash::mod;\
+    \ mid;\n            }\n        }\n        return low;\n    }\n};\n\n/* // \u57FA\
+    \u6570\u3092\u30E9\u30F3\u30C0\u30E0\u306B\u521D\u671F\u5316\nstd::mt19937_64\
+    \ mt{(unsigned int)time(NULL)};\nRollingHash::ull RollingHash::base = mt() % RollingHash::mod;\
     \ // \uFF08\u9759\u7684\u30E1\u30F3\u30D0\u5909\u6570\u306F\u306E\u521D\u671F\u5316\
-    \u306F\u3001\u30AF\u30E9\u30B9\u306E\u5916\u90E8\u3067\u884C\u3046\uFF09\n\n#endif\
-    \ // RollingHash_HPP"
+    \u306F\u3001\u30AF\u30E9\u30B9\u306E\u5916\u90E8\u3067\u884C\u3046\uFF09 */\n\n\
+    #endif // RollingHash_HPP"
   dependsOn: []
   isVerificationFile: false
   path: String/RollingHash.hpp
   requiredBy: []
-  timestamp: '2024-09-26 18:45:24+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: String/RollingHash.hpp

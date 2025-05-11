@@ -4,6 +4,12 @@ data:
   - name: Algorithm
     pages:
     - icon: ':warning:'
+      path: Algorithm/Doubling.hpp
+      title: Algorithm/Doubling.hpp
+    - icon: ':warning:'
+      path: Algorithm/Mo.hpp
+      title: Algorithm/Mo.hpp
+    - icon: ':warning:'
       path: Algorithm/next_pairing.hpp
       title: next_pairing
     - icon: ':warning:'
@@ -42,13 +48,13 @@ data:
   - name: Math
     pages:
     - icon: ':warning:'
-      path: Math/binom.hpp
-      title: Math/binom.hpp
+      path: Math/Binom.hpp
+      title: Math/Binom.hpp
     - icon: ':warning:'
-      path: Math/binom_mod.hpp
-      title: Math/binom_mod.hpp
+      path: Math/BinomMod.hpp
+      title: Math/BinomMod.hpp
     - icon: ':warning:'
-      path: Math/binom_mod_ll.hpp
+      path: Math/BinomMod_ll.hpp
       title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
         \u308B"
     - icon: ':warning:'
@@ -92,8 +98,9 @@ data:
       title: Others/Monoids.hpp
     - icon: ':warning:'
       path: Others/ZobristHash.hpp
-      title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\
-        \u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
+      title: "\u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\u5BFE\
+        \u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\
+        \u308B"
     - icon: ':warning:'
       path: Others/bisect.hpp
       title: Others/bisect.hpp
@@ -115,9 +122,6 @@ data:
       path: String/RollingHash.hpp
       title: "a*b mod 2^61 - 1 \u3092\u3001\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\
         \u306A\u3057\u3067\u8A08\u7B97"
-    - icon: ':warning:'
-      path: String/Trie.hpp
-      title: Trie
   - name: ac-library/atcoder
     pages:
     - icon: ':warning:'

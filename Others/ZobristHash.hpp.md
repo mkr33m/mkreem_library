@@ -10,8 +10,9 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\
-      \u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
+    document_title: "\u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\
+      \u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\
+      \u3066\u308B"
     links: []
   bundledCode: "#line 1 \"Others/ZobristHash.hpp\"\n\n\n\n#include <vector>\n#include\
     \ <set>\n#include <map>\n#include <unordered_set>\n#include <limits>\n#include\
@@ -50,95 +51,99 @@ data:
     \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
     using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
     \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
-    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
-    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
-    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
-    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
-    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
-    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
-    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
-    \ false;\n}\n\n\n#line 13 \"Others/ZobristHash.hpp\"\n\ntemplate <typename T>\n\
-    struct ZobristHash {\nprivate:\n    std::map<T, int> hash;\n\npublic:\n    /**\n\
-    \     * @brief \u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\
-    \u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B\n     * @remark \u8907\u6570\u306E\
-    \ vector \u3092\u540C\u6642\u306B\u6E21\u3059\u3053\u3068\u304C\u3067\u304D\u308B\
-    \n     */\n    template <typename... Args>\n    ZobristHash(const Args&... vecs){\n\
-    \        std::vector<T> merged;\n\n        (merged.insert(merged.end(), vecs.begin(),\
-    \ vecs.end()), ...);\n\n        std::sort(merged.begin(), merged.end());\n   \
-    \     merged.erase(std::unique(merged.begin(), merged.end()), merged.end());\n\
-    \n        std::random_device rd;\n        std::mt19937 mt(rd());\n        std::uniform_int_distribution<int>\
-    \ ran(0, std::numeric_limits<int>::max());\n\n        for(const auto& e : merged){\n\
-    \            hash[e] = ran(mt);\n        }\n    }\n\n    /**\n     * @brief \u5F15\
-    \u6570\u306B\u5272\u308A\u5F53\u3066\u3089\u308C\u305F\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u3092\u8FD4\u3059\n     */\n    int val(const T& e){\n        assert(hash.find(e)\
-    \ != hash.end());\n        return hash[e];\n    }\n\n    /**\n     * @brief \u5404\
-    \u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E XOR \u3092\u53D6\u308B\
-    \ ver\n     * @remark set \u3068\u3057\u3066\uFF08multiset \u3067\u306F\u306A\u3044\
-    \uFF01\uFF09\u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\u3053\
-    \u3068\u304C\u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\u308C\
-    \u305F vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u306E\u7D2F\u7A4DXOR\u3092\u53D6\u3063\u305F\u3082\u306E\n     */\n   \
-    \ std::vector<ll> xor_hash(const std::vector<T>& vec){\n        int N = vec.size();\n\
-    \        std::vector<ll> hashed_vec(N + 1);\n        std::unordered_set<T> memo;\n\
-    \n        for(int i = 0; i < N; i++){\n            if(memo.find(vec[i]) == memo.end()){\n\
-    \                memo.insert(vec[i]);\n                hashed_vec[i + 1] = hashed_vec[i]\
-    \ ^ val(vec[i]);\n            } else{\n                hashed_vec[i + 1] = hashed_vec[i];\n\
-    \            }\n        }\n\n        return hashed_vec;\n    }\n\n    /**\n  \
-    \   * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E\u7D2F\
-    \u7A4D\u548C\u3092\u3068\u308B ver\n     * @remark multiset \u3068\u3057\u3066\
-    \u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\u3053\u3068\u304C\
-    \u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\u308C\u305F\
-    \ vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\
-    \u306E\u7D2F\u7A4D\u548C\u3092\u53D6\u3063\u305F\u3082\u306E\n     */\n    std::vector<ll>\
-    \ pref_hash(const std::vector<T>& vec){\n        int N = vec.size();\n       \
-    \ std::vector<ll> hashed_vec(N + 1);\n\n        for(int i = 0; i < N; i++){\n\
-    \            hashed_vec[i + 1] = hashed_vec[i] + val(vec[i]);\n        }\n\n \
-    \       return hashed_vec;\n    }\n};\n\n\n"
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
+    \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst int di8[8]\
+    \ = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};\n\
+    \nbool out_of_grid(const int& i, const int& j, const int& h, const int& w){\n\
+    \    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return false;\n\
+    }\n\n\n#line 13 \"Others/ZobristHash.hpp\"\n\ntemplate <typename T>\nstruct ZobristHash\
+    \ {\nprivate:\n    std::map<T, int> hash_;\n\npublic:\n    /**\n     * @brief\
+    \ \u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\
+    \u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B\n   \
+    \  * @remark \u8907\u6570\u306E vector \u3092\u540C\u6642\u306B\u6E21\u3059\u3053\
+    \u3068\u304C\u3067\u304D\u308B\n     */\n    template <typename... Args>\n   \
+    \ ZobristHash(const Args&... vecs) {\n        std::vector<T> merged;\n       \
+    \ (merged.insert(merged.end(), vecs.begin(), vecs.end()), ...);\n\n        std::sort(merged.begin(),\
+    \ merged.end());\n        merged.erase(std::unique(merged.begin(), merged.end()),\
+    \ merged.end());\n\n        std::random_device rd;\n        std::mt19937 mt(rd());\n\
+    \        std::uniform_int_distribution<int> ran(0, std::numeric_limits<int>::max());\
+    \ // int \u578B\u306E\u7BC4\u56F2\u3067\u5272\u308A\u5F53\u3066\u308B\uFF08\u305F\
+    \u3060\u3057\u3001\u975E\u8CA0\u6574\u6570\uFF09\n\n        for (const auto& e\
+    \ : merged) {\n            hash_[e] = ran(mt);\n        }\n    }\n\n    /**\n\
+    \     * @brief \u5F15\u6570\u306B\u5272\u308A\u5F53\u3066\u3089\u308C\u305F\u30CF\
+    \u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\n     */\n    int val(const T& e) {\n\
+    \        assert(hash_.find(e) != hash_.end());\n        return hash_[e];\n   \
+    \ }\n\n    /**\n     * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\
+    \u5024\u306E XOR \u3092\u53D6\u308B ver\n     * @remark set \u3068\u3057\u3066\
+    \uFF08multiset \u3067\u306F\u306A\u3044\uFF01\uFF09\u306E\u4E00\u81F4\u5224\u5B9A\
+    \u3092 O(1) \u3067\u884C\u3046\u3053\u3068\u304C\u3067\u304D\u308B\n     * @return\
+    \ \u5F15\u6570\u3067\u6E21\u3055\u308C\u305F vector<T> vec \u306E\u3001\u5404\u8981\
+    \u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E\u7D2F\u7A4D XOR \u3092\u53D6\u3063\
+    \u305F\u3082\u306E\n     */\n    std::vector<ll> hash_pref_xor(const std::vector<T>&\
+    \ vec) {\n        int N = vec.size();\n        std::vector<ll> pref(N + 1);\n\
+    \        std::unordered_set<T> memo;\n\n        for (int i = 0; i < N; i++) {\n\
+    \            if (memo.find(vec[i]) == memo.end()) {\n                memo.insert(vec[i]);\n\
+    \                pref[i + 1] = pref[i] ^ val(vec[i]);\n            } else {\n\
+    \                pref[i + 1] = pref[i];\n            }\n        }\n\n        return\
+    \ pref;\n    }\n\n    /**\n     * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u306E\u7D2F\u7A4D\u548C\u3092\u3068\u308B ver\n     * @remark multiset\
+    \ \u3068\u3057\u3066\u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\
+    \u3053\u3068\u304C\u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\
+    \u308C\u305F vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u306E\u7D2F\u7A4D\u548C\u3092\u53D6\u3063\u305F\u3082\u306E\n   \
+    \  */\n    std::vector<ll> hash_pref_sum(const std::vector<T>& vec) {\n      \
+    \  int N = vec.size();\n        std::vector<ll> pref(N + 1);\n\n        for (int\
+    \ i = 0; i < N; i++) {\n            pref[i + 1] = pref[i] + val(vec[i]);\n   \
+    \     }\n\n        return pref;\n    }\n};\n\n\n"
   code: "#ifndef ZobristHash_HPP\n#define ZobristHash_HPP\n\n#include <vector>\n#include\
     \ <set>\n#include <map>\n#include <unordered_set>\n#include <limits>\n#include\
     \ <algorithm>\n#include <random>\n\n#include \"macros.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct ZobristHash {\nprivate:\n    std::map<T, int> hash;\n\npublic:\n\
-    \    /**\n     * @brief \u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\
-    \u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B\n     * @remark \u8907\
-    \u6570\u306E vector \u3092\u540C\u6642\u306B\u6E21\u3059\u3053\u3068\u304C\u3067\
-    \u304D\u308B\n     */\n    template <typename... Args>\n    ZobristHash(const\
-    \ Args&... vecs){\n        std::vector<T> merged;\n\n        (merged.insert(merged.end(),\
-    \ vecs.begin(), vecs.end()), ...);\n\n        std::sort(merged.begin(), merged.end());\n\
-    \        merged.erase(std::unique(merged.begin(), merged.end()), merged.end());\n\
-    \n        std::random_device rd;\n        std::mt19937 mt(rd());\n        std::uniform_int_distribution<int>\
-    \ ran(0, std::numeric_limits<int>::max());\n\n        for(const auto& e : merged){\n\
-    \            hash[e] = ran(mt);\n        }\n    }\n\n    /**\n     * @brief \u5F15\
-    \u6570\u306B\u5272\u308A\u5F53\u3066\u3089\u308C\u305F\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u3092\u8FD4\u3059\n     */\n    int val(const T& e){\n        assert(hash.find(e)\
-    \ != hash.end());\n        return hash[e];\n    }\n\n    /**\n     * @brief \u5404\
-    \u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E XOR \u3092\u53D6\u308B\
-    \ ver\n     * @remark set \u3068\u3057\u3066\uFF08multiset \u3067\u306F\u306A\u3044\
-    \uFF01\uFF09\u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\u3053\
-    \u3068\u304C\u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\u308C\
-    \u305F vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u306E\u7D2F\u7A4DXOR\u3092\u53D6\u3063\u305F\u3082\u306E\n     */\n   \
-    \ std::vector<ll> xor_hash(const std::vector<T>& vec){\n        int N = vec.size();\n\
-    \        std::vector<ll> hashed_vec(N + 1);\n        std::unordered_set<T> memo;\n\
-    \n        for(int i = 0; i < N; i++){\n            if(memo.find(vec[i]) == memo.end()){\n\
-    \                memo.insert(vec[i]);\n                hashed_vec[i + 1] = hashed_vec[i]\
-    \ ^ val(vec[i]);\n            } else{\n                hashed_vec[i + 1] = hashed_vec[i];\n\
-    \            }\n        }\n\n        return hashed_vec;\n    }\n\n    /**\n  \
-    \   * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E\u7D2F\
-    \u7A4D\u548C\u3092\u3068\u308B ver\n     * @remark multiset \u3068\u3057\u3066\
-    \u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\u3053\u3068\u304C\
-    \u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\u308C\u305F\
-    \ vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\
-    \u306E\u7D2F\u7A4D\u548C\u3092\u53D6\u3063\u305F\u3082\u306E\n     */\n    std::vector<ll>\
-    \ pref_hash(const std::vector<T>& vec){\n        int N = vec.size();\n       \
-    \ std::vector<ll> hashed_vec(N + 1);\n\n        for(int i = 0; i < N; i++){\n\
-    \            hashed_vec[i + 1] = hashed_vec[i] + val(vec[i]);\n        }\n\n \
-    \       return hashed_vec;\n    }\n};\n\n#endif // ZobristHash_HPP"
+    \ T>\nstruct ZobristHash {\nprivate:\n    std::map<T, int> hash_;\n\npublic:\n\
+    \    /**\n     * @brief \u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\
+    \u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\
+    \u5F53\u3066\u308B\n     * @remark \u8907\u6570\u306E vector \u3092\u540C\u6642\
+    \u306B\u6E21\u3059\u3053\u3068\u304C\u3067\u304D\u308B\n     */\n    template\
+    \ <typename... Args>\n    ZobristHash(const Args&... vecs) {\n        std::vector<T>\
+    \ merged;\n        (merged.insert(merged.end(), vecs.begin(), vecs.end()), ...);\n\
+    \n        std::sort(merged.begin(), merged.end());\n        merged.erase(std::unique(merged.begin(),\
+    \ merged.end()), merged.end());\n\n        std::random_device rd;\n        std::mt19937\
+    \ mt(rd());\n        std::uniform_int_distribution<int> ran(0, std::numeric_limits<int>::max());\
+    \ // int \u578B\u306E\u7BC4\u56F2\u3067\u5272\u308A\u5F53\u3066\u308B\uFF08\u305F\
+    \u3060\u3057\u3001\u975E\u8CA0\u6574\u6570\uFF09\n\n        for (const auto& e\
+    \ : merged) {\n            hash_[e] = ran(mt);\n        }\n    }\n\n    /**\n\
+    \     * @brief \u5F15\u6570\u306B\u5272\u308A\u5F53\u3066\u3089\u308C\u305F\u30CF\
+    \u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\n     */\n    int val(const T& e) {\n\
+    \        assert(hash_.find(e) != hash_.end());\n        return hash_[e];\n   \
+    \ }\n\n    /**\n     * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\u30E5\
+    \u5024\u306E XOR \u3092\u53D6\u308B ver\n     * @remark set \u3068\u3057\u3066\
+    \uFF08multiset \u3067\u306F\u306A\u3044\uFF01\uFF09\u306E\u4E00\u81F4\u5224\u5B9A\
+    \u3092 O(1) \u3067\u884C\u3046\u3053\u3068\u304C\u3067\u304D\u308B\n     * @return\
+    \ \u5F15\u6570\u3067\u6E21\u3055\u308C\u305F vector<T> vec \u306E\u3001\u5404\u8981\
+    \u7D20\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E\u7D2F\u7A4D XOR \u3092\u53D6\u3063\
+    \u305F\u3082\u306E\n     */\n    std::vector<ll> hash_pref_xor(const std::vector<T>&\
+    \ vec) {\n        int N = vec.size();\n        std::vector<ll> pref(N + 1);\n\
+    \        std::unordered_set<T> memo;\n\n        for (int i = 0; i < N; i++) {\n\
+    \            if (memo.find(vec[i]) == memo.end()) {\n                memo.insert(vec[i]);\n\
+    \                pref[i + 1] = pref[i] ^ val(vec[i]);\n            } else {\n\
+    \                pref[i + 1] = pref[i];\n            }\n        }\n\n        return\
+    \ pref;\n    }\n\n    /**\n     * @brief \u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u306E\u7D2F\u7A4D\u548C\u3092\u3068\u308B ver\n     * @remark multiset\
+    \ \u3068\u3057\u3066\u306E\u4E00\u81F4\u5224\u5B9A\u3092 O(1) \u3067\u884C\u3046\
+    \u3053\u3068\u304C\u3067\u304D\u308B\n     * @return \u5F15\u6570\u3067\u6E21\u3055\
+    \u308C\u305F vector<T> vec \u306E\u3001\u5404\u8981\u7D20\u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u306E\u7D2F\u7A4D\u548C\u3092\u53D6\u3063\u305F\u3082\u306E\n   \
+    \  */\n    std::vector<ll> hash_pref_sum(const std::vector<T>& vec) {\n      \
+    \  int N = vec.size();\n        std::vector<ll> pref(N + 1);\n\n        for (int\
+    \ i = 0; i < N; i++) {\n            pref[i + 1] = pref[i] + val(vec[i]);\n   \
+    \     }\n\n        return pref;\n    }\n};\n\n#endif // ZobristHash_HPP"
   dependsOn:
   - Others/macros.hpp
   isVerificationFile: false
   path: Others/ZobristHash.hpp
   requiredBy: []
-  timestamp: '2025-03-11 07:02:05+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/ZobristHash.hpp
@@ -146,6 +151,6 @@ layout: document
 redirect_from:
 - /library/Others/ZobristHash.hpp
 - /library/Others/ZobristHash.hpp.html
-title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\
-  \u3092\u5272\u308A\u5F53\u3066\u308B"
+title: "\u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\u5BFE\u3057\
+  \u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
 ---

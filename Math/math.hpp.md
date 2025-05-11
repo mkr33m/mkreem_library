@@ -49,22 +49,22 @@ data:
     \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
     using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
     \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
-    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
-    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
-    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
-    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
-    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
-    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
-    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
-    \ false;\n}\n\n\n#line 5 \"Math/math.hpp\"\n\nnamespace math {\n\n    ll pow(ll\
-    \ N, ll e) {\n        ll res = 1;\n        while (e) {\n            if (e & 1)\
-    \ {\n                res *= N;\n            }\n            N *= N;\n         \
-    \   e >>= 1;\n        }\n        return res;\n    }\n\n    ll floor (const ll&\
-    \ x, const ll& m) {\n        ll r = (x % m + m) % m;\n        return (x - r) /\
-    \ m;\n    }\n\n    ll ceil (const ll& x, const ll& m) {\n        return floor(x\
-    \ + m - 1, m);\n    }\n\n    int log2_floor(ll N) {\n        int res = -1;\n \
-    \       while (N != 0) {\n            res++;\n            N /= 2;\n        }\n\
-    \        return res;\n    }\n\n} // namespace math\n\n\n"
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
+    \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst int di8[8]\
+    \ = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};\n\
+    \nbool out_of_grid(const int& i, const int& j, const int& h, const int& w){\n\
+    \    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return false;\n\
+    }\n\n\n#line 5 \"Math/math.hpp\"\n\nnamespace math {\n\n    ll pow(ll N, ll e)\
+    \ {\n        ll res = 1;\n        while (e) {\n            if (e & 1) {\n    \
+    \            res *= N;\n            }\n            N *= N;\n            e >>=\
+    \ 1;\n        }\n        return res;\n    }\n\n    ll floor (const ll& x, const\
+    \ ll& m) {\n        ll r = (x % m + m) % m;\n        return (x - r) / m;\n   \
+    \ }\n\n    ll ceil (const ll& x, const ll& m) {\n        return floor(x + m -\
+    \ 1, m);\n    }\n\n    int log2_floor(ll N) {\n        int res = -1;\n       \
+    \ while (N != 0) {\n            res++;\n            N /= 2;\n        }\n     \
+    \   return res;\n    }\n\n} // namespace math\n\n\n"
   code: "#ifndef math_HPP\n#define math_HPP\n\n#include \"../Others/macros.hpp\"\n\
     \nnamespace math {\n\n    ll pow(ll N, ll e) {\n        ll res = 1;\n        while\
     \ (e) {\n            if (e & 1) {\n                res *= N;\n            }\n\
@@ -81,7 +81,7 @@ data:
   path: Math/math.hpp
   requiredBy:
   - Algorithm/next_pairing.hpp
-  timestamp: '2025-03-11 07:02:05+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Math/math.hpp

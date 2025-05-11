@@ -28,31 +28,31 @@ data:
     \ \u3057\u305F\u3068\u304D\u306B\u3082\u3063\u304B\u3044\u3082\u3046\u4E00\u5EA6\
     \u30A4\u30F3\u30AF\u30EB\u30FC\u30C9\u3057\u3066\u3057\u307E\u3046\u304B\u3089\
     \u5FC5\u9808\n#endif\n\n// \u52A0\u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate <typename\
-    \ T>\nstruct AddMonoid {\n    using S = T;\n    static S e(){\n        return\
-    \ 0;\n    }\n    static S op(const S& l, const S& r){\n        return l + r;\n\
+    \ T>\nstruct AddMonoid {\n    using S = T;\n    static S e() {\n        return\
+    \ 0;\n    }\n    static S op(const S& l, const S& r) {\n        return l + r;\n\
     \    }\n};\n\n// \u4E57\u7B97\u30E2\u30CE\u30A4\u30C9\ntemplate <typename T =\
     \ atcoder::modint998244353>\nstruct MultiplyMonoid_998 {\n    using S = T;\n \
-    \   static S e(){\n        return 1;\n    }\n    static S op(const S& l, const\
-    \ S& r){\n        return l * r;\n    }\n};\n\n// \u4E57\u7B97\u30E2\u30CE\u30A4\
+    \   static S e() {\n        return 1;\n    }\n    static S op(const S& l, const\
+    \ S& r) {\n        return l * r;\n    }\n};\n\n// \u4E57\u7B97\u30E2\u30CE\u30A4\
     \u30C9\ntemplate <typename T = atcoder::modint1000000007>\nstruct MultiplyMonoid_100\
-    \ {\n    using S = T;\n    static S e(){\n        return 1;\n    }\n    static\
-    \ S op(const S& l, const S& r){\n        return l * r;\n    }\n};\n\n// \u6700\
+    \ {\n    using S = T;\n    static S e() {\n        return 1;\n    }\n    static\
+    \ S op(const S& l, const S& r) {\n        return l * r;\n    }\n};\n\n// \u6700\
     \u5927\u5024\u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\nstruct MaxMonoid\
-    \ {\n    using S = T;\n    static S e(){\n        return std::numeric_limits<S>::min();\n\
-    \    }\n    static S op(const S& l, const S& r){\n        return std::max(l, r);\n\
-    \    }\n};\n\n// \u6700\u5C0F\u5024\u30E2\u30CE\u30A4\u30C9\ntemplate <typename\
-    \ T>\nstruct MinMonoid {\n    using S = T;\n    static S e(){\n        return\
+    \ {\n    using S = T;\n    static S e() {\n        return std::numeric_limits<S>::min();\n\
+    \    }\n    static S op(const S& l, const S& r) {\n        return std::max(l,\
+    \ r);\n    }\n};\n\n// \u6700\u5C0F\u5024\u30E2\u30CE\u30A4\u30C9\ntemplate <typename\
+    \ T>\nstruct MinMonoid {\n    using S = T;\n    static S e() {\n        return\
     \ std::numeric_limits<S>::max();\n    }\n    static S op(const S& l, const S&\
-    \ r){\n        return std::min(l, r);\n    }\n};\n\n// AND \u30E2\u30CE\u30A4\u30C9\
-    \ntemplate <typename T>\nstruct AndMonoid {\n    using S = T;\n    static S e(){\n\
-    \        return ~0;\n    }\n    static S op(const S& l, const S& r){\n       \
-    \ return l & r;\n    }\n};\n\n// OR \u30E2\u30CE\u30A4\u30C9\ntemplate <typename\
-    \ T>\nstruct OrMonoid {\n    using S = T;\n    static S e(){\n        return 0;\n\
-    \    }\n    static S op(const S& l, const S& r){\n        return l | r;\n    }\n\
-    };\n\n// XOR \u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\nstruct XorMonoid\
-    \ {\n    using S = T;\n    static S e(){\n        return 0;\n    }\n    static\
-    \ S op(const S& l, const S& r){\n        return l ^ r;\n    }\n};\n\n#endif //\
-    \ Monoids_HPP"
+    \ r) {\n        return std::min(l, r);\n    }\n};\n\n// AND \u30E2\u30CE\u30A4\
+    \u30C9\ntemplate <typename T>\nstruct AndMonoid {\n    using S = T;\n    static\
+    \ S e() {\n        return ~0;\n    }\n    static S op(const S& l, const S& r)\
+    \ {\n        return l & r;\n    }\n};\n\n// OR \u30E2\u30CE\u30A4\u30C9\ntemplate\
+    \ <typename T>\nstruct OrMonoid {\n    using S = T;\n    static S e() {\n    \
+    \    return 0;\n    }\n    static S op(const S& l, const S& r) {\n        return\
+    \ l | r;\n    }\n};\n\n// XOR \u30E2\u30CE\u30A4\u30C9\ntemplate <typename T>\n\
+    struct XorMonoid {\n    using S = T;\n    static S e() {\n        return 0;\n\
+    \    }\n    static S op(const S& l, const S& r) {\n        return l ^ r;\n   \
+    \ }\n};\n\n#endif // Monoids_HPP"
   dependsOn: []
   isVerificationFile: false
   path: Others/Monoids.hpp

@@ -12,36 +12,37 @@ data:
     links: []
   bundledCode: "#line 1 \"Graph/Graph_template.hpp\"\n\n\n\n#include <vector>\n#include\
     \ <algorithm>\n#include <queue>\n#include <iostream>\n#include <limits>\n\ntemplate\
-    \ <typename T>\nstruct Graph {\n    struct Edge {\n        int from, to;\n   \
-    \     T cost;\n        int id;\n\n        Edge() : from(-1), to(-1), cost(-1),\
-    \ id(-1) {}\n        Edge(int from, int to, T cost = 1, int id = -1) : from(from),\
-    \ to(to), cost(cost), id(id) {}\n\n        bool operator<(const Edge &rhs) const\
-    \ { return cost < rhs.cost; }\n        operator int() const { return to; }\n \
-    \       friend std::ostream& operator<<(std::ostream& os, const Edge& e) {\n \
-    \           return os << \"(\" << e.from << \" -> \" << e.to << \"  weight: \"\
-    \ << e.cost << \", id: \" << e.id << \")\";\n        }\n    };\n\n    Graph()\
-    \ = default;\n    Graph(int N) : N(N), M(0), G(N), color(N, -1), visited(N, false),\
-    \ finished(N, false) {}\n\nprivate:\n    int N, M;\n    std::vector<std::vector<Edge>>\
-    \ G;\n    std::vector<int> color; // for is_bipartite\n    int start; // for detect_cycle\n\
-    \    std::vector<int> cycle; // for detect_cycle\n    std::vector<bool> visited,\
-    \ finished; // for detect_cycle\n    bool precalc_done = false; // for LCA\n \
-    \   std::vector<std::vector<int>> parent; // for LCA -> precalc_for_LCA \u95A2\
-    \u6570\u3067\u521D\u671F\u5316\n    std::vector<int> dist; // for LCA -> precalc_for_LCA\
-    \ \u95A2\u6570\u3067\u521D\u671F\u5316\n\n    // \u30B5\u30A4\u30AF\u30EB\u691C\
-    \u51FA ===========================================\n    int dfs_for_detect_cycle\
-    \ (const int& v) {\n        // \u884C\u304D\u304C\u3051\n        visited[v] =\
-    \ true;\n        cycle.push_back(v);\n\n        for (const auto& e : G[v]) {\n\
-    \            int nv = e.to;\n            if (finished[nv]) {\n               \
-    \ continue;\n            }\n            if (visited[nv]) { // \u59CB\u70B9\n \
-    \               return nv;\n            }\n\n            int start = dfs_for_detect_cycle(nv);\n\
-    \            if (start != -1) {\n                return start; // \u30B5\u30A4\
-    \u30AF\u30EB\u304C\u3042\u308C\u3070\u3001\u6700\u7D42\u7684\u306B\u59CB\u70B9\
-    \u3092\u8FD4\u3059\n            }\n        }\n\n        // \u30B5\u30A4\u30AF\u30EB\
-    \u304C\u306A\u304B\u3063\u305F\u5834\u5408\n        finished[v] = true;\n    \
-    \    cycle.pop_back();\n        return -1;\n    }\n\n    // LCA ===========================================\n\
-    \    /**\n     * @brief LCA\uFF08\u6700\u8FD1\u5171\u901A\u7956\u5148\uFF09\u3092\
-    \u6C42\u3081\u308B\u305F\u3081\u306E\u524D\u51E6\u7406\n     * @param parent[i][v]\
-    \ := \u9802\u70B9 v \u306E\u30012^i\u5148\u306E\u7956\u5148\u3002\u5B58\u5728\u3057\
+    \ <typename T = int>\nstruct Graph {\n    // \u8FBA\u306E\u69CB\u9020\u4F53\n\
+    \    struct Edge {\n        int from, to;\n        T cost;\n        int id;\n\n\
+    \        Edge() : from(-1), to(-1), cost(-1), id(-1) {}\n        Edge(int from,\
+    \ int to, T cost = 1, int id = -1) : from(from), to(to), cost(cost), id(id) {}\n\
+    \n        bool operator<(const Edge &rhs) const { return cost < rhs.cost; }\n\
+    \        operator int() const { return to; }\n        friend std::ostream& operator<<(std::ostream&\
+    \ os, const Edge& e) {\n            return os << \"(\" << e.from << \" -> \" <<\
+    \ e.to << \"  weight: \" << e.cost << \", id: \" << e.id << \")\";\n        }\n\
+    \    };\n\n    Graph() = default;\n    Graph(int N) : N(N), M(0), G(N), color(N,\
+    \ -1), visited(N, false), finished(N, false) {}\n\nprivate:\n    int N, M;\n \
+    \   std::vector<std::vector<Edge>> G;\n    bool is_weighted = false;\n    std::vector<int>\
+    \ color; // for is_bipartite\n    int start; // for detect_cycle\n    std::vector<int>\
+    \ cycle; // for detect_cycle\n    std::vector<bool> visited, finished; // for\
+    \ detect_cycle\n    bool precalc_done = false; // for LCA\n    std::vector<std::vector<int>>\
+    \ parent; // for LCA -> precalc_for_LCA \u95A2\u6570\u3067\u521D\u671F\u5316\n\
+    \    std::vector<int> dist; // for LCA -> precalc_for_LCA \u95A2\u6570\u3067\u521D\
+    \u671F\u5316\n\n    // \u30B5\u30A4\u30AF\u30EB\u691C\u51FA ===========================================\n\
+    \    int dfs_for_detect_cycle (int v) {\n        // \u884C\u304D\u304C\u3051\n\
+    \        visited[v] = true;\n        cycle.push_back(v);\n\n        for (const\
+    \ auto& e : G[v]) {\n            int nv = e.to;\n            if (finished[nv])\
+    \ {\n                continue;\n            }\n            if (visited[nv]) {\
+    \ // \u59CB\u70B9\n                return nv;\n            }\n\n            int\
+    \ start = dfs_for_detect_cycle(nv);\n            if (start != -1) {\n        \
+    \        return start; // \u30B5\u30A4\u30AF\u30EB\u304C\u3042\u308C\u3070\u3001\
+    \u6700\u7D42\u7684\u306B\u59CB\u70B9\u3092\u8FD4\u3059\n            }\n      \
+    \  }\n\n        // \u30B5\u30A4\u30AF\u30EB\u304C\u306A\u304B\u3063\u305F\u5834\
+    \u5408\n        finished[v] = true;\n        cycle.pop_back();\n        return\
+    \ -1;\n    }\n\n    // LCA ===========================================\n    /**\n\
+    \     * @brief LCA\uFF08\u6700\u8FD1\u5171\u901A\u7956\u5148\uFF09\u3092\u6C42\
+    \u3081\u308B\u305F\u3081\u306E\u524D\u51E6\u7406\n     * @param parent[i][v] :=\
+    \ \u9802\u70B9 v \u306E\u30012^i\u5148\u306E\u7956\u5148\u3002\u5B58\u5728\u3057\
     \u306A\u3051\u308C\u3070-1\u3002\n     */\n    void precalc_for_LCA(const int&\
     \ root = 0) {\n        int K = 1;\n        while ((1 << K) < N) {\n          \
     \  K++;\n        }\n        parent.assign(K, std::vector<int>(N, -1));\n     \
@@ -56,17 +57,19 @@ data:
     \ != par) {\n                dfs_for_LCA(nv, v, d + 1);\n            }\n     \
     \   }\n    }\n\npublic:\n    void add_edge(const int& u, const int& v, T w = 1)\
     \ {\n        G[u].push_back({u, v, w, M});\n        G[v].push_back({v, u, w, M++});\n\
-    \    }\n    void add_directed_edge(const int& u, const int& v, T w = 1) {\n  \
-    \      G[u].push_back({u, v, w, M++});\n    }\n\n    void read(const int& M, bool\
-    \ weighted = false, bool directed = false, int padding = 1) {\n        for (int\
-    \ i = 0; i < M; i++) {\n            int u, v; std::cin >> u >> v;\n          \
-    \  u -= padding;\n            v -= padding;\n            T w(1);\n           \
-    \ if (weighted) {\n                std::cin >> w;\n            }\n           \
-    \ if (directed) {\n                add_directed_edge(u, v, w);\n            }\
-    \ else {\n                add_edge(u, v, w);\n            }\n        }\n    }\n\
-    \n    std::vector<Edge>& operator[](const int& v) {\n        return G[v];\n  \
-    \  }\n\n    std::vector<Edge> edges() {\n        std::vector<Edge> es(M);\n  \
-    \      for (int v = 0; v < N; v++) {\n            for (const auto& nv : G[v])\
+    \        if (w != 1) {\n            is_weighted = true;\n        }\n    }\n  \
+    \  void add_directed_edge(const int& u, const int& v, T w = 1) {\n        G[u].push_back({u,\
+    \ v, w, M++});\n        if (w != 1) {\n            is_weighted = true;\n     \
+    \   }\n    }\n\n    void read(const int& M, bool weighted = false, bool directed\
+    \ = false, int padding = 1) {\n        for (int i = 0; i < M; i++) {\n       \
+    \     int u, v; std::cin >> u >> v;\n            u -= padding;\n            v\
+    \ -= padding;\n            T w(1);\n            if (weighted) {\n            \
+    \    is_weighted = true;\n                std::cin >> w;\n            }\n    \
+    \        if (directed) {\n                add_directed_edge(u, v, w);\n      \
+    \      } else {\n                add_edge(u, v, w);\n            }\n        }\n\
+    \    }\n\n    std::vector<Edge>& operator[](const int& v) {\n        return G[v];\n\
+    \    }\n\n    std::vector<Edge> edges() {\n        std::vector<Edge> es(M);\n\
+    \        for (int v = 0; v < N; v++) {\n            for (const auto& nv : G[v])\
     \ {\n                es[nv.id] = nv;\n            }\n        }\n        return\
     \ es;\n    }\n\n    // is_bipartite \u95A2\u6570 ===========================================\n\
     \    /**\n     * @brief \u30B0\u30E9\u30D5g\u304C\u4E8C\u90E8\u30B0\u30E9\u30D5\
@@ -78,7 +81,23 @@ data:
     \        return false;\n                }\n                continue;\n       \
     \     }\n\n            if (!is_bipartite(nv, 1 - v_color)) {\n               \
     \ return false;\n            }\n        }\n\n        return true;\n    }\n\n \
-    \   // \u30B5\u30A4\u30AF\u30EB\u691C\u51FA ===========================================\n\
+    \   // \u6728\u306E\u76F4\u5F84 ===========================================\n\
+    \    std::vector<int> get_tree_diameter(int x = 0) {\n\n        std::vector<T>\
+    \ dist;\n        std::vector<Edge> prev_edges(N);\n        if (is_weighted) {\n\
+    \            std::tie(dist, prev_edges) = Dijkstra(x);\n        } else {\n   \
+    \         std::tie(dist, prev_edges) = BFS(x);\n        }\n        auto get_farthest_vertex\
+    \ = [this](std::vector<T>& dist, int from) {\n            T max_dist = std::numeric_limits<T>::min();\n\
+    \            int to = -1;\n            for (int v = 0; v < this->N; v++) {\n \
+    \               if (max_dist < dist[v]) {\n                    max_dist = dist[v];\n\
+    \                    to = v;\n                }\n            }\n            return\
+    \ to;\n        };\n        int y = get_farthest_vertex(dist, x);\n        if (is_weighted)\
+    \ {\n            std::tie(dist, prev_edges) = Dijkstra(y);\n        } else {\n\
+    \            std::tie(dist, prev_edges) = BFS(y);\n        }\n        int z =\
+    \ get_farthest_vertex(dist, y);\n\n        std::vector<int> path;\n        int\
+    \ v = z;\n        while (1) {\n            path.push_back(v);\n            if\
+    \ (v == y) {\n                break;\n            }\n            v = prev_edges[v].from;\n\
+    \        }\n\n        std::reverse(path.begin(), path.end());\n\n        return\
+    \ path;\n    }\n\n    // \u30B5\u30A4\u30AF\u30EB\u691C\u51FA ===========================================\n\
     \    /**\n     * @brief v \u3092\u59CB\u70B9\u3068\u3057\u3066\u6709\u5411\u8FBA\
     \u3092\u8FBF\u3063\u3066\u3044\u304D\u3001\u30B5\u30A4\u30AF\u30EB\u304C\u3042\
     \u308B\u304B\u3069\u3046\u304B\u3092\u5224\u5B9A\n     * @remark \u9802\u70B9\u304C\
@@ -98,29 +117,29 @@ data:
     \    std::pair<std::vector<T>, std::vector<Edge>> BFS(const int& start) {\n  \
     \      std::vector<T> dist(N, std::numeric_limits<T>::max());\n        std::queue<int>\
     \ q;\n        /**\n         * @param prev_edges[target] : start \u304B\u3089 target\
+    \ \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\
+    \ \u3092\u8A2A\u308C\u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n       \
+    \  */\n        std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n  \
+    \      q.push(start);\n\n        while (!q.empty()) {\n            int v = q.front();\
+    \ q.pop();\n            for (const auto& e : G[v]) {\n                int nv =\
+    \ e.to;\n                if(dist[nv] != std::numeric_limits<T>::max()) {\n   \
+    \                 continue;\n                }\n                dist[nv] = dist[v]\
+    \ + 1;\n                prev_edges[nv] = e;\n                q.push(nv);\n   \
+    \         }\n        }\n\n        return make_pair(dist, prev_edges);\n    }\n\
+    \n    std::pair<std::vector<T>, std::vector<Edge>> BFS01(const int& start) {\n\
+    \        std::vector<T> dist(N, std::numeric_limits<T>::max());\n        std::deque<int>\
+    \ q;\n        /**\n         * @param prev_edges[target] : start \u304B\u3089 target\
     \ \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\u3092\
     \u8A2A\u308C\u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n         */\n  \
-    \      std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n        q.push(start);\n\
-    \n        while (!q.empty()) {\n            int v = q.front(); q.pop();\n    \
-    \        for (const auto& e : G[v]) {\n                int nv = e.to;\n      \
-    \          if(dist[nv] != std::numeric_limits<T>::max()) {\n                 \
-    \   continue;\n                }\n                dist[nv] = dist[v] + 1;\n  \
-    \              prev_edges[nv] = e;\n                q.push(nv);\n            }\n\
-    \        }\n\n        return {dist, prev_edges};\n    }\n\n    std::pair<std::vector<T>,\
-    \ std::vector<Edge>> BFS01(const int& start) {\n        std::vector<T> dist(N,\
-    \ std::numeric_limits<T>::max());\n        std::deque<int> q;\n        /**\n \
-    \        * @param prev_edges[target] : start \u304B\u3089 target \u307E\u3067\u306E\
-    \u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\u3092\u8A2A\u308C\
-    \u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n         */\n        std::vector<Edge>\
-    \ prev_edges(N);\n        dist[start] = 0;\n        q.push_front(start);\n\n \
-    \       while (!q.empty()) {\n            int v = q.front(); q.pop_front();\n\
+    \      std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n        q.push_front(start);\n\
+    \n        while (!q.empty()) {\n            int v = q.front(); q.pop_front();\n\
     \            for (const auto& e : G[v]) {\n                int nv = e.to;\n  \
     \              if (dist[nv] <= dist[v] + e.cost) {\n                    continue;\n\
     \                }\n                dist[nv] = dist[v] + e.cost;\n           \
     \     prev_edges[nv] = e;\n                if (e.cost == 0) {\n              \
     \      q.push_front(nv);\n                } else {\n                    q.push_back(nv);\n\
-    \                }\n            }\n        }\n\n        return {dist, prev_edges};\n\
-    \    }\n\n    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(const int&\
+    \                }\n            }\n        }\n\n        return make_pair(dist,\
+    \ prev_edges);\n    }\n\n    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(int\
     \ start){\n        std::vector<T> dist(N, std::numeric_limits<T>::max());\n  \
     \      std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,\
     \ std::greater<std::pair<T, int>>> q;\n        /**\n         * @param prev_edges[target]\
@@ -134,7 +153,7 @@ data:
     \        if(dist[nv] <= dist[v] + e.cost) {\n                    continue;\n \
     \               }\n                dist[nv] = dist[v] + e.cost;\n            \
     \    prev_edges[nv] = e;\n                q.push({dist[nv], nv});\n          \
-    \  }\n        }\n\n        return {dist, prev_edges};\n    }\n\n    std::vector<Edge>\
+    \  }\n        }\n\n        return make_pair(dist, prev_edges);\n    }\n\n    std::vector<Edge>\
     \ path(const int& start, const int& target, const std::vector<Edge>& prev_edges)\
     \ {\n        std::vector<Edge> path;\n        for (int cur = target; cur != start;\
     \ cur = prev_edges[cur].from) {\n            if (prev_edges[cur].id == -1) {\n\
@@ -168,28 +187,29 @@ data:
     \ p) + get_dist(p, v) == get_dist(u, v);\n    }\n};\n\n\n"
   code: "#ifndef Graph_template_HPP\n#define Graph_template_HPP\n\n#include <vector>\n\
     #include <algorithm>\n#include <queue>\n#include <iostream>\n#include <limits>\n\
-    \ntemplate <typename T>\nstruct Graph {\n    struct Edge {\n        int from,\
-    \ to;\n        T cost;\n        int id;\n\n        Edge() : from(-1), to(-1),\
-    \ cost(-1), id(-1) {}\n        Edge(int from, int to, T cost = 1, int id = -1)\
-    \ : from(from), to(to), cost(cost), id(id) {}\n\n        bool operator<(const\
-    \ Edge &rhs) const { return cost < rhs.cost; }\n        operator int() const {\
-    \ return to; }\n        friend std::ostream& operator<<(std::ostream& os, const\
-    \ Edge& e) {\n            return os << \"(\" << e.from << \" -> \" << e.to <<\
-    \ \"  weight: \" << e.cost << \", id: \" << e.id << \")\";\n        }\n    };\n\
-    \n    Graph() = default;\n    Graph(int N) : N(N), M(0), G(N), color(N, -1), visited(N,\
-    \ false), finished(N, false) {}\n\nprivate:\n    int N, M;\n    std::vector<std::vector<Edge>>\
-    \ G;\n    std::vector<int> color; // for is_bipartite\n    int start; // for detect_cycle\n\
-    \    std::vector<int> cycle; // for detect_cycle\n    std::vector<bool> visited,\
-    \ finished; // for detect_cycle\n    bool precalc_done = false; // for LCA\n \
-    \   std::vector<std::vector<int>> parent; // for LCA -> precalc_for_LCA \u95A2\
-    \u6570\u3067\u521D\u671F\u5316\n    std::vector<int> dist; // for LCA -> precalc_for_LCA\
-    \ \u95A2\u6570\u3067\u521D\u671F\u5316\n\n    // \u30B5\u30A4\u30AF\u30EB\u691C\
-    \u51FA ===========================================\n    int dfs_for_detect_cycle\
-    \ (const int& v) {\n        // \u884C\u304D\u304C\u3051\n        visited[v] =\
-    \ true;\n        cycle.push_back(v);\n\n        for (const auto& e : G[v]) {\n\
-    \            int nv = e.to;\n            if (finished[nv]) {\n               \
-    \ continue;\n            }\n            if (visited[nv]) { // \u59CB\u70B9\n \
-    \               return nv;\n            }\n\n            int start = dfs_for_detect_cycle(nv);\n\
+    \ntemplate <typename T = int>\nstruct Graph {\n    // \u8FBA\u306E\u69CB\u9020\
+    \u4F53\n    struct Edge {\n        int from, to;\n        T cost;\n        int\
+    \ id;\n\n        Edge() : from(-1), to(-1), cost(-1), id(-1) {}\n        Edge(int\
+    \ from, int to, T cost = 1, int id = -1) : from(from), to(to), cost(cost), id(id)\
+    \ {}\n\n        bool operator<(const Edge &rhs) const { return cost < rhs.cost;\
+    \ }\n        operator int() const { return to; }\n        friend std::ostream&\
+    \ operator<<(std::ostream& os, const Edge& e) {\n            return os << \"(\"\
+    \ << e.from << \" -> \" << e.to << \"  weight: \" << e.cost << \", id: \" << e.id\
+    \ << \")\";\n        }\n    };\n\n    Graph() = default;\n    Graph(int N) : N(N),\
+    \ M(0), G(N), color(N, -1), visited(N, false), finished(N, false) {}\n\nprivate:\n\
+    \    int N, M;\n    std::vector<std::vector<Edge>> G;\n    bool is_weighted =\
+    \ false;\n    std::vector<int> color; // for is_bipartite\n    int start; // for\
+    \ detect_cycle\n    std::vector<int> cycle; // for detect_cycle\n    std::vector<bool>\
+    \ visited, finished; // for detect_cycle\n    bool precalc_done = false; // for\
+    \ LCA\n    std::vector<std::vector<int>> parent; // for LCA -> precalc_for_LCA\
+    \ \u95A2\u6570\u3067\u521D\u671F\u5316\n    std::vector<int> dist; // for LCA\
+    \ -> precalc_for_LCA \u95A2\u6570\u3067\u521D\u671F\u5316\n\n    // \u30B5\u30A4\
+    \u30AF\u30EB\u691C\u51FA ===========================================\n    int\
+    \ dfs_for_detect_cycle (int v) {\n        // \u884C\u304D\u304C\u3051\n      \
+    \  visited[v] = true;\n        cycle.push_back(v);\n\n        for (const auto&\
+    \ e : G[v]) {\n            int nv = e.to;\n            if (finished[nv]) {\n \
+    \               continue;\n            }\n            if (visited[nv]) { // \u59CB\
+    \u70B9\n                return nv;\n            }\n\n            int start = dfs_for_detect_cycle(nv);\n\
     \            if (start != -1) {\n                return start; // \u30B5\u30A4\
     \u30AF\u30EB\u304C\u3042\u308C\u3070\u3001\u6700\u7D42\u7684\u306B\u59CB\u70B9\
     \u3092\u8FD4\u3059\n            }\n        }\n\n        // \u30B5\u30A4\u30AF\u30EB\
@@ -212,17 +232,19 @@ data:
     \ != par) {\n                dfs_for_LCA(nv, v, d + 1);\n            }\n     \
     \   }\n    }\n\npublic:\n    void add_edge(const int& u, const int& v, T w = 1)\
     \ {\n        G[u].push_back({u, v, w, M});\n        G[v].push_back({v, u, w, M++});\n\
-    \    }\n    void add_directed_edge(const int& u, const int& v, T w = 1) {\n  \
-    \      G[u].push_back({u, v, w, M++});\n    }\n\n    void read(const int& M, bool\
-    \ weighted = false, bool directed = false, int padding = 1) {\n        for (int\
-    \ i = 0; i < M; i++) {\n            int u, v; std::cin >> u >> v;\n          \
-    \  u -= padding;\n            v -= padding;\n            T w(1);\n           \
-    \ if (weighted) {\n                std::cin >> w;\n            }\n           \
-    \ if (directed) {\n                add_directed_edge(u, v, w);\n            }\
-    \ else {\n                add_edge(u, v, w);\n            }\n        }\n    }\n\
-    \n    std::vector<Edge>& operator[](const int& v) {\n        return G[v];\n  \
-    \  }\n\n    std::vector<Edge> edges() {\n        std::vector<Edge> es(M);\n  \
-    \      for (int v = 0; v < N; v++) {\n            for (const auto& nv : G[v])\
+    \        if (w != 1) {\n            is_weighted = true;\n        }\n    }\n  \
+    \  void add_directed_edge(const int& u, const int& v, T w = 1) {\n        G[u].push_back({u,\
+    \ v, w, M++});\n        if (w != 1) {\n            is_weighted = true;\n     \
+    \   }\n    }\n\n    void read(const int& M, bool weighted = false, bool directed\
+    \ = false, int padding = 1) {\n        for (int i = 0; i < M; i++) {\n       \
+    \     int u, v; std::cin >> u >> v;\n            u -= padding;\n            v\
+    \ -= padding;\n            T w(1);\n            if (weighted) {\n            \
+    \    is_weighted = true;\n                std::cin >> w;\n            }\n    \
+    \        if (directed) {\n                add_directed_edge(u, v, w);\n      \
+    \      } else {\n                add_edge(u, v, w);\n            }\n        }\n\
+    \    }\n\n    std::vector<Edge>& operator[](const int& v) {\n        return G[v];\n\
+    \    }\n\n    std::vector<Edge> edges() {\n        std::vector<Edge> es(M);\n\
+    \        for (int v = 0; v < N; v++) {\n            for (const auto& nv : G[v])\
     \ {\n                es[nv.id] = nv;\n            }\n        }\n        return\
     \ es;\n    }\n\n    // is_bipartite \u95A2\u6570 ===========================================\n\
     \    /**\n     * @brief \u30B0\u30E9\u30D5g\u304C\u4E8C\u90E8\u30B0\u30E9\u30D5\
@@ -234,7 +256,23 @@ data:
     \        return false;\n                }\n                continue;\n       \
     \     }\n\n            if (!is_bipartite(nv, 1 - v_color)) {\n               \
     \ return false;\n            }\n        }\n\n        return true;\n    }\n\n \
-    \   // \u30B5\u30A4\u30AF\u30EB\u691C\u51FA ===========================================\n\
+    \   // \u6728\u306E\u76F4\u5F84 ===========================================\n\
+    \    std::vector<int> get_tree_diameter(int x = 0) {\n\n        std::vector<T>\
+    \ dist;\n        std::vector<Edge> prev_edges(N);\n        if (is_weighted) {\n\
+    \            std::tie(dist, prev_edges) = Dijkstra(x);\n        } else {\n   \
+    \         std::tie(dist, prev_edges) = BFS(x);\n        }\n        auto get_farthest_vertex\
+    \ = [this](std::vector<T>& dist, int from) {\n            T max_dist = std::numeric_limits<T>::min();\n\
+    \            int to = -1;\n            for (int v = 0; v < this->N; v++) {\n \
+    \               if (max_dist < dist[v]) {\n                    max_dist = dist[v];\n\
+    \                    to = v;\n                }\n            }\n            return\
+    \ to;\n        };\n        int y = get_farthest_vertex(dist, x);\n        if (is_weighted)\
+    \ {\n            std::tie(dist, prev_edges) = Dijkstra(y);\n        } else {\n\
+    \            std::tie(dist, prev_edges) = BFS(y);\n        }\n        int z =\
+    \ get_farthest_vertex(dist, y);\n\n        std::vector<int> path;\n        int\
+    \ v = z;\n        while (1) {\n            path.push_back(v);\n            if\
+    \ (v == y) {\n                break;\n            }\n            v = prev_edges[v].from;\n\
+    \        }\n\n        std::reverse(path.begin(), path.end());\n\n        return\
+    \ path;\n    }\n\n    // \u30B5\u30A4\u30AF\u30EB\u691C\u51FA ===========================================\n\
     \    /**\n     * @brief v \u3092\u59CB\u70B9\u3068\u3057\u3066\u6709\u5411\u8FBA\
     \u3092\u8FBF\u3063\u3066\u3044\u304D\u3001\u30B5\u30A4\u30AF\u30EB\u304C\u3042\
     \u308B\u304B\u3069\u3046\u304B\u3092\u5224\u5B9A\n     * @remark \u9802\u70B9\u304C\
@@ -254,29 +292,29 @@ data:
     \    std::pair<std::vector<T>, std::vector<Edge>> BFS(const int& start) {\n  \
     \      std::vector<T> dist(N, std::numeric_limits<T>::max());\n        std::queue<int>\
     \ q;\n        /**\n         * @param prev_edges[target] : start \u304B\u3089 target\
+    \ \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\
+    \ \u3092\u8A2A\u308C\u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n       \
+    \  */\n        std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n  \
+    \      q.push(start);\n\n        while (!q.empty()) {\n            int v = q.front();\
+    \ q.pop();\n            for (const auto& e : G[v]) {\n                int nv =\
+    \ e.to;\n                if(dist[nv] != std::numeric_limits<T>::max()) {\n   \
+    \                 continue;\n                }\n                dist[nv] = dist[v]\
+    \ + 1;\n                prev_edges[nv] = e;\n                q.push(nv);\n   \
+    \         }\n        }\n\n        return make_pair(dist, prev_edges);\n    }\n\
+    \n    std::pair<std::vector<T>, std::vector<Edge>> BFS01(const int& start) {\n\
+    \        std::vector<T> dist(N, std::numeric_limits<T>::max());\n        std::deque<int>\
+    \ q;\n        /**\n         * @param prev_edges[target] : start \u304B\u3089 target\
     \ \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\u3092\
     \u8A2A\u308C\u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n         */\n  \
-    \      std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n        q.push(start);\n\
-    \n        while (!q.empty()) {\n            int v = q.front(); q.pop();\n    \
-    \        for (const auto& e : G[v]) {\n                int nv = e.to;\n      \
-    \          if(dist[nv] != std::numeric_limits<T>::max()) {\n                 \
-    \   continue;\n                }\n                dist[nv] = dist[v] + 1;\n  \
-    \              prev_edges[nv] = e;\n                q.push(nv);\n            }\n\
-    \        }\n\n        return {dist, prev_edges};\n    }\n\n    std::pair<std::vector<T>,\
-    \ std::vector<Edge>> BFS01(const int& start) {\n        std::vector<T> dist(N,\
-    \ std::numeric_limits<T>::max());\n        std::deque<int> q;\n        /**\n \
-    \        * @param prev_edges[target] : start \u304B\u3089 target \u307E\u3067\u306E\
-    \u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u3001target\u3092\u8A2A\u308C\
-    \u308B\u76F4\u524D\u306B\u901A\u3063\u305F\u8FBA\n         */\n        std::vector<Edge>\
-    \ prev_edges(N);\n        dist[start] = 0;\n        q.push_front(start);\n\n \
-    \       while (!q.empty()) {\n            int v = q.front(); q.pop_front();\n\
+    \      std::vector<Edge> prev_edges(N);\n        dist[start] = 0;\n        q.push_front(start);\n\
+    \n        while (!q.empty()) {\n            int v = q.front(); q.pop_front();\n\
     \            for (const auto& e : G[v]) {\n                int nv = e.to;\n  \
     \              if (dist[nv] <= dist[v] + e.cost) {\n                    continue;\n\
     \                }\n                dist[nv] = dist[v] + e.cost;\n           \
     \     prev_edges[nv] = e;\n                if (e.cost == 0) {\n              \
     \      q.push_front(nv);\n                } else {\n                    q.push_back(nv);\n\
-    \                }\n            }\n        }\n\n        return {dist, prev_edges};\n\
-    \    }\n\n    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(const int&\
+    \                }\n            }\n        }\n\n        return make_pair(dist,\
+    \ prev_edges);\n    }\n\n    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(int\
     \ start){\n        std::vector<T> dist(N, std::numeric_limits<T>::max());\n  \
     \      std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,\
     \ std::greater<std::pair<T, int>>> q;\n        /**\n         * @param prev_edges[target]\
@@ -290,7 +328,7 @@ data:
     \        if(dist[nv] <= dist[v] + e.cost) {\n                    continue;\n \
     \               }\n                dist[nv] = dist[v] + e.cost;\n            \
     \    prev_edges[nv] = e;\n                q.push({dist[nv], nv});\n          \
-    \  }\n        }\n\n        return {dist, prev_edges};\n    }\n\n    std::vector<Edge>\
+    \  }\n        }\n\n        return make_pair(dist, prev_edges);\n    }\n\n    std::vector<Edge>\
     \ path(const int& start, const int& target, const std::vector<Edge>& prev_edges)\
     \ {\n        std::vector<Edge> path;\n        for (int cur = target; cur != start;\
     \ cur = prev_edges[cur].from) {\n            if (prev_edges[cur].id == -1) {\n\
@@ -326,7 +364,7 @@ data:
   isVerificationFile: false
   path: Graph/Graph_template.hpp
   requiredBy: []
-  timestamp: '2025-03-11 07:52:32+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Graph/Graph_template.hpp

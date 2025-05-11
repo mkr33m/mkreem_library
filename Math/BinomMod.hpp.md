@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Math/binom_mod.hpp\"\n\n\n\n#include <vector>\n\ntemplate\
+  bundledCode: "#line 1 \"Math/BinomMod.hpp\"\n\n\n\n#include <vector>\n\ntemplate\
     \ <typename T>\nstruct BinomMod {\nprivate:\n    int MAX_N;\n    int mod;\n  \
     \  std::vector<T> factorial, factorial_inv;\n\npublic:\n    BinomMod() = default;\n\
     \    BinomMod(int MAX_N = 10000000) : MAX_N(MAX_N), mod(mod), factorial(MAX_N\
@@ -34,15 +34,15 @@ data:
     \    }\n};\n\n#endif // binom_mod_HPP"
   dependsOn: []
   isVerificationFile: false
-  path: Math/binom_mod.hpp
+  path: Math/BinomMod.hpp
   requiredBy: []
-  timestamp: '2025-03-11 07:02:05+09:00'
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Math/binom_mod.hpp
+documentation_of: Math/BinomMod.hpp
 layout: document
 redirect_from:
-- /library/Math/binom_mod.hpp
-- /library/Math/binom_mod.hpp.html
-title: Math/binom_mod.hpp
+- /library/Math/BinomMod.hpp
+- /library/Math/BinomMod.hpp.html
+title: Math/BinomMod.hpp
 ---

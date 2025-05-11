@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: Math/binom_mod_ll.hpp
+    path: Math/BinomMod_ll.hpp
     title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
       \u308B"
   _extendedVerifiedWith: []
@@ -42,7 +42,7 @@ data:
   isVerificationFile: false
   path: Math/extended_gcd.hpp
   requiredBy:
-  - Math/binom_mod_ll.hpp
+  - Math/BinomMod_ll.hpp
   timestamp: '2025-03-11 07:02:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

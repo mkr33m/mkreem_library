@@ -16,10 +16,10 @@ data:
     path: Geometry/Point.hpp
     title: Geometry/Point.hpp
   - icon: ':warning:'
-    path: Math/binom.hpp
-    title: Math/binom.hpp
+    path: Math/Binom.hpp
+    title: Math/Binom.hpp
   - icon: ':warning:'
-    path: Math/binom_mod_ll.hpp
+    path: Math/BinomMod_ll.hpp
     title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
       \u308B"
   - icon: ':warning:'
@@ -27,8 +27,8 @@ data:
     title: Math/math.hpp
   - icon: ':warning:'
     path: Others/ZobristHash.hpp
-    title: "\u5404\u8981\u7D20\u306B\u5BFE\u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\
-      \u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
+    title: "\u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\u5BFE\u3057\
+      \u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\u308B"
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -69,14 +69,14 @@ data:
     \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
     using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
     \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
-    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
-    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
-    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
-    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
-    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
-    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
-    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
-    \ false;\n}\n\n\n"
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
+    \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst int di8[8]\
+    \ = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};\n\
+    \nbool out_of_grid(const int& i, const int& j, const int& h, const int& w){\n\
+    \    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return false;\n\
+    }\n\n\n"
   code: "#ifndef macros_HPP\n#define macros_HPP\n\n#include <vector>\n#include <queue>\n\
     #include <cmath>\n\nusing ll = long long;\nusing lll = __int128_t;\nusing ld =\
     \ long double;\n#define newl '\\n'\n#define REF const auto&\n#define INF 1000390039\n\
@@ -111,27 +111,27 @@ data:
     \ <typename T>\nusing maxpq = std::priority_queue<T>;\ntemplate <typename T>\n\
     using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;\n// \u6700\
     \u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename T1,\
-    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if(a < b){ a = b; return\
-    \ 1; }\n    else return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1\
-    \ &a, const T2& b){\n    if(a > b){ a = b; return 1; }\n    else return 0;\n}\n\
-    \nconst int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst\
-    \ int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0,\
-    \ -1, -1, -1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const\
-    \ int& w){\n    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return\
-    \ false;\n}\n\n#endif // macros_HPP"
+    \ typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
+    \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ int di4[4] = {-1, 0, 1, 0};\nconst int dj4[4] = {0, 1, 0, -1};\nconst int di8[8]\
+    \ = {-1, -1, 0, 1, 1, 1, 0, -1};\nconst int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};\n\
+    \nbool out_of_grid(const int& i, const int& j, const int& h, const int& w){\n\
+    \    if(i < 0 || j < 0 || i >= h || j >= w) return true;\n    return false;\n\
+    }\n\n#endif // macros_HPP"
   dependsOn: []
   isVerificationFile: false
   path: Others/macros.hpp
   requiredBy:
-  - Algorithm/next_pairing.hpp
-  - Algorithm/next_pairing.hpp
-  - Math/binom_mod_ll.hpp
   - Math/math.hpp
-  - Math/binom.hpp
-  - Others/ZobristHash.hpp
-  - Geometry/Point.hpp
+  - Math/Binom.hpp
+  - Math/BinomMod_ll.hpp
   - DataStructure/RangeSet.hpp
-  timestamp: '2025-03-11 07:02:05+09:00'
+  - Others/ZobristHash.hpp
+  - Algorithm/next_pairing.hpp
+  - Algorithm/next_pairing.hpp
+  - Geometry/Point.hpp
+  timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Others/macros.hpp
