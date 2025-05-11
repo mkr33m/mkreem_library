@@ -13,7 +13,7 @@ T bisect(T& ok, T& ng, const F& f) {
 }
 
 template <typename T, typename F>
-T bisect_real(T& ok, T& ng, const F& f, int itr = 100) {
+T bisect_real(T& ok, T& ng, const F& f, int itr = 80) {
     while (itr--) {
         T mid = (ok + ng) / 2;
         (f(mid) ? ok : ng) = mid;

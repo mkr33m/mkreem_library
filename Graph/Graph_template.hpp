@@ -7,8 +7,9 @@
 #include <iostream>
 #include <limits>
 
-template <typename T>
+template <typename T = int>
 struct Graph {
+    // 辺の構造体
     struct Edge {
         int from, to;
         T cost;
@@ -30,6 +31,7 @@ struct Graph {
 private:
     int N, M;
     std::vector<std::vector<Edge>> G;
+    bool is_weighted = false;
     std::vector<int> color; // for is_bipartite
     int start; // for detect_cycle
     std::vector<int> cycle; // for detect_cycle
@@ -39,7 +41,7 @@ private:
     std::vector<int> dist; // for LCA -> precalc_for_LCA 関数で初期化
 
     // サイクル検出 ===========================================
-    int dfs_for_detect_cycle (const int& v) {
+    int dfs_for_detect_cycle (int v) {
         // 行きがけ
         visited[v] = true;
         cycle.push_back(v);
@@ -105,9 +107,15 @@ public:
     void add_edge(const int& u, const int& v, T w = 1) {
         G[u].push_back({u, v, w, M});
         G[v].push_back({v, u, w, M++});
+        if (w != 1) {
+            is_weighted = true;
+        }
     }
     void add_directed_edge(const int& u, const int& v, T w = 1) {
         G[u].push_back({u, v, w, M++});
+        if (w != 1) {
+            is_weighted = true;
+        }
     }
 
     void read(const int& M, bool weighted = false, bool directed = false, int padding = 1) {
@@ -117,6 +125,7 @@ public:
             v -= padding;
             T w(1);
             if (weighted) {
+                is_weighted = true;
                 std::cin >> w;
             }
             if (directed) {
@@ -164,6 +173,50 @@ public:
         return true;
     }
 
+    // 木の直径 ===========================================
+    std::vector<int> get_tree_diameter(int x = 0) {
+
+        std::vector<T> dist;
+        std::vector<Edge> prev_edges(N);
+        if (is_weighted) {
+            std::tie(dist, prev_edges) = Dijkstra(x);
+        } else {
+            std::tie(dist, prev_edges) = BFS(x);
+        }
+        auto get_farthest_vertex = [this](std::vector<T>& dist, int from) {
+            T max_dist = std::numeric_limits<T>::min();
+            int to = -1;
+            for (int v = 0; v < this->N; v++) {
+                if (max_dist < dist[v]) {
+                    max_dist = dist[v];
+                    to = v;
+                }
+            }
+            return to;
+        };
+        int y = get_farthest_vertex(dist, x);
+        if (is_weighted) {
+            std::tie(dist, prev_edges) = Dijkstra(y);
+        } else {
+            std::tie(dist, prev_edges) = BFS(y);
+        }
+        int z = get_farthest_vertex(dist, y);
+
+        std::vector<int> path;
+        int v = z;
+        while (1) {
+            path.push_back(v);
+            if (v == y) {
+                break;
+            }
+            v = prev_edges[v].from;
+        }
+
+        std::reverse(path.begin(), path.end());
+
+        return path;
+    }
+
     // サイクル検出 ===========================================
     /**
      * @brief v を始点として有向辺を辿っていき、サイクルがあるかどうかを判定
@@ -206,7 +259,7 @@ public:
         std::vector<T> dist(N, std::numeric_limits<T>::max());
         std::queue<int> q;
         /**
-         * @param prev_edges[target] : start から target までの最短経路における、targetを訪れる直前に通った辺
+         * @param prev_edges[target] : start から target までの最短経路における、target を訪れる直前に通った辺
          */
         std::vector<Edge> prev_edges(N);
         dist[start] = 0;
@@ -225,7 +278,7 @@ public:
             }
         }
 
-        return {dist, prev_edges};
+        return make_pair(dist, prev_edges);
     }
 
     std::pair<std::vector<T>, std::vector<Edge>> BFS01(const int& start) {
@@ -255,10 +308,10 @@ public:
             }
         }
 
-        return {dist, prev_edges};
+        return make_pair(dist, prev_edges);
     }
 
-    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(const int& start){
+    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(int start){
         std::vector<T> dist(N, std::numeric_limits<T>::max());
         std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>> q;
         /**
@@ -284,7 +337,7 @@ public:
             }
         }
 
-        return {dist, prev_edges};
+        return make_pair(dist, prev_edges);
     }
 
     std::vector<Edge> path(const int& start, const int& target, const std::vector<Edge>& prev_edges) {

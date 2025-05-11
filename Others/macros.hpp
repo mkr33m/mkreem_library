@@ -60,13 +60,13 @@ using minpq = std::priority_queue<T, std::vector<T>, std::greater<T>>;
 // 最大値・最小値の更新
 template <typename T1, typename T2>
 bool chmax(T1 &a, const T2& b){
-    if(a < b){ a = b; return 1; }
-    else return 0;
+    if (a < b) { a = b; return 1; }
+    return 0;
 }
 template <typename T1, typename T2>
 bool chmin(T1 &a, const T2& b){
-    if(a > b){ a = b; return 1; }
-    else return 0;
+    if (a > b) { a = b; return 1; }
+    return 0;
 }
 
 const int di4[4] = {-1, 0, 1, 0};

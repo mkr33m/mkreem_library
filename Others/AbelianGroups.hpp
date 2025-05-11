@@ -20,10 +20,10 @@
 template <typename T>
 struct AdditiveGroup {
     using S = T;
-    static S e(){
+    static S e() {
         return 0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l + r;
     }
     static S inv(const S& x){
@@ -35,13 +35,13 @@ struct AdditiveGroup {
 template <typename T = atcoder::modint998244353>
 struct MultiplicativeGroup_998 {
     using S = T;
-    static S e(){
+    static S e() {
         return 1;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l * r;
     }
-    static S inv(const S& x){
+    static S inv(const S& x) {
         return x.inv();
     }
 };
@@ -50,13 +50,13 @@ struct MultiplicativeGroup_998 {
 template <typename T = atcoder::modint1000000007>
 struct MultiplicativeGroup_100 {
     using S = T;
-    static S e(){
+    static S e() {
         return 1;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l * r;
     }
-    static S inv(const S& x){
+    static S inv(const S& x) {
         return x.inv();
     }
 };
@@ -68,7 +68,7 @@ struct XorGroup {
     static S e(){
         return 0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l ^ r;
     }
     static S inv(const S& x){

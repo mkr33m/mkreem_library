@@ -110,8 +110,8 @@ public:
     }
 };
 
-// 基数をランダムに初期化
+/* // 基数をランダムに初期化
 std::mt19937_64 mt{(unsigned int)time(NULL)};
-RollingHash::ull RollingHash::base = mt() % RollingHash::mod; // （静的メンバ変数はの初期化は、クラスの外部で行う）
+RollingHash::ull RollingHash::base = mt() % RollingHash::mod; // （静的メンバ変数はの初期化は、クラスの外部で行う） */
 
 #endif // RollingHash_HPP

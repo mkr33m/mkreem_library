@@ -19,10 +19,10 @@
 template <typename T>
 struct AddMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return 0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l + r;
     }
 };
@@ -31,10 +31,10 @@ struct AddMonoid {
 template <typename T = atcoder::modint998244353>
 struct MultiplyMonoid_998 {
     using S = T;
-    static S e(){
+    static S e() {
         return 1;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l * r;
     }
 };
@@ -43,10 +43,10 @@ struct MultiplyMonoid_998 {
 template <typename T = atcoder::modint1000000007>
 struct MultiplyMonoid_100 {
     using S = T;
-    static S e(){
+    static S e() {
         return 1;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l * r;
     }
 };
@@ -55,10 +55,10 @@ struct MultiplyMonoid_100 {
 template <typename T>
 struct MaxMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return std::numeric_limits<S>::min();
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return std::max(l, r);
     }
 };
@@ -67,10 +67,10 @@ struct MaxMonoid {
 template <typename T>
 struct MinMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return std::numeric_limits<S>::max();
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return std::min(l, r);
     }
 };
@@ -79,10 +79,10 @@ struct MinMonoid {
 template <typename T>
 struct AndMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return ~0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l & r;
     }
 };
@@ -91,10 +91,10 @@ struct AndMonoid {
 template <typename T>
 struct OrMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return 0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l | r;
     }
 };
@@ -103,10 +103,10 @@ struct OrMonoid {
 template <typename T>
 struct XorMonoid {
     using S = T;
-    static S e(){
+    static S e() {
         return 0;
     }
-    static S op(const S& l, const S& r){
+    static S op(const S& l, const S& r) {
         return l ^ r;
     }
 };

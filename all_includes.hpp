@@ -1,6 +1,8 @@
 #ifndef all_includes_HPP
 #define all_includes_HPP
 
+#include "/home/pomelo/github.com/mkreem_library/Algorithm/Doubling.hpp"
+#include "/home/pomelo/github.com/mkreem_library/Algorithm/Mo.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_pairing.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/Potentialized_UnionFind.hpp"
@@ -10,9 +12,9 @@
 #include "/home/pomelo/github.com/mkreem_library/DataStructure/UnionFind.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Geometry/Point.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Graph/Graph_template.hpp"
-#include "/home/pomelo/github.com/mkreem_library/Math/binom.hpp"
-#include "/home/pomelo/github.com/mkreem_library/Math/binom_mod.hpp"
-#include "/home/pomelo/github.com/mkreem_library/Math/binom_mod_ll.hpp"
+#include "/home/pomelo/github.com/mkreem_library/Math/Binom.hpp"
+#include "/home/pomelo/github.com/mkreem_library/Math/BinomMod.hpp"
+#include "/home/pomelo/github.com/mkreem_library/Math/BinomMod_ll.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Math/enum_divisors.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Math/extended_gcd.hpp"
 #include "/home/pomelo/github.com/mkreem_library/Math/is_prime.hpp"
@@ -31,6 +33,5 @@
 #include "/home/pomelo/github.com/mkreem_library/Others/macros.hpp"
 #include "/home/pomelo/github.com/mkreem_library/String/Grid.hpp"
 #include "/home/pomelo/github.com/mkreem_library/String/RollingHash.hpp"
-#include "/home/pomelo/github.com/mkreem_library/String/Trie.hpp"
 
 #endif // all_includes_HPP
