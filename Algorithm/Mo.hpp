@@ -19,7 +19,8 @@ struct Mo {
 
     Mo(int N, const Add& add, const Del& del) : N(N), add(add), del(del) {}
 
-    void add_query(int l, int r, int id) {
+    void add_query(int l, int r) {
+        int id = (int)queries.size();
         queries.push_back({l, r, id});
     };
 
