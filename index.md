@@ -120,8 +120,8 @@ data:
       title: String/Grid.hpp
     - icon: ':warning:'
       path: String/RollingHash.hpp
-      title: "a*b mod 2^61 - 1 \u3092\u3001\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\
-        \u306A\u3057\u3067\u8A08\u7B97"
+      title: "(a * b) MOD 2^61 - 1 \u3092\u3001\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\
+        \u30FC\u306A\u3057\u3067\u8A08\u7B97"
   - name: ac-library/atcoder
     pages:
     - icon: ':warning:'
