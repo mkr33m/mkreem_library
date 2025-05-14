@@ -7,28 +7,22 @@
 #include <algorithm>
 #include <cassert>
 
-/**
- * get, connnect, rebuild, lcp
- * get : 登録されている文字列の [l, r) の Hash を返す
- * connect : 
- * rebuild : 登録されている文字列の末尾に、文字列を追加
- * lcp : 2 つの文字列の共通接頭辞を計算
- */
-
 class RollingHash {
     using ull = unsigned long long;
     // static：インスタンス間でのみ共有される
-    static const ull MOD = 0x1fffffffffffffff; // ハッシュ値がでかくなりすぎるから、そのための mod（2^61 - 1）
+    static constexpr ull MOD = 0x1fffffffffffffff; // ハッシュ値がでかくなりすぎるから、そのための mod（2^61 - 1）
     /**
      * @param base ハッシュ計算の基底
      * @param hase 部分文字列のハッシュ値  hash[i] で S[0, i) をハッシュ化したもの
+     * @param S ハッシュ化する文字列
      * @param N ハッシュ化した文字列の長さ
      * @param initialized // 基底 base を各インスタンスで共有するためのフラグ
      **/
-    static ull base;
+    inline static ull base = 0; // 初期化
     std::vector<ull> hash, rhash, power;
+    std::string S;
     int N;
-    static bool initialized; 
+    inline static bool initialized = false; // 初期化
 
 public:
     /**
@@ -64,7 +58,7 @@ public:
         return ans;
     }
 
-    RollingHash(const std::string& S) : N((int)S.size()) {
+    RollingHash(const std::string& S) : S(S), N((int)S.size()) {
         if (!initialized) {
             std::mt19937_64 mt{ std::random_device{}() };
             std::uniform_int_distribution<long long> ran(0, std::numeric_limits<long long>::max());
@@ -131,14 +125,28 @@ public:
      * @brief 既存の文字列に新しい文字列を結合し、ハッシュテーブルを再構成（M 延長して、idx の N 以降を構築する）。
      */ 
     void rebuild(const std::string& T) {
-        int N = hash.size() - 1, M = T.size();
-        hash.resize(N + M + 1);
-        power.resize(N + M + 1);
-        for(int i = N; i < N + M; i++){
+
+        int prevN = N;
+        int M = (int)T.size();
+        S += T; // S の更新
+        N += M; // N の更新
+        hash.resize(N + 1);
+        rhash.assign(N + 1, 0);
+        power.resize(N + 1);
+
+        for (int i = prevN; i < N; i++) {
             power[i + 1] = mul(power[i], base);
-            hash[i + 1] = mul(hash[i], base) + T[i - N];
-            if(hash[i + 1] >= MOD){
+            hash[i + 1] = mul(hash[i], base) + T[i - prevN];
+            if (hash[i + 1] >= MOD) {
                 hash[i + 1] -= MOD;
+            }
+        }
+        std::string revS = S;
+        std::reverse(revS.begin(), revS.end());
+        for (int i = 0; i < N; i++) {
+            rhash[i + 1] = mul(rhash[i], base) + revS[i];
+            if (rhash[i + 1] >= MOD) {
+                rhash[i + 1] -= MOD;
             }
         }
     }
@@ -163,13 +171,9 @@ public:
     /**
      * @brief S[l, r) が回文であるかどうかを判定する
      */
-    bool is_palindrome(int l, int r) {
+    bool is_palindrome(int l, int r) const {
         return get(l, r) == get_rev(N - r, N - l);
     }
 };
-
-// static 変数はクラスの外部で初期化しないといけないらしい。
-unsigned long long RollingHash::base = 0;
-bool RollingHash::initialized = false;
 
 #endif // RollingHash_HPP
