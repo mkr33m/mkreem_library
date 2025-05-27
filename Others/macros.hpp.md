@@ -9,6 +9,12 @@ data:
     path: Algorithm/next_pairing.hpp
     title: next_pairing
   - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith.hpp
+    title: DataStructure/LazySegtree_arith.hpp
+  - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith_add.hpp
+    title: DataStructure/LazySegtree_arith_add.hpp
+  - icon: ':warning:'
     path: DataStructure/RangeSet.hpp
     title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\
       \u3069\u3046\u304B\u3092\u8FD4\u3059"
@@ -123,14 +129,16 @@ data:
   isVerificationFile: false
   path: Others/macros.hpp
   requiredBy:
+  - Others/ZobristHash.hpp
+  - DataStructure/LazySegtree_arith.hpp
+  - DataStructure/LazySegtree_arith_add.hpp
+  - DataStructure/RangeSet.hpp
+  - Geometry/Point.hpp
+  - Algorithm/next_pairing.hpp
+  - Algorithm/next_pairing.hpp
+  - Math/BinomMod_ll.hpp
   - Math/math.hpp
   - Math/Binom.hpp
-  - Math/BinomMod_ll.hpp
-  - DataStructure/RangeSet.hpp
-  - Others/ZobristHash.hpp
-  - Algorithm/next_pairing.hpp
-  - Algorithm/next_pairing.hpp
-  - Geometry/Point.hpp
   timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

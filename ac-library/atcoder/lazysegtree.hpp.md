@@ -4,7 +4,13 @@ data:
   - icon: ':warning:'
     path: ac-library/atcoder/internal_bit.hpp
     title: ac-library/atcoder/internal_bit.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith.hpp
+    title: DataStructure/LazySegtree_arith.hpp
+  - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith_add.hpp
+    title: DataStructure/LazySegtree_arith_add.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -181,7 +187,9 @@ data:
   - ac-library/atcoder/internal_bit.hpp
   isVerificationFile: false
   path: ac-library/atcoder/lazysegtree.hpp
-  requiredBy: []
+  requiredBy:
+  - DataStructure/LazySegtree_arith.hpp
+  - DataStructure/LazySegtree_arith_add.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

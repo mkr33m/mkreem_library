@@ -18,6 +18,12 @@ data:
   - name: DataStructure
     pages:
     - icon: ':warning:'
+      path: DataStructure/LazySegtree_arith.hpp
+      title: DataStructure/LazySegtree_arith.hpp
+    - icon: ':warning:'
+      path: DataStructure/LazySegtree_arith_add.hpp
+      title: DataStructure/LazySegtree_arith_add.hpp
+    - icon: ':warning:'
       path: DataStructure/Potentialized_UnionFind.hpp
       title: "root_u \u304B\u3089\u898B\u305F u \u306E\u30DD\u30C6\u30F3\u30B7\u30E3\
         \u30EB\u3092\u8FD4\u3059"

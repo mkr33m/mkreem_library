@@ -41,8 +41,8 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/internal_csr.hpp
   requiredBy:
-  - ac-library/atcoder/twosat.hpp
   - ac-library/atcoder/internal_scc.hpp
+  - ac-library/atcoder/twosat.hpp
   - ac-library/atcoder/scc.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS

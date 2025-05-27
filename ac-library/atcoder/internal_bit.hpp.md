@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith.hpp
+    title: DataStructure/LazySegtree_arith.hpp
+  - icon: ':warning:'
+    path: DataStructure/LazySegtree_arith_add.hpp
+    title: DataStructure/LazySegtree_arith_add.hpp
+  - icon: ':warning:'
     path: ac-library/atcoder/convolution.hpp
     title: ac-library/atcoder/convolution.hpp
   - icon: ':warning:'
@@ -46,9 +52,11 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/internal_bit.hpp
   requiredBy:
-  - ac-library/atcoder/segtree.hpp
   - ac-library/atcoder/lazysegtree.hpp
   - ac-library/atcoder/convolution.hpp
+  - ac-library/atcoder/segtree.hpp
+  - DataStructure/LazySegtree_arith.hpp
+  - DataStructure/LazySegtree_arith_add.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

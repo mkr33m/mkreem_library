@@ -33,6 +33,10 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/DataStructure/LazySegtree_arith.hpp"
+
+    #include "/home/pomelo/github.com/mkreem_library/DataStructure/LazySegtree_arith_add.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/Potentialized_UnionFind.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/RangeSet.hpp"
