@@ -2,53 +2,32 @@
 #define UF_ComponentSum_HPP
 
 #include <vector>
+#include <cassert>
 
 #include "UnionFind.hpp"
 
-/**
- * @param T モノイド（連結成分が持つ情報）の型
- */
-template <typename T>
-using merge_function = void(*)(T& component_sum1, T component_sum2);
-
-// 型引数、非型引数（コンパイル時に定まるものに限る）
-template <typename T, merge_function<T> f>
+template <typename Op>
 class UF_ComponentSum : public UnionFind { // 継承
-    std::vector<T> sum_;
+    int N; // 頂点数
+    Op op;
 
 public:
-    UF_ComponentSum() = default;
-    UF_ComponentSum(const std::vector<T>& init) : 
-        UnionFind((int)init.size()), sum_(init) {}
+                                                             // UF を初期化
+    UF_ComponentSum(int N, const Op& op) : N(N), op(op), UnionFind(N) {}
 
-    /**
-     * @brief u が所属する連結成分の sum と v が所属する連結成分の sum を統合する
-     */
-    bool merge(const int& u, const int& v) {
-        int prev_root_u = root(u), prev_root_v = root(v);
-        bool merged = UnionFind::merge(u, v);
+    bool merge(int u, int v) { // 上書き
+        int ru = root(u), rv = root(v);
+        int r = UnionFind::merge(u, v);
+        bool merged = (r != ru) || (r != rv);
         if (merged) {
-            int root_u = root(u);
-            /*
-            merge 後、
-            ・prev_root_u == root_u -> 連結後の成分の根は prev_root_u
-            ・prev_root_u != root_u -> 連結後の成分の根は prev_root_v
-            */
-            if (prev_root_u != root_u) {
-                f(sum_[prev_root_v], std::move(sum_[prev_root_u]));
-            } else {
-                f(sum_[prev_root_u], std::move(sum_[prev_root_v]));
+            if (r == ru) {
+                op(r, rv);
+            } else { // r == pv
+                op(r, ru);
             }
         }
-
         return merged;
     }
-
-    T sum(const int& v) {
-        int root_v = root(v);
-        return sum_[root_v];
-    }
-
 };
 
 #endif // UF_ComponentSum_HPP
