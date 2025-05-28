@@ -16,6 +16,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
+    document_title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
     links: []
   bundledCode: "#line 1 \"DataStructure/LazySegtree_arith.hpp\"\n\n\n\n#include <vector>\n\
     #include <algorithm>\n#line 1 \"Others/macros.hpp\"\n\n\n\n#line 5 \"Others/macros.hpp\"\
@@ -152,9 +153,54 @@ data:
     S op(S L, S R) {\n    return S{std::max(L.max, R.max), std::min(L.min, R.min),\
     \ L.sum + R.sum, std::min(L.l, R.l), std::max(L.r, R.r)};\n}\nS e() {\n    return\
     \ S{-LLINF, LLINF, 0LL, INF, -INF};\n}\nstruct F {\n    ll a, b;\n};\nS mapping(F\
-    \ f, S s) {\n    ll m = f.a * s.l + f.b;\n    ll M = f.a * (s.r - 1) + f.b;\n\
-    \    if (f.a < 0) {\n        std::swap(M, m);\n    }\n    return S{\n        M,\
-    \ m,\n        f.a * ((s.r - 1) * s.r - s.l * (s.l + 1)) / 2 + (s.r - s.l) * f.b,\n\
+    \ f, S s) {\n    if (f.a == LLINF) {\n        return s;\n    }\n    ll m = f.a\
+    \ * s.l + f.b;\n    ll M = f.a * (s.r - 1) + f.b;\n    if (f.a < 0) {\n      \
+    \  std::swap(M, m);\n    }\n    return S{\n        M, m,\n        (f.a * (s.l\
+    \ + s.r - 1) + f.b * 2) * (s.r - s.l) / 2,\n        s.l, s.r\n        };\n}\n\
+    F composition(F f, F g) {\n    return (f.a == LLINF ? g : f);\n};\nF id() {\n\
+    \    return F{LLINF, LLINF};\n}\n\nusing lazy = atcoder::lazy_segtree<S, op, e,\
+    \ F, mapping, composition, id>;\n\ntemplate <typename T>\nstruct LazySegtree_arith\
+    \ : lazy {\n    using lazy::lazy; // \u57FA\u5E95\u30AF\u30E9\u30B9\u304C\u6301\
+    \u3064\u5168\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u3001\u6D3E\u751F\
+    \u30AF\u30E9\u30B9\u3067\u3082\u4F7F\u3048\u308B\u3088\u3046\u306B\u3059\u308B\
+    \n    LazySegtree_arith(int N) {\n        std::vector<S> vec(N);\n        for\
+    \ (int i = 0; i < N; i++) {\n            vec[i] = S{0, 0, 0, i, i + 1};\n    \
+    \    }\n        LazySegtree_arith tmp(vec); // using lazy::lazy \u306B\u3088\u308B\
+    \u3001acl \u306E\u9045\u5EF6\u30BB\u30B0\u6728\u306E\u30B3\u30F3\u30B9\u30C8\u30E9\
+    \u30AF\u30BF\u3092\u547C\u3073\u51FA\u3057\u3066\u3044\u308B\n        /**\n  \
+    \       * \u6D3E\u751F\u30AF\u30E9\u30B9\u306B\u304A\u3044\u3066\u3001int N \u3060\
+    \u3051\u6E21\u3057\u3066\u4E2D\u8EAB\u306F\u30BC\u30ED\u521D\u671F\u5316\u3001\
+    vector<ll> \u3092\u6E21\u3057\u3066 vector<S> \u306B\u5909\u63DB\u3057\u3066\u304B\
+    \u3089\u521D\u671F\u5316\u3001\u306A\u3069\u3001\u5225\u306E\u5F15\u6570\u30D1\
+    \u30BF\u30FC\u30F3\u3067\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u5B9A\
+    \u7FA9\u3057\u305F\u3044\u3002\n         * \u3057\u304B\u3057\u3001\u6D3E\u751F\
+    \u30AF\u30E9\u30B9\u3067\u3082\u308F\u3056\u308F\u3056\u30BB\u30B0\u6728\u3092\
+    \u69CB\u7BC9\u3059\u308B\u306E\u306F\u9762\u5012 \u2192 \u57FA\u5E95\u30AF\u30E9\
+    \u30B9\u306E\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u547C\u3073\u51FA\
+    \u3057\u3066\u30BB\u30B0\u6728\u3092\u69CB\u7BC9\u3057\u3066\uFF08\u4E00\u6642\
+    \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u751F\u6210\u3002\u91CD\u3044\u521D\
+    \u671F\u5316\u3092\u57FA\u5E95\u30AF\u30E9\u30B9\u306B\u4E38\u6295\u3052\uFF09\
+    \u3001\u305D\u306E\u4E00\u6642\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092 *this\
+    \ \u306B\u30B3\u30D4\u30FC\u3002\n         */\n        (*this) = tmp;\n    }\n\
+    \    LazySegtree_arith(std::vector<T> v) {\n        std::vector<S> vec((int)v.size());\n\
+    \        for (int i = 0; i < (int)v.size(); i++) {\n            vec[i] = S{v[i],\
+    \ v[i], v[i], i, i + 1};\n        }\n        LazySegtree_arith tmp(vec);\n   \
+    \     (*this) = tmp;\n    }\n\n    /**\n     * @brief b, a+b, ..., (r-l)a + b\
+    \ \u3067\u66F4\u65B0\n     */\n    void apply(int l, int r, F f) {\n        lazy::apply(l,\
+    \ r, F{f.a, f.b - f.a * get(l).l});\n    }\n    /**\n     * @brief la + b, (l+1)a\
+    \ + b, ..., (r-1)a + b \u3067\u66F4\u65B0\n     */\n    void apply_idx(int l,\
+    \ int r, F f) {\n        lazy::apply(l, r, F{f.a, f.b - f.a * get(l).l});\n  \
+    \  }\n};\n\n} // namespace arith\n\n\n"
+  code: "#ifndef LazySegtree_arith_HPP\n#define LazySegtree_arith_HPP\n\n#include\
+    \ <vector>\n#include <algorithm>\n#include \"../Others/macros.hpp\"\n#include\
+    \ \"../ac-library/atcoder/lazysegtree.hpp\"\n\nnamespace arith {\n\nstruct S {\n\
+    \    ll max, min, sum;\n    int l, r;\n};\nS op(S L, S R) {\n    return S{std::max(L.max,\
+    \ R.max), std::min(L.min, R.min), L.sum + R.sum, std::min(L.l, R.l), std::max(L.r,\
+    \ R.r)};\n}\nS e() {\n    return S{-LLINF, LLINF, 0LL, INF, -INF};\n}\nstruct\
+    \ F {\n    ll a, b;\n};\nS mapping(F f, S s) {\n    if (f.a == LLINF) {\n    \
+    \    return s;\n    }\n    ll m = f.a * s.l + f.b;\n    ll M = f.a * (s.r - 1)\
+    \ + f.b;\n    if (f.a < 0) {\n        std::swap(M, m);\n    }\n    return S{\n\
+    \        M, m,\n        (f.a * (s.l + s.r - 1) + f.b * 2) * (s.r - s.l) / 2,\n\
     \        s.l, s.r\n        };\n}\nF composition(F f, F g) {\n    return (f.a ==\
     \ LLINF ? g : f);\n};\nF id() {\n    return F{LLINF, LLINF};\n}\n\nusing lazy\
     \ = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;\n\ntemplate\
@@ -183,52 +229,13 @@ data:
     \       (*this) = tmp;\n    }\n    LazySegtree_arith(std::vector<T> v) {\n   \
     \     std::vector<S> vec((int)v.size());\n        for (int i = 0; i < (int)v.size();\
     \ i++) {\n            vec[i] = S{v[i], v[i], v[i], i, i + 1};\n        }\n   \
-    \     LazySegtree_arith tmp(vec);\n        (*this) = tmp;\n    }\n\n    void apply(int\
+    \     LazySegtree_arith tmp(vec);\n        (*this) = tmp;\n    }\n\n    /**\n\
+    \     * @brief b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0\n     */\n    void apply(int\
     \ l, int r, F f) {\n        lazy::apply(l, r, F{f.a, f.b - f.a * get(l).l});\n\
-    \    }\n    void apply(int p, F f) {\n        lazy::apply(p, {f.a, f.b - f.a *\
-    \ get(p).l});\n    }\n};\n\n} // namespace arith\n\n\n"
-  code: "#ifndef LazySegtree_arith_HPP\n#define LazySegtree_arith_HPP\n\n#include\
-    \ <vector>\n#include <algorithm>\n#include \"../Others/macros.hpp\"\n#include\
-    \ \"../ac-library/atcoder/lazysegtree.hpp\"\n\nnamespace arith {\n\nstruct S {\n\
-    \    ll max, min, sum;\n    int l, r;\n};\nS op(S L, S R) {\n    return S{std::max(L.max,\
-    \ R.max), std::min(L.min, R.min), L.sum + R.sum, std::min(L.l, R.l), std::max(L.r,\
-    \ R.r)};\n}\nS e() {\n    return S{-LLINF, LLINF, 0LL, INF, -INF};\n}\nstruct\
-    \ F {\n    ll a, b;\n};\nS mapping(F f, S s) {\n    ll m = f.a * s.l + f.b;\n\
-    \    ll M = f.a * (s.r - 1) + f.b;\n    if (f.a < 0) {\n        std::swap(M, m);\n\
-    \    }\n    return S{\n        M, m,\n        f.a * ((s.r - 1) * s.r - s.l * (s.l\
-    \ + 1)) / 2 + (s.r - s.l) * f.b,\n        s.l, s.r\n        };\n}\nF composition(F\
-    \ f, F g) {\n    return (f.a == LLINF ? g : f);\n};\nF id() {\n    return F{LLINF,\
-    \ LLINF};\n}\n\nusing lazy = atcoder::lazy_segtree<S, op, e, F, mapping, composition,\
-    \ id>;\n\ntemplate <typename T>\nstruct LazySegtree_arith : lazy {\n    using\
-    \ lazy::lazy; // \u57FA\u5E95\u30AF\u30E9\u30B9\u304C\u6301\u3064\u5168\u30B3\u30F3\
-    \u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u3001\u6D3E\u751F\u30AF\u30E9\u30B9\u3067\
-    \u3082\u4F7F\u3048\u308B\u3088\u3046\u306B\u3059\u308B\n    LazySegtree_arith(int\
-    \ N) {\n        std::vector<S> vec(N);\n        for (int i = 0; i < N; i++) {\n\
-    \            vec[i] = S{0, 0, 0, i, i + 1};\n        }\n        LazySegtree_arith\
-    \ tmp(vec); // using lazy::lazy \u306B\u3088\u308B\u3001acl \u306E\u9045\u5EF6\
-    \u30BB\u30B0\u6728\u306E\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u547C\
-    \u3073\u51FA\u3057\u3066\u3044\u308B\n        /**\n         * \u6D3E\u751F\u30AF\
-    \u30E9\u30B9\u306B\u304A\u3044\u3066\u3001int N \u3060\u3051\u6E21\u3057\u3066\
-    \u4E2D\u8EAB\u306F\u30BC\u30ED\u521D\u671F\u5316\u3001vector<ll> \u3092\u6E21\u3057\
-    \u3066 vector<S> \u306B\u5909\u63DB\u3057\u3066\u304B\u3089\u521D\u671F\u5316\u3001\
-    \u306A\u3069\u3001\u5225\u306E\u5F15\u6570\u30D1\u30BF\u30FC\u30F3\u3067\u30B3\
-    \u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3092\u5B9A\u7FA9\u3057\u305F\u3044\u3002\
-    \n         * \u3057\u304B\u3057\u3001\u6D3E\u751F\u30AF\u30E9\u30B9\u3067\u3082\
-    \u308F\u3056\u308F\u3056\u30BB\u30B0\u6728\u3092\u69CB\u7BC9\u3059\u308B\u306E\
-    \u306F\u9762\u5012 \u2192 \u57FA\u5E95\u30AF\u30E9\u30B9\u306E\u30B3\u30F3\u30B9\
-    \u30C8\u30E9\u30AF\u30BF\u3092\u547C\u3073\u51FA\u3057\u3066\u30BB\u30B0\u6728\
-    \u3092\u69CB\u7BC9\u3057\u3066\uFF08\u4E00\u6642\u30AA\u30D6\u30B8\u30A7\u30AF\
-    \u30C8\u306E\u751F\u6210\u3002\u91CD\u3044\u521D\u671F\u5316\u3092\u57FA\u5E95\
-    \u30AF\u30E9\u30B9\u306B\u4E38\u6295\u3052\uFF09\u3001\u305D\u306E\u4E00\u6642\
-    \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092 *this \u306B\u30B3\u30D4\u30FC\u3002\
-    \n         */\n        (*this) = tmp;\n    }\n    LazySegtree_arith(std::vector<T>\
-    \ v) {\n        std::vector<S> vec((int)v.size());\n        for (int i = 0; i\
-    \ < (int)v.size(); i++) {\n            vec[i] = S{v[i], v[i], v[i], i, i + 1};\n\
-    \        }\n        LazySegtree_arith tmp(vec);\n        (*this) = tmp;\n    }\n\
-    \n    void apply(int l, int r, F f) {\n        lazy::apply(l, r, F{f.a, f.b -\
-    \ f.a * get(l).l});\n    }\n    void apply(int p, F f) {\n        lazy::apply(p,\
-    \ {f.a, f.b - f.a * get(p).l});\n    }\n};\n\n} // namespace arith\n\n#endif //\
-    \ LazySegtree_arith_HPP"
+    \    }\n    /**\n     * @brief la + b, (l+1)a + b, ..., (r-1)a + b \u3067\u66F4\
+    \u65B0\n     */\n    void apply_idx(int l, int r, F f) {\n        lazy::apply(l,\
+    \ r, F{f.a, f.b - f.a * get(l).l});\n    }\n};\n\n} // namespace arith\n\n#endif\
+    \ // LazySegtree_arith_HPP"
   dependsOn:
   - Others/macros.hpp
   - ac-library/atcoder/lazysegtree.hpp
@@ -236,7 +243,7 @@ data:
   isVerificationFile: false
   path: DataStructure/LazySegtree_arith.hpp
   requiredBy: []
-  timestamp: '2025-05-27 22:26:13+09:00'
+  timestamp: '2025-05-28 18:48:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: DataStructure/LazySegtree_arith.hpp
@@ -244,5 +251,5 @@ layout: document
 redirect_from:
 - /library/DataStructure/LazySegtree_arith.hpp
 - /library/DataStructure/LazySegtree_arith.hpp.html
-title: DataStructure/LazySegtree_arith.hpp
+title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
 ---

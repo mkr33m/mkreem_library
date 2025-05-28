@@ -10,10 +10,10 @@ data:
     title: next_pairing
   - icon: ':warning:'
     path: DataStructure/LazySegtree_arith.hpp
-    title: DataStructure/LazySegtree_arith.hpp
+    title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
   - icon: ':warning:'
     path: DataStructure/LazySegtree_arith_add.hpp
-    title: DataStructure/LazySegtree_arith_add.hpp
+    title: "b, a+b, ..., (r-l)a + b \u3092\u52A0\u7B97"
   - icon: ':warning:'
     path: DataStructure/RangeSet.hpp
     title: "[l, r) \u304C\u5B8C\u5168\u306B\u542B\u307E\u308C\u3066\u3044\u308B\u304B\

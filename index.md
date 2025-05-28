@@ -19,10 +19,10 @@ data:
     pages:
     - icon: ':warning:'
       path: DataStructure/LazySegtree_arith.hpp
-      title: DataStructure/LazySegtree_arith.hpp
+      title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
     - icon: ':warning:'
       path: DataStructure/LazySegtree_arith_add.hpp
-      title: DataStructure/LazySegtree_arith_add.hpp
+      title: "b, a+b, ..., (r-l)a + b \u3092\u52A0\u7B97"
     - icon: ':warning:'
       path: DataStructure/Potentialized_UnionFind.hpp
       title: "root_u \u304B\u3089\u898B\u305F u \u306E\u30DD\u30C6\u30F3\u30B7\u30E3\

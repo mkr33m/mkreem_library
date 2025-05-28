@@ -4,10 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: DataStructure/LazySegtree_arith.hpp
-    title: DataStructure/LazySegtree_arith.hpp
+    title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
   - icon: ':warning:'
     path: DataStructure/LazySegtree_arith_add.hpp
-    title: DataStructure/LazySegtree_arith_add.hpp
+    title: "b, a+b, ..., (r-l)a + b \u3092\u52A0\u7B97"
   - icon: ':warning:'
     path: ac-library/atcoder/convolution.hpp
     title: ac-library/atcoder/convolution.hpp
