@@ -22,6 +22,9 @@ struct F {
     ll a, b;
 };
 S mapping(F f, S s) {
+    if (f.a == LLINF) {
+        return s;
+    }
     ll m = f.a * s.l + f.b;
     ll M = f.a * (s.r - 1) + f.b;
     if (f.a < 0) {
@@ -29,7 +32,7 @@ S mapping(F f, S s) {
     }
     return S{
         M, m,
-        f.a * ((s.r - 1) * s.r - s.l * (s.l + 1)) / 2 + (s.r - s.l) * f.b,
+        (f.a * (s.l + s.r - 1) + f.b * 2) * (s.r - s.l) / 2,
         s.l, s.r
         };
 }
@@ -66,11 +69,17 @@ struct LazySegtree_arith : lazy {
         (*this) = tmp;
     }
 
+    /**
+     * @brief b, a+b, ..., (r-l)a + b で更新
+     */
     void apply(int l, int r, F f) {
         lazy::apply(l, r, F{f.a, f.b - f.a * get(l).l});
     }
-    void apply(int p, F f) {
-        lazy::apply(p, {f.a, f.b - f.a * get(p).l});
+    /**
+     * @brief la + b, (l+1)a + b, ..., (r-1)a + b で更新
+     */
+    void apply_idx(int l, int r, F f) {
+        lazy::apply(l, r, F{f.a, f.b - f.a * get(l).l});
     }
 };
 

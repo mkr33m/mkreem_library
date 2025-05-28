@@ -1,5 +1,5 @@
-#ifndef LazySegtree_arith_HPP
-#define LazySegtree_arith_HPP
+#ifndef LazySegtree_arith_add_HPP
+#define LazySegtree_arith_add_HPP
 
 #include <vector>
 #include "../Others/macros.hpp"
@@ -21,13 +21,8 @@ struct F {
     ll a, b;
 };
 S mapping(F f, S s) {
-    ll m = f.a * s.l + f.b;
-    ll M = f.a * (s.r - 1) + f.b;
-    if (f.a < 0) {
-        std::swap(M, m);
-    }
     return S{
-        s.sum + f.a * ((s.r - 1) * s.r - s.l * (s.l + 1)) / 2 + (s.r - s.l) * f.b,
+        s.sum + (f.a * (s.l + s.r - 1) + f.b * 2) * (s.r - s.l) / 2,
         s.l, s.r
         };
 }
@@ -64,14 +59,20 @@ struct LazySegtree_arith : lazy {
         (*this) = tmp;
     }
 
+    /**
+     * @brief b, a+b, ..., (r-l)a + b を加算
+     */
     void apply(int l, int r, F f) {
         lazy::apply(l, r, F{f.a, f.b - f.a * get(l).l});
     }
-    void apply(int p, F f) {
-        lazy::apply(p, {f.a, f.b - f.a * get(p).l});
+    /**
+     * @brief la + b, (l+1)a + b, ..., (r-1)a + b を加算
+     */
+    void apply_idx(int l, int r, F f) {
+        lazy::apply(l, r, f);
     }
 };
 
-} // namespace arith
+} // namespace arith_add
 
-#endif // LazySegtree_arith_HPP
+#endif // LazySegtree_arith_add_HPP
