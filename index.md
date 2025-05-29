@@ -125,6 +125,12 @@ data:
       path: String/Grid.hpp
       title: String/Grid.hpp
     - icon: ':warning:'
+      path: String/MP.hpp
+      title: "S[0, i) \u306E\u63A5\u982D\u8F9E\u3001\u63A5\u5C3E\u8F9E\u304C\u6700\
+        \u5927\u4F55\u6587\u5B57\u4E00\u81F4\u3057\u3066\u3044\u308B\u304B\u3092\u8A18\
+        \u9332\u3057\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\u3064\u307E\u308A\u3001\
+        S[0, k) == S[i-k, i) \u306A\u308B\u6700\u5927\u306E k\u3002"
+    - icon: ':warning:'
       path: String/RollingHash.hpp
       title: "(a * b) MOD 2^61 - 1 \u3092\u3001\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\
         \u30FC\u306A\u3057\u3067\u8A08\u7B97"
