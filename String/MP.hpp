@@ -12,8 +12,8 @@ std::vector<int> MP(std::string S) {
     std::vector<int> res(N + 1); // [0, i)
 
     res[0] = -1;
-    int j = -1;
     for (int i = 0; i < N; i++) {
+        int j = res[i];
         while (j >= 0 && S[i] != S[j]) {
             j = res[j];
         }
