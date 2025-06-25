@@ -188,8 +188,8 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/lazysegtree.hpp
   requiredBy:
-  - DataStructure/LazySegtree_arith.hpp
   - DataStructure/LazySegtree_arith_add.hpp
+  - DataStructure/LazySegtree_arith.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
