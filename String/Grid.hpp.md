@@ -9,9 +9,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"String/Grid.hpp\"\n\n\n\n#include <iostream>\n#include <vector>\n\
-    #include <string>\n#include <algorithm>\n\ntemplate<typename T> // \u5404\u8981\
-    \u7D20\u306E\u578B\nclass Grid {\nprivate:\n    std::vector<std::vector<T>> grid;\n\
-    \    int offset_i_, offset_j_;\n\n    static void pad_strings(std::vector<std::string>&\
+    #include <string>\n#include <algorithm>\n#include <assert.h>\n\ntemplate<typename\
+    \ T> // \u5404\u8981\u7D20\u306E\u578B\nclass Grid {\nprivate:\n    std::vector<std::vector<T>>\
+    \ grid;\n    int offset_i_, offset_j_;\n\n    static void pad_strings(std::vector<std::string>&\
     \ grid_arg) {\n        size_t maxlen = 0;\n        for (const auto& row : grid_arg)\
     \ {\n            maxlen = std::max(maxlen, row.size());\n        }\n        for\
     \ (auto& row : grid_arg) {\n            row.resize(maxlen, ' ');\n        }\n\
@@ -21,10 +21,10 @@ data:
     \       int H = grid_arg.size();\n        int W = grid_arg[0].size();\n      \
     \  grid.assign(H, std::vector<T>(W));\n        for (int i = 0; i < H; ++i) {\n\
     \            for (int j = 0; j < W; ++j) {\n                grid[i][j] = grid_arg[i][j];\n\
-    \            }\n        }\n    }\n\n    T& get(int i, int j) {\n        assert(0\
+    \            }\n        }\n    }\n\n    T get(int i, int j) const {\n        assert(0\
     \ <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n  \
-    \      return grid[i][j];\n    }\n\n    void set(int i, int j, T x) const {\n\
-    \        assert(0 <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n\
+    \      return grid[i][j];\n    }\n\n    void set(int i, int j, T x) {\n      \
+    \  assert(0 <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n\
     \        grid[i][j] = x;\n    }\n\n    size_t get_H() const {\n        return\
     \ grid.size();\n    }\n\n    size_t get_W() const {\n        return grid[0].size();\n\
     \    }\n\n    const std::vector<std::vector<T>>& get_data() const {\n        return\
@@ -55,6 +55,16 @@ data:
     \ (int)get_W();\n        std::vector<std::vector<T>> new_grid(W, std::vector<T>(H));\n\
     \        for (int i = 0; i < W; i++) {\n            for (int j = 0; j < H; j++)\
     \ {\n                new_grid[i][j] = grid[j][i];\n            }\n        }\n\
+    \        grid.swap(new_grid);\n    }\n\n    // \u5DE6\u53F3\u53CD\u8EE2\n    void\
+    \ left_right_flip() {\n        int H = (int)get_H();\n        int W = (int)get_W();\n\
+    \        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));\n       \
+    \ for (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) {\n \
+    \               new_grid[i][j] = grid[i][W - 1 - j];\n            }\n        }\n\
+    \        grid.swap(new_grid);\n    }\n\n    // \u4E0A\u4E0B\u53CD\u8EE2\n    void\
+    \ upside_down() {\n        int H = (int)get_H();\n        int W = (int)get_W();\n\
+    \        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));\n       \
+    \ for (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) {\n \
+    \               new_grid[i][j] = grid[H - 1 - i][j];\n            }\n        }\n\
     \        grid.swap(new_grid);\n    }\n\n    // \u5E73\u884C\u79FB\u52D5\n    void\
     \ parallel_shift(int di, int dj) {\n        int H = (int)get_H();\n        int\
     \ W = (int)get_W();\n        offset_i_ = (offset_i_ + di % H + H) % H;\n     \
@@ -68,9 +78,9 @@ data:
     \n    int offset_i() {\n        return offset_i_;\n    }\n\n    int offset_j()\
     \ {\n        return offset_j_;\n    }\n};\n\n\n"
   code: "#ifndef Grid_HPP\n#define Grid_HPP\n\n#include <iostream>\n#include <vector>\n\
-    #include <string>\n#include <algorithm>\n\ntemplate<typename T> // \u5404\u8981\
-    \u7D20\u306E\u578B\nclass Grid {\nprivate:\n    std::vector<std::vector<T>> grid;\n\
-    \    int offset_i_, offset_j_;\n\n    static void pad_strings(std::vector<std::string>&\
+    #include <string>\n#include <algorithm>\n#include <assert.h>\n\ntemplate<typename\
+    \ T> // \u5404\u8981\u7D20\u306E\u578B\nclass Grid {\nprivate:\n    std::vector<std::vector<T>>\
+    \ grid;\n    int offset_i_, offset_j_;\n\n    static void pad_strings(std::vector<std::string>&\
     \ grid_arg) {\n        size_t maxlen = 0;\n        for (const auto& row : grid_arg)\
     \ {\n            maxlen = std::max(maxlen, row.size());\n        }\n        for\
     \ (auto& row : grid_arg) {\n            row.resize(maxlen, ' ');\n        }\n\
@@ -80,10 +90,10 @@ data:
     \       int H = grid_arg.size();\n        int W = grid_arg[0].size();\n      \
     \  grid.assign(H, std::vector<T>(W));\n        for (int i = 0; i < H; ++i) {\n\
     \            for (int j = 0; j < W; ++j) {\n                grid[i][j] = grid_arg[i][j];\n\
-    \            }\n        }\n    }\n\n    T& get(int i, int j) {\n        assert(0\
+    \            }\n        }\n    }\n\n    T get(int i, int j) const {\n        assert(0\
     \ <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n  \
-    \      return grid[i][j];\n    }\n\n    void set(int i, int j, T x) const {\n\
-    \        assert(0 <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n\
+    \      return grid[i][j];\n    }\n\n    void set(int i, int j, T x) {\n      \
+    \  assert(0 <= i && i < (int)get_H());\n        assert(0 <= j && j < (int)get_W());\n\
     \        grid[i][j] = x;\n    }\n\n    size_t get_H() const {\n        return\
     \ grid.size();\n    }\n\n    size_t get_W() const {\n        return grid[0].size();\n\
     \    }\n\n    const std::vector<std::vector<T>>& get_data() const {\n        return\
@@ -114,6 +124,16 @@ data:
     \ (int)get_W();\n        std::vector<std::vector<T>> new_grid(W, std::vector<T>(H));\n\
     \        for (int i = 0; i < W; i++) {\n            for (int j = 0; j < H; j++)\
     \ {\n                new_grid[i][j] = grid[j][i];\n            }\n        }\n\
+    \        grid.swap(new_grid);\n    }\n\n    // \u5DE6\u53F3\u53CD\u8EE2\n    void\
+    \ left_right_flip() {\n        int H = (int)get_H();\n        int W = (int)get_W();\n\
+    \        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));\n       \
+    \ for (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) {\n \
+    \               new_grid[i][j] = grid[i][W - 1 - j];\n            }\n        }\n\
+    \        grid.swap(new_grid);\n    }\n\n    // \u4E0A\u4E0B\u53CD\u8EE2\n    void\
+    \ upside_down() {\n        int H = (int)get_H();\n        int W = (int)get_W();\n\
+    \        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));\n       \
+    \ for (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) {\n \
+    \               new_grid[i][j] = grid[H - 1 - i][j];\n            }\n        }\n\
     \        grid.swap(new_grid);\n    }\n\n    // \u5E73\u884C\u79FB\u52D5\n    void\
     \ parallel_shift(int di, int dj) {\n        int H = (int)get_H();\n        int\
     \ W = (int)get_W();\n        offset_i_ = (offset_i_ + di % H + H) % H;\n     \
@@ -130,7 +150,7 @@ data:
   isVerificationFile: false
   path: String/Grid.hpp
   requiredBy: []
-  timestamp: '2025-03-14 07:28:35+09:00'
+  timestamp: '2025-11-23 17:14:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: String/Grid.hpp

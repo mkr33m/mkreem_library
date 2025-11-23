@@ -7,6 +7,9 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
+    document_title: "start \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09\
+      K \u9802\u70B9\u8E0F\u3093\u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\
+      \u306E\u5024\u306E\u5408\u8A08\u5024\u3092\u6C42\u3081\u308B"
     links: []
   bundledCode: "#line 1 \"Algorithm/Doubling.hpp\"\n\n\n\n#include <vector>\n\ntemplate\
     \ <typename S, S (*op)(S, S), S (*e)()>\nstruct Doubling {\n    Doubling(const\
@@ -21,7 +24,10 @@ data:
     \u524D\u534A\u533A\u9593\uFF09\n                // j \u304B\u3089 2^{i-1} \u884C\
     \u3063\u305F\u5148\uFF08next[i - 1][j]\uFF09\u304B\u3089 2^{i-1} \u624B\uFF08\u5F8C\
     \u534A\u533A\u9593\uFF09\n                dp[i][j] = op(dp[i - 1][j], dp[i - 1][next[i\
-    \ - 1][j]]);\n            }\n        }\n    }\n\n    S get(int start, long long\
+    \ - 1][j]]);\n            }\n        }\n    }\n\n    /**\n     * @brief start\
+    \ \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09K \u9802\u70B9\u8E0F\u3093\
+    \u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\u306E\u5024\u306E\u5408\
+    \u8A08\u5024\u3092\u6C42\u3081\u308B\n     */\n    S get(int start, long long\
     \ K) {\n        S ret = e();\n        int cur = start;\n        for (int b = 0;\
     \ b <= 60; b++) {\n            if (K & (1LL << b)) {\n                ret = op(ret,\
     \ dp[b][cur]);\n                cur = next[b][cur];\n            }\n        }\n\
@@ -40,7 +46,10 @@ data:
     \u524D\u534A\u533A\u9593\uFF09\n                // j \u304B\u3089 2^{i-1} \u884C\
     \u3063\u305F\u5148\uFF08next[i - 1][j]\uFF09\u304B\u3089 2^{i-1} \u624B\uFF08\u5F8C\
     \u534A\u533A\u9593\uFF09\n                dp[i][j] = op(dp[i - 1][j], dp[i - 1][next[i\
-    \ - 1][j]]);\n            }\n        }\n    }\n\n    S get(int start, long long\
+    \ - 1][j]]);\n            }\n        }\n    }\n\n    /**\n     * @brief start\
+    \ \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09K \u9802\u70B9\u8E0F\u3093\
+    \u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\u306E\u5024\u306E\u5408\
+    \u8A08\u5024\u3092\u6C42\u3081\u308B\n     */\n    S get(int start, long long\
     \ K) {\n        S ret = e();\n        int cur = start;\n        for (int b = 0;\
     \ b <= 60; b++) {\n            if (K & (1LL << b)) {\n                ret = op(ret,\
     \ dp[b][cur]);\n                cur = next[b][cur];\n            }\n        }\n\
@@ -50,7 +59,7 @@ data:
   isVerificationFile: false
   path: Algorithm/Doubling.hpp
   requiredBy: []
-  timestamp: '2025-05-11 23:56:10+09:00'
+  timestamp: '2025-11-23 17:14:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/Doubling.hpp
@@ -58,5 +67,7 @@ layout: document
 redirect_from:
 - /library/Algorithm/Doubling.hpp
 - /library/Algorithm/Doubling.hpp.html
-title: Algorithm/Doubling.hpp
+title: "start \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09K \u9802\u70B9\
+  \u8E0F\u3093\u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\u306E\u5024\u306E\
+  \u5408\u8A08\u5024\u3092\u6C42\u3081\u308B"
 ---

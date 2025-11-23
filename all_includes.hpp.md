@@ -29,9 +29,13 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Algorithm/Mo.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/Algorithm/bisect.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_pairing.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Algorithm/next_shuffle.hpp"
+
+    #include "/home/pomelo/github.com/mkreem_library/Algorithm/ternary_search.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/LazySegtree_arith.hpp"
 
@@ -47,7 +51,7 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/DataStructure/UnionFind.hpp"
 
-    #include "/home/pomelo/github.com/mkreem_library/Geometry/Point.hpp"
+    #include "/home/pomelo/github.com/mkreem_library/Geometry/geometry.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Graph/Graph_template.hpp"
 
@@ -69,6 +73,8 @@ data:
 
     #include "/home/pomelo/github.com/mkreem_library/Math/prime_factorize.hpp"
 
+    #include "/home/pomelo/github.com/mkreem_library/Math/zeta_mobius.hpp"
+
     #include "/home/pomelo/github.com/mkreem_library/Others/AbelianGroups.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/Debug.hpp"
@@ -80,8 +86,6 @@ data:
     #include "/home/pomelo/github.com/mkreem_library/Others/Monoids.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/ZobristHash.hpp"
-
-    #include "/home/pomelo/github.com/mkreem_library/Others/bisect.hpp"
 
     #include "/home/pomelo/github.com/mkreem_library/Others/cum1D.hpp"
 

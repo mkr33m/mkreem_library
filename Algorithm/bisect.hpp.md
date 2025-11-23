@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"Others/bisect.hpp\"\n\n\n\n#include <cmath>\n\ntemplate\
+  bundledCode: "#line 1 \"Algorithm/bisect.hpp\"\n\n\n\n#include <cmath>\n\ntemplate\
     \ <typename T, typename F>\nT bisect(T& ok, T& ng, const F& f) {\n    while (std::abs(ok\
     \ - ng) > 1) {\n        T mid = (ok - ng) / 2 + ng;\n        (f(mid) ? ok : ng)\
     \ = mid;\n    }\n    return ok;\n}\n\ntemplate <typename T, typename F>\nT bisect_real(T&\
@@ -24,15 +24,15 @@ data:
     \n#endif // bisect_HPP"
   dependsOn: []
   isVerificationFile: false
-  path: Others/bisect.hpp
+  path: Algorithm/bisect.hpp
   requiredBy: []
-  timestamp: '2025-05-11 23:56:10+09:00'
+  timestamp: '2025-11-23 17:14:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Others/bisect.hpp
+documentation_of: Algorithm/bisect.hpp
 layout: document
 redirect_from:
-- /library/Others/bisect.hpp
-- /library/Others/bisect.hpp.html
-title: Others/bisect.hpp
+- /library/Algorithm/bisect.hpp
+- /library/Algorithm/bisect.hpp.html
+title: Algorithm/bisect.hpp
 ---

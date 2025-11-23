@@ -5,16 +5,25 @@ data:
     pages:
     - icon: ':warning:'
       path: Algorithm/Doubling.hpp
-      title: Algorithm/Doubling.hpp
+      title: "start \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09K \u9802\
+        \u70B9\u8E0F\u3093\u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\u306E\
+        \u5024\u306E\u5408\u8A08\u5024\u3092\u6C42\u3081\u308B"
     - icon: ':warning:'
       path: Algorithm/Mo.hpp
       title: Algorithm/Mo.hpp
+    - icon: ':warning:'
+      path: Algorithm/bisect.hpp
+      title: Algorithm/bisect.hpp
     - icon: ':warning:'
       path: Algorithm/next_pairing.hpp
       title: next_pairing
     - icon: ':warning:'
       path: Algorithm/next_shuffle.hpp
       title: next_shuffle
+    - icon: ':warning:'
+      path: Algorithm/ternary_search.hpp
+      title: "\u51F8\u95A2\u6570\u306E [L, R] \u306B\u304A\u3051\u308B\u6700\u5C0F\
+        \uFF08\u6700\u5927\u5024\uFF09\u3092\u8FD4\u3059"
   - name: DataStructure
     pages:
     - icon: ':warning:'
@@ -43,8 +52,8 @@ data:
   - name: Geometry
     pages:
     - icon: ':warning:'
-      path: Geometry/Point.hpp
-      title: Geometry/Point.hpp
+      path: Geometry/geometry.hpp
+      title: "\u5185\u7A4D\u3092\u6C42\u3081\u308B"
   - name: Graph
     pages:
     - icon: ':warning:'
@@ -64,6 +73,9 @@ data:
       title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
         \u308B"
     - icon: ':warning:'
+      path: Math/abc428_d_bundled.cpp
+      title: Math/abc428_d_bundled.cpp
+    - icon: ':warning:'
       path: Math/enum_divisors.hpp
       title: Math/enum_divisors.hpp
     - icon: ':warning:'
@@ -75,7 +87,7 @@ data:
       title: Math/is_prime.hpp
     - icon: ':warning:'
       path: Math/math.hpp
-      title: Math/math.hpp
+      title: "floor(sqrt(N)) \u3092\u6C42\u3081\u308B"
     - icon: ':warning:'
       path: Math/osa_k.hpp
       title: "N\u306E\u7D20\u56E0\u6570\u306E\u7D50\u679C\u304B\u3089\u3001N\u306E\
@@ -84,6 +96,10 @@ data:
       path: Math/prime_factorize.hpp
       title: "N \u306E\u7D20\u56E0\u6570\u5206\u89E3\u3057\u3001\u305D\u306E\u7D50\
         \u679C\u3092 map \u306B\u683C\u7D0D\u3059\u308B"
+    - icon: ':warning:'
+      path: Math/zeta_mobius.hpp
+      title: "\u4E0B\u4F4D\u96C6\u5408\u65B9\u5411\u306E\u9AD8\u901F\u30BC\u30FC\u30BF\
+        \u5909\u63DB"
   - name: Others
     pages:
     - icon: ':warning:'
@@ -107,9 +123,6 @@ data:
       title: "\u6E21\u3055\u308C\u305F vector \u306E\u5404\u8981\u7D20\u306B\u5BFE\
         \u3057\u3066\u3001\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u5272\u308A\u5F53\u3066\
         \u308B"
-    - icon: ':warning:'
-      path: Others/bisect.hpp
-      title: Others/bisect.hpp
     - icon: ':warning:'
       path: Others/cum1D.hpp
       title: "[0, i) \u306E\u7DCF\u7A4D\u3092\u8FD4\u5374"

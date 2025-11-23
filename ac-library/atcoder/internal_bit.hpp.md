@@ -3,12 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: DataStructure/LazySegtree_arith.hpp
-    title: "b, a+b, ..., (r-l)a + b \u3067\u66F4\u65B0"
-  - icon: ':warning:'
-    path: DataStructure/LazySegtree_arith_add.hpp
-    title: "b, a+b, ..., (r-l)a + b \u3092\u52A0\u7B97"
-  - icon: ':warning:'
     path: ac-library/atcoder/convolution.hpp
     title: ac-library/atcoder/convolution.hpp
   - icon: ':warning:'
@@ -52,11 +46,9 @@ data:
   isVerificationFile: false
   path: ac-library/atcoder/internal_bit.hpp
   requiredBy:
-  - DataStructure/LazySegtree_arith_add.hpp
-  - DataStructure/LazySegtree_arith.hpp
   - ac-library/atcoder/segtree.hpp
-  - ac-library/atcoder/convolution.hpp
   - ac-library/atcoder/lazysegtree.hpp
+  - ac-library/atcoder/convolution.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
