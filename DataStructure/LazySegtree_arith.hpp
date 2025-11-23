@@ -4,7 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include "../Others/macros.hpp"
-#include "../ac-library/atcoder/lazysegtree.hpp"
+//#include "../ac-library/atcoder/lazysegtree.hpp"
+#include <atcoder/lazysegtree>
 
 namespace arith {
 

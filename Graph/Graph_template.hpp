@@ -19,53 +19,22 @@ struct Graph {
         Edge(int from, int to, T cost = 1, int id = -1) : from(from), to(to), cost(cost), id(id) {}
 
         bool operator<(const Edge &rhs) const { return cost < rhs.cost; }
-        operator int() const { return to; }
         friend std::ostream& operator<<(std::ostream& os, const Edge& e) {
             return os << "(" << e.from << " -> " << e.to << "  weight: " << e.cost << ", id: " << e.id << ")";
         }
     };
 
     Graph() = default;
-    Graph(int N) : N(N), M(0), G(N), color(N, -1), visited(N, false), finished(N, false) {}
+    Graph(int N) : N(N), M(0), G(N), color(N, -1) {}
 
 private:
     int N, M;
     std::vector<std::vector<Edge>> G;
     bool is_weighted = false;
     std::vector<int> color; // for is_bipartite
-    int start; // for detect_cycle
-    std::vector<int> cycle; // for detect_cycle
-    std::vector<bool> visited, finished; // for detect_cycle
     bool precalc_done = false; // for LCA
     std::vector<std::vector<int>> parent; // for LCA -> precalc_for_LCA 関数で初期化
     std::vector<int> dist; // for LCA -> precalc_for_LCA 関数で初期化
-
-    // サイクル検出 ===========================================
-    int dfs_for_detect_cycle (int v) {
-        // 行きがけ
-        visited[v] = true;
-        cycle.push_back(v);
-
-        for (const auto& e : G[v]) {
-            int nv = e.to;
-            if (finished[nv]) {
-                continue;
-            }
-            if (visited[nv]) { // 始点
-                return nv;
-            }
-
-            int start = dfs_for_detect_cycle(nv);
-            if (start != -1) {
-                return start; // サイクルがあれば、最終的に始点を返す
-            }
-        }
-
-        // サイクルがなかった場合
-        finished[v] = true;
-        cycle.pop_back();
-        return -1;
-    }
 
     // LCA ===========================================
     /**
@@ -217,43 +186,6 @@ public:
         return path;
     }
 
-    // サイクル検出 ===========================================
-    /**
-     * @brief v を始点として有向辺を辿っていき、サイクルがあるかどうかを判定
-     * @remark 頂点が 1 つだけの連結成分は、サイクルとみなさない
-     */
-    bool find_cycle(const int& v) {
-        if (visited[v]) {
-            return false;
-        }
-
-        start = dfs_for_detect_cycle(v);
-        if (start == -1) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @brief 見つけたサイクルを復元して、vector に格納して返す
-     */
-    std::vector<int> get_cycle() {
-        std::vector<int> res;
-        bool stop = false;
-        while (!cycle.empty()) {
-            int v = cycle.back(); cycle.pop_back();
-            finished[v] = true;
-            if (!stop) {
-                res.push_back(v);
-            }
-            if (v == start) {
-                stop = true;
-            }
-        }
-        std::reverse(res.begin(), res.end());
-        return res;
-    }
-
     // 最短距離 ===========================================
     std::pair<std::vector<T>, std::vector<Edge>> BFS(const int& start) {
         std::vector<T> dist(N, std::numeric_limits<T>::max());
@@ -311,7 +243,7 @@ public:
         return make_pair(dist, prev_edges);
     }
 
-    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(int start){
+    std::pair<std::vector<T>, std::vector<Edge>> Dijkstra(int start) {
         std::vector<T> dist(N, std::numeric_limits<T>::max());
         std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>> q;
         /**
@@ -338,6 +270,42 @@ public:
         }
 
         return make_pair(dist, prev_edges);
+    }
+
+    /**
+     * @brief 負辺を含むグラフで、単一始点の最短経路を求める
+     * @return 負閉路を含む場合かどうかのフラグ、dist 配列
+     * @remark 全辺のコストを -1 倍すると、最長経路を求める
+     */
+    std::pair<std::vector<T>, bool> bellman_ford(int start) {
+        const T INF_ = std::numeric_limits<T>::max();
+        std::vector<T> dist(N, INF_);
+        dist[start] = 0;
+        int cnt = 0;
+        std::vector<Graph::Edge> es = edges();
+
+        /**
+         * 全ての辺を走査して緩和を行う
+         * https://qiita.com/muumu/items/bae1575c3161ced28587
+         * 各 while ループで、
+         * 長さ 1 の最短路が決定 -> 長さ 2 の最短路が決定 -> ...
+         * みたいな感じ？
+         */
+        while (cnt < N) {
+            bool end = true;
+            for (const auto& e : es) {
+                if (dist[e.from] != INF_ and dist[e.from] + e.cost < dist[e.to]) {
+                    dist[e.to] = dist[e.from] + e.cost;
+                    end = false;
+                }
+            }
+            if (end) {
+                break;
+            }
+            cnt++;
+        }
+
+        return make_pair(dist, (cnt == N));
     }
 
     std::vector<Edge> path(const int& start, const int& target, const std::vector<Edge>& prev_edges) {

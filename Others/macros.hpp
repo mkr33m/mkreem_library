@@ -34,11 +34,66 @@ using ld = long double;
 #define UNIQUE(v) (std::sort(all(v)), (v).erase(std::unique(all(v)), (v).end()))
 #define pcnt(x) __builtin_popcount(x)
 #define llpcnt(x) __builtin_popcountll(x)
-#define VC(name, type, ...) vector<type> name(__VA_ARGS__)
-#define VVC(name, type, a, ...) vector<vector<type>> name(a, vector<type>(__VA_ARGS__))
-#define VVVC(name, type, a, b, ...) vector<vector<vector<type>>> name(a, vector<vector<type>>(b, vector<type>(__VA_ARGS__)))
-#define VVVVC(name, type, a, b, c, ...) vector<vector<vector<vector<type>>>> name(a, vector<vector<vector<type>>>(b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
-#define VVVVVC(name, type, a, b, c, d, ...) vector<vector<vector<vector<vector<type>>>>> name(a, vector<vector<vector<vector<type>>>>(b, vector<vector<vector<type>>>(c, vector<vector<type>>(d, vector<type>(__VA_ARGS__)))));
+// 1D
+#define VC(name, type, ...) \
+    vector<type> name( \
+        __VA_ARGS__ \
+    )
+// 2D
+#define VVC(name, type, a, ...) \
+    vector<vector<type>> name( \
+        (a), vector<type>( \
+            __VA_ARGS__ \
+        ) \
+    )
+// 3D
+#define VVVC(name, type, a, b, ...) \
+    vector<vector<vector<type>>> name( \
+        (a), vector<vector<type>>( \
+            (b), vector<type>( \
+                __VA_ARGS__ \
+            ) \
+        ) \
+    )
+// 4D
+#define VVVVC(name, type, a, b, c, ...) \
+    vector<vector<vector<vector<type>>>> name( \
+        (a), vector<vector<vector<type>>>( \
+            (b), vector<vector<type>>( \
+                (c), vector<type>( \
+                    __VA_ARGS__ \
+                ) \
+            ) \
+        ) \
+    )
+// 5D
+#define VVVVVC(name, type, a, b, c, d, ...) \
+    vector<vector<vector<vector<vector<type>>>>> name( \
+        (a), vector<vector<vector<vector<type>>>>( \
+            (b), vector<vector<vector<type>>>( \
+                (c), vector<vector<type>>( \
+                    (d), vector<type>( \
+                        __VA_ARGS__ \
+                    ) \
+                ) \
+            ) \
+        ) \
+    )
+// 6D
+#define VVVVVVC(name, type, a, b, c, d, e, ...) \
+    vector<vector<vector<vector<vector<vector<type>>>>>> name( \
+        (a), vector<vector<vector<vector<vector<type>>>>>( \
+            (b), vector<vector<vector<vector<type>>>>( \
+                (c), vector<vector<vector<type>>>( \
+                    (d), vector<vector<type>>( \
+                        (e), vector<type>( \
+                            __VA_ARGS__ \
+                        ) \
+                    ) \
+                ) \
+            ) \
+        ) \
+    )
 template <typename T>
 int lwb(const std::vector<T>& vec, const T& x){
     return lower_bound(all(vec), x) - vec.begin();
@@ -69,10 +124,10 @@ bool chmin(T1 &a, const T2& b){
     return 0;
 }
 
-const int di4[4] = {-1, 0, 1, 0};
-const int dj4[4] = {0, 1, 0, -1};
-const int di8[8] = {-1, -1, 0, 1, 1, 1, 0, -1};
-const int dj8[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+const int di4[4] = {0, -1, 0, 1};
+const int dj4[4] = {1, 0, -1, 0};
+const int di8[8] = {0, -1, -1, -1, 0, 1, 1, 1};
+const int dj8[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 
 bool out_of_grid(const int& i, const int& j, const int& h, const int& w){
     if(i < 0 || j < 0 || i >= h || j >= w) return true;

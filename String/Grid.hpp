@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <assert.h>
 
 template<typename T> // 各要素の型
 class Grid {
@@ -37,13 +38,13 @@ public:
         }
     }
 
-    T& get(int i, int j) {
+    T get(int i, int j) const {
         assert(0 <= i && i < (int)get_H());
         assert(0 <= j && j < (int)get_W());
         return grid[i][j];
     }
 
-    void set(int i, int j, T x) const {
+    void set(int i, int j, T x) {
         assert(0 <= i && i < (int)get_H());
         assert(0 <= j && j < (int)get_W());
         grid[i][j] = x;
@@ -123,6 +124,32 @@ public:
         for (int i = 0; i < W; i++) {
             for (int j = 0; j < H; j++) {
                 new_grid[i][j] = grid[j][i];
+            }
+        }
+        grid.swap(new_grid);
+    }
+
+    // 左右反転
+    void left_right_flip() {
+        int H = (int)get_H();
+        int W = (int)get_W();
+        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                new_grid[i][j] = grid[i][W - 1 - j];
+            }
+        }
+        grid.swap(new_grid);
+    }
+
+    // 上下反転
+    void upside_down() {
+        int H = (int)get_H();
+        int W = (int)get_W();
+        std::vector<std::vector<T>> new_grid(H, std::vector<T>(W));
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                new_grid[i][j] = grid[H - 1 - i][j];
             }
         }
         grid.swap(new_grid);

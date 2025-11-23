@@ -24,6 +24,9 @@ struct Doubling {
         }
     }
 
+    /**
+     * @brief start から（start を含めて）K 頂点踏んだとき、踏んだ頂点の値の合計値を求める
+     */
     S get(int start, long long K) {
         S ret = e();
         int cur = start;
