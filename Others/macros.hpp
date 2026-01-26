@@ -19,7 +19,7 @@ using ld = long double;
 #define BIT(i) (1LL << (i))
 #define tbit(n, k) ((n >> k) & 1) // nの（上から）kビット目
 #define bit(n, k) (n & (1LL << (k))) // nの（下から）kビット目
-#define PI acos(-1)
+#define PI acosl(-1)
 #define inr(l, x, r) (l <= x && x < r)
 #define einr(l, x, r) (l <= x && x <= r)
 #define rep(i, a, b) for(int i = (a); i < (b); i++)
@@ -30,7 +30,7 @@ using ld = long double;
 #define rrepl(i, a, b) for(long long i = (a); i >= (b); i--)
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
-#define FOR_subset(sub, bit) for (ll sub = (bit); sub >= 0; sub = (sub == 0 ? -1 : (sub - 1) & (bit)))
+#define for_subset(sub, bit) for (ll sub = (bit); sub >= 0; sub = (sub == 0 ? -1 : (sub - 1) & (bit)))
 #define UNIQUE(v) (std::sort(all(v)), (v).erase(std::unique(all(v)), (v).end()))
 #define pcnt(x) __builtin_popcount(x)
 #define llpcnt(x) __builtin_popcountll(x)
@@ -122,6 +122,35 @@ template <typename T1, typename T2>
 bool chmin(T1 &a, const T2& b){
     if (a > b) { a = b; return 1; }
     return 0;
+}
+/**
+ * @brief (dx, dy) を基準として、(x, y) の偏角を求める。
+ * @remark 弧度法で、[0, 2π) の範囲で返す
+ * @remark cw=true なら時計回り
+ */
+ld calc_arg(ld x, ld y, ld dx = 1, ld dy = 0, bool cw = false) {
+    assert(x != 0 or y != 0);
+    assert(dx != 0 or dy != 0);
+    
+    ld c = dx * y - dy * x; // 外積
+    ld d = dx * x + dy * y; // 内積
+    ld theta = atan2l(cw ? -c : c, d);
+    if (theta < 0) {
+        theta += 2.0L * PI;
+    }
+    return theta;
+}
+/**
+ * @brief 弧度法 -> 度数法
+ */
+ld rad_to_deg(ld rad) {
+    return rad * 180.0L / PI;
+}
+/**
+ * @brief 度数法 -> 弧度法
+ */
+ld deg_to_rad(ld deg) {
+    return deg * PI / 180.0L;
 }
 
 const int di4[4] = {0, -1, 0, 1};

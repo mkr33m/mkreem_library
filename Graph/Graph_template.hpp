@@ -62,6 +62,9 @@ private:
      * @param dist 根からの距離
      */
     void dfs_for_LCA(int v, int par = -1, int d = 0) {
+        if (par == -1) {
+            par = v;
+        }
         parent[0][v] = par;
         dist[v] = d;
         for (const auto& e : G[v]) {
@@ -133,18 +136,15 @@ public:
                 }
                 continue;
             }
-
             if (!is_bipartite(nv, 1 - v_color)) {
                 return false;
             }
         }
-
         return true;
     }
 
     // 木の直径 ===========================================
     std::vector<int> get_tree_diameter(int x = 0) {
-
         std::vector<T> dist;
         std::vector<Edge> prev_edges(N);
         if (is_weighted) {
@@ -170,7 +170,6 @@ public:
             std::tie(dist, prev_edges) = BFS(y);
         }
         int z = get_farthest_vertex(dist, y);
-
         std::vector<int> path;
         int v = z;
         while (1) {
@@ -180,9 +179,7 @@ public:
             }
             v = prev_edges[v].from;
         }
-
         std::reverse(path.begin(), path.end());
-
         return path;
     }
 
@@ -196,7 +193,6 @@ public:
         std::vector<Edge> prev_edges(N);
         dist[start] = 0;
         q.push(start);
-
         while (!q.empty()) {
             int v = q.front(); q.pop();
             for (const auto& e : G[v]) {
@@ -209,7 +205,6 @@ public:
                 q.push(nv);
             }
         }
-
         return make_pair(dist, prev_edges);
     }
 
@@ -222,7 +217,6 @@ public:
         std::vector<Edge> prev_edges(N);
         dist[start] = 0;
         q.push_front(start);
-
         while (!q.empty()) {
             int v = q.front(); q.pop_front();
             for (const auto& e : G[v]) {
@@ -239,7 +233,6 @@ public:
                 }
             }
         }
-
         return make_pair(dist, prev_edges);
     }
 
@@ -252,7 +245,6 @@ public:
         std::vector<Edge> prev_edges(N);
         dist[start] = 0;
         q.push({dist[start], start});
-
         while (!q.empty()) {
             auto [dist_v, v] = q.top(); q.pop();
             if (dist_v > dist[v]) {
@@ -268,7 +260,6 @@ public:
                 q.push({dist[nv], nv});
             }
         }
-
         return make_pair(dist, prev_edges);
     }
 
@@ -283,7 +274,6 @@ public:
         dist[start] = 0;
         int cnt = 0;
         std::vector<Graph::Edge> es = edges();
-
         /**
          * 全ての辺を走査して緩和を行う
          * https://qiita.com/muumu/items/bae1575c3161ced28587
@@ -304,7 +294,6 @@ public:
             }
             cnt++;
         }
-
         return make_pair(dist, (cnt == N));
     }
 
@@ -317,7 +306,6 @@ public:
             path.push_back(prev_edges[cur]);
         }
         std::reverse(path.begin(), path.end());
-
         return path;
     }
 
@@ -331,7 +319,6 @@ public:
             precalc_for_LCA(root);
             precalc_done = true;
         }
-
         if (dist[u] < dist[v]) {
             std::swap(u, v);
         }
@@ -343,7 +330,6 @@ public:
                 u = parent[i][u];
             }
         }
-
         if (u == v) {
             return u;
         }
@@ -356,7 +342,6 @@ public:
         }
         return parent[0][u];
     }
-
     /**
      * @brief 木上の2頂点 u, v の距離を、LCA を利用して求める。
      */
@@ -367,12 +352,24 @@ public:
         }
         return dist[u] + dist[v] - 2 * dist[LCA(u, v)];
     }
-
     /**
      * @brief 木上の2頂点 u, v のパス上に、頂点 p があるかどうかを判定する。
      */
-    bool is_on_path (int u, int v, int p, const int& root = 0) {
+    bool is_on_path(int u, int v, int p, const int& root = 0) {
         return get_dist(u, p) + get_dist(p, v) == get_dist(u, v);
+    }
+    int kth_ancestor(int v, int k, const int& root = 0) {
+        if (!precalc_done) {
+            precalc_for_LCA(root);
+            precalc_done = true;
+        }
+        int K = (int)parent.size();
+        for (int i = 0; i < K; i ++) {
+            if ((K >> i) & 1) {
+                v = parent[i][v];
+            }
+        }
+        return v;
     }
 };
 

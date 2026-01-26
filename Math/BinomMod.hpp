@@ -12,7 +12,7 @@ private:
 
 public:
     BinomMod() = default;
-    BinomMod(int MAX_N = 10000000) : MAX_N(MAX_N), mod(mod), factorial(MAX_N + 1, 0), factorial_inv(MAX_N + 1, 0) {
+    BinomMod(int MAX_N = 10000000) : MAX_N(MAX_N), factorial(MAX_N + 1, 0), factorial_inv(MAX_N + 1, 0) {
         factorial[0] = 1;
         for (int i = 1; i <= MAX_N; i++) {
             factorial[i] = factorial[i - 1] * i;
