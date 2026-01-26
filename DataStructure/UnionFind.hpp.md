@@ -5,6 +5,12 @@ data:
   - icon: ':warning:'
     path: DataStructure/UF_ComponentSum.hpp
     title: UF_ComponentSum
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -61,6 +67,8 @@ data:
   path: DataStructure/UnionFind.hpp
   requiredBy:
   - DataStructure/UF_ComponentSum.hpp
+  - all_includes.hpp
+  - all_includes.hpp
   timestamp: '2025-05-11 23:56:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

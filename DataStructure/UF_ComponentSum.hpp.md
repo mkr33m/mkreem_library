@@ -4,7 +4,10 @@ data:
   - icon: ':warning:'
     path: DataStructure/UnionFind.hpp
     title: DataStructure/UnionFind.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -59,7 +62,8 @@ data:
   - DataStructure/UnionFind.hpp
   isVerificationFile: false
   path: DataStructure/UF_ComponentSum.hpp
-  requiredBy: []
+  requiredBy:
+  - all_includes.hpp
   timestamp: '2025-05-27 22:26:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -35,7 +38,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: String/MP.hpp
-  requiredBy: []
+  requiredBy:
+  - all_includes.hpp
   timestamp: '2025-05-30 14:13:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

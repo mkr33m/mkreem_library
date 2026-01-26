@@ -7,7 +7,7 @@ data:
       path: Algorithm/Doubling.hpp
       title: "start \u304B\u3089\uFF08start \u3092\u542B\u3081\u3066\uFF09K \u9802\
         \u70B9\u8E0F\u3093\u3060\u3068\u304D\u3001\u8E0F\u3093\u3060\u9802\u70B9\u306E\
-        \u5024\u306E\u5408\u8A08\u5024\u3092\u6C42\u3081\u308B"
+        \u5024\u306E\u5408\u8A08\u5024\u3092\u8FD4\u3059"
     - icon: ':warning:'
       path: Algorithm/Mo.hpp
       title: Algorithm/Mo.hpp
@@ -52,6 +52,9 @@ data:
   - name: Geometry
     pages:
     - icon: ':warning:'
+      path: Geometry/ArgSort.hpp
+      title: Geometry/ArgSort.hpp
+    - icon: ':warning:'
       path: Geometry/geometry.hpp
       title: "\u5185\u7A4D\u3092\u6C42\u3081\u308B"
   - name: Graph
@@ -73,9 +76,6 @@ data:
       title: "a \u306E mod m \u306B\u304A\u3051\u308B\u9006\u5143 x \u3092\u6C42\u3081\
         \u308B"
     - icon: ':warning:'
-      path: Math/abc428_d_bundled.cpp
-      title: Math/abc428_d_bundled.cpp
-    - icon: ':warning:'
       path: Math/enum_divisors.hpp
       title: Math/enum_divisors.hpp
     - icon: ':warning:'
@@ -93,9 +93,17 @@ data:
       title: "N\u306E\u7D20\u56E0\u6570\u306E\u7D50\u679C\u304B\u3089\u3001N\u306E\
         \u7D04\u6570\u3092\u5217\u6319\u3059\u308B"
     - icon: ':warning:'
-      path: Math/prime_factorize.hpp
+      path: Math/prime_factorize_map.hpp
+      title: Math/prime_factorize_map.hpp
+    - icon: ':warning:'
+      path: Math/prime_factorize_vector.hpp
       title: "N \u306E\u7D20\u56E0\u6570\u5206\u89E3\u3057\u3001\u305D\u306E\u7D50\
         \u679C\u3092 map \u306B\u683C\u7D0D\u3059\u308B"
+    - icon: ':warning:'
+      path: Math/quotient_range.hpp
+      title: "floor(N/i) (1<=i<=N) \u306B\u3064\u3044\u3066\u3001p=floor(N/i) \u3068\
+        \u306A\u308B i \u306E\u7BC4\u56F2 [l,r] \u3092\u5168\u3066\u306E p \u3067\u6C42\
+        \u3081\u308B"
     - icon: ':warning:'
       path: Math/zeta_mobius.hpp
       title: "\u4E0B\u4F4D\u96C6\u5408\u65B9\u5411\u306E\u9AD8\u901F\u30BC\u30FC\u30BF\
@@ -131,7 +139,8 @@ data:
       title: "[i1, j1) * [i2, j2) \u306E\u7DCF\u7A4D\u3092\u53D6\u5F97\u3059\u308B"
     - icon: ':warning:'
       path: Others/macros.hpp
-      title: Others/macros.hpp
+      title: "(dx, dy) \u3092\u57FA\u6E96\u3068\u3057\u3066\u3001(x, y) \u306E\u504F\
+        \u89D2\u3092\u6C42\u3081\u308B\u3002"
   - name: String
     pages:
     - icon: ':warning:'

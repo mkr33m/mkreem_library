@@ -6,11 +6,16 @@ data:
     title: "floor(sqrt(N)) \u3092\u6C42\u3081\u308B"
   - icon: ':warning:'
     path: Others/macros.hpp
-    title: Others/macros.hpp
+    title: "(dx, dy) \u3092\u57FA\u6E96\u3068\u3057\u3066\u3001(x, y) \u306E\u504F\
+      \u89D2\u3092\u6C42\u3081\u308B\u3002"
   - icon: ':warning:'
     path: Others/macros.hpp
-    title: Others/macros.hpp
-  _extendedRequiredBy: []
+    title: "(dx, dy) \u3092\u57FA\u6E96\u3068\u3057\u3066\u3001(x, y) \u306E\u504F\
+      \u89D2\u3092\u6C42\u3081\u308B\u3002"
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -27,20 +32,20 @@ data:
     \ BIT(i) (1LL << (i))\n#define tbit(n, k) ((n >> k) & 1) // n\u306E\uFF08\u4E0A\
     \u304B\u3089\uFF09k\u30D3\u30C3\u30C8\u76EE\n#define bit(n, k) (n & (1LL << (k)))\
     \ // n\u306E\uFF08\u4E0B\u304B\u3089\uFF09k\u30D3\u30C3\u30C8\u76EE\n#define PI\
-    \ acos(-1)\n#define inr(l, x, r) (l <= x && x < r)\n#define einr(l, x, r) (l <=\
-    \ x && x <= r)\n#define rep(i, a, b) for(int i = (a); i < (b); i++)\n#define erep(i,\
-    \ a, b) for(int i = (a); i <= (b); i++)\n#define rrep(i, a, b) for(int i = (a);\
-    \ i >= (b); i--)\n#define repl(i, a, b) for(long long i = (a); i < (b); i++)\n\
-    #define erepl(i, a, b) for(long long i = (a); i <= (b); i++)\n#define rrepl(i,\
-    \ a, b) for(long long i = (a); i >= (b); i--)\n#define all(x) (x).begin(), (x).end()\n\
-    #define rall(x) (x).rbegin(), (x).rend()\n#define FOR_subset(sub, bit) for (ll\
-    \ sub = (bit); sub >= 0; sub = (sub == 0 ? -1 : (sub - 1) & (bit)))\n#define UNIQUE(v)\
-    \ (std::sort(all(v)), (v).erase(std::unique(all(v)), (v).end()))\n#define pcnt(x)\
-    \ __builtin_popcount(x)\n#define llpcnt(x) __builtin_popcountll(x)\n// 1D\n#define\
-    \ VC(name, type, ...) \\\n    vector<type> name( \\\n        __VA_ARGS__ \\\n\
-    \    )\n// 2D\n#define VVC(name, type, a, ...) \\\n    vector<vector<type>> name(\
-    \ \\\n        (a), vector<type>( \\\n            __VA_ARGS__ \\\n        ) \\\n\
-    \    )\n// 3D\n#define VVVC(name, type, a, b, ...) \\\n    vector<vector<vector<type>>>\
+    \ acosl(-1)\n#define inr(l, x, r) (l <= x && x < r)\n#define einr(l, x, r) (l\
+    \ <= x && x <= r)\n#define rep(i, a, b) for(int i = (a); i < (b); i++)\n#define\
+    \ erep(i, a, b) for(int i = (a); i <= (b); i++)\n#define rrep(i, a, b) for(int\
+    \ i = (a); i >= (b); i--)\n#define repl(i, a, b) for(long long i = (a); i < (b);\
+    \ i++)\n#define erepl(i, a, b) for(long long i = (a); i <= (b); i++)\n#define\
+    \ rrepl(i, a, b) for(long long i = (a); i >= (b); i--)\n#define all(x) (x).begin(),\
+    \ (x).end()\n#define rall(x) (x).rbegin(), (x).rend()\n#define for_subset(sub,\
+    \ bit) for (ll sub = (bit); sub >= 0; sub = (sub == 0 ? -1 : (sub - 1) & (bit)))\n\
+    #define UNIQUE(v) (std::sort(all(v)), (v).erase(std::unique(all(v)), (v).end()))\n\
+    #define pcnt(x) __builtin_popcount(x)\n#define llpcnt(x) __builtin_popcountll(x)\n\
+    // 1D\n#define VC(name, type, ...) \\\n    vector<type> name( \\\n        __VA_ARGS__\
+    \ \\\n    )\n// 2D\n#define VVC(name, type, a, ...) \\\n    vector<vector<type>>\
+    \ name( \\\n        (a), vector<type>( \\\n            __VA_ARGS__ \\\n      \
+    \  ) \\\n    )\n// 3D\n#define VVVC(name, type, a, b, ...) \\\n    vector<vector<vector<type>>>\
     \ name( \\\n        (a), vector<vector<type>>( \\\n            (b), vector<type>(\
     \ \\\n                __VA_ARGS__ \\\n            ) \\\n        ) \\\n    )\n\
     // 4D\n#define VVVVC(name, type, a, b, c, ...) \\\n    vector<vector<vector<vector<type>>>>\
@@ -70,7 +75,18 @@ data:
     // \u6700\u5927\u5024\u30FB\u6700\u5C0F\u5024\u306E\u66F4\u65B0\ntemplate <typename\
     \ T1, typename T2>\nbool chmax(T1 &a, const T2& b){\n    if (a < b) { a = b; return\
     \ 1; }\n    return 0;\n}\ntemplate <typename T1, typename T2>\nbool chmin(T1 &a,\
-    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n\nconst\
+    \ const T2& b){\n    if (a > b) { a = b; return 1; }\n    return 0;\n}\n/**\n\
+    \ * @brief (dx, dy) \u3092\u57FA\u6E96\u3068\u3057\u3066\u3001(x, y) \u306E\u504F\
+    \u89D2\u3092\u6C42\u3081\u308B\u3002\n * @remark \u5F27\u5EA6\u6CD5\u3067\u3001\
+    [0, 2\u03C0) \u306E\u7BC4\u56F2\u3067\u8FD4\u3059\n * @remark cw=true \u306A\u3089\
+    \u6642\u8A08\u56DE\u308A\n */\nld calc_arg(ld x, ld y, ld dx = 1, ld dy = 0, bool\
+    \ cw = false) {\n    assert(x != 0 or y != 0);\n    assert(dx != 0 or dy != 0);\n\
+    \    \n    ld c = dx * y - dy * x; // \u5916\u7A4D\n    ld d = dx * x + dy * y;\
+    \ // \u5185\u7A4D\n    ld theta = atan2l(cw ? -c : c, d);\n    if (theta < 0)\
+    \ {\n        theta += 2.0L * PI;\n    }\n    return theta;\n}\n/**\n * @brief\
+    \ \u5F27\u5EA6\u6CD5 -> \u5EA6\u6570\u6CD5\n */\nld rad_to_deg(ld rad) {\n   \
+    \ return rad * 180.0L / PI;\n}\n/**\n * @brief \u5EA6\u6570\u6CD5 -> \u5F27\u5EA6\
+    \u6CD5\n */\nld deg_to_rad(ld deg) {\n    return deg * PI / 180.0L;\n}\n\nconst\
     \ int di4[4] = {0, -1, 0, 1};\nconst int dj4[4] = {1, 0, -1, 0};\nconst int di8[8]\
     \ = {0, -1, -1, -1, 0, 1, 1, 1};\nconst int dj8[8] = {1, 1, 0, -1, -1, -1, 0,\
     \ 1};\n\nbool out_of_grid(const int& i, const int& j, const int& h, const int&\
@@ -130,8 +146,9 @@ data:
   - Others/macros.hpp
   isVerificationFile: false
   path: Algorithm/next_pairing.hpp
-  requiredBy: []
-  timestamp: '2025-11-23 17:14:41+09:00'
+  requiredBy:
+  - all_includes.hpp
+  timestamp: '2026-01-26 21:21:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Algorithm/next_pairing.hpp

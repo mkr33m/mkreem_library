@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -93,7 +96,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: Math/zeta_mobius.hpp
-  requiredBy: []
+  requiredBy:
+  - all_includes.hpp
   timestamp: '2025-11-23 17:14:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

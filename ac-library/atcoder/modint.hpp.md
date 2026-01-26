@@ -9,8 +9,17 @@ data:
     title: ac-library/atcoder/internal_type_traits.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: Others/AbelianGroups.hpp
+    title: Others/AbelianGroups.hpp
+  - icon: ':warning:'
+    path: Others/Monoids.hpp
+    title: Others/Monoids.hpp
+  - icon: ':warning:'
     path: ac-library/atcoder/convolution.hpp
     title: ac-library/atcoder/convolution.hpp
+  - icon: ':warning:'
+    path: all_includes.hpp
+    title: all_includes.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -326,6 +335,9 @@ data:
   path: ac-library/atcoder/modint.hpp
   requiredBy:
   - ac-library/atcoder/convolution.hpp
+  - Others/Monoids.hpp
+  - Others/AbelianGroups.hpp
+  - all_includes.hpp
   timestamp: '2024-09-28 19:53:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
