@@ -20,6 +20,7 @@
 #include "Math/Binom.hpp"
 #include "Math/BinomMod.hpp"
 #include "Math/BinomMod_ll.hpp"
+#include "Math/Matrix.hpp"
 #include "Math/enum_divisors.hpp"
 #include "Math/extended_gcd.hpp"
 #include "Math/is_prime.hpp"

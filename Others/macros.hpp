@@ -1,9 +1,10 @@
 #ifndef macros_HPP
 #define macros_HPP
 
-#include <vector>
-#include <queue>
+#include <cassert>
 #include <cmath>
+#include <queue>
+#include <vector>
 
 using ll = long long;
 using lll = __int128_t;
@@ -140,6 +141,10 @@ ld calc_arg(ld x, ld y, ld dx = 1, ld dy = 0, bool cw = false) {
     }
     return theta;
 }
+__int128 cross(__int128 x1, __int128 y1, __int128 x2, __int128 y2) { return x1 * y2 - y1 * x2; };
+bool is_clockwise(__int128 x1, __int128 y1, __int128 x2, __int128 y2) { return cross(x1, y1, x2, y2) < 0; }
+bool is_counter_clockwise(__int128 x1, __int128 y1, __int128 x2, __int128 y2) { return cross(x1, y1, x2, y2) > 0; }
+bool is_collinear(__int128 x1, __int128 y1, __int128 x2, __int128 y2) { return cross(x1, y1, x2, y2) == 0; }
 /**
  * @brief 弧度法 -> 度数法
  */

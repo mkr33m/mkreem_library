@@ -6,6 +6,8 @@
 #include <cmath>
 #include <tuple>
 
+#include "Others/macros.hpp"
+
 template <int dx = 1, int dy = 0, bool cw = false, typename T = long long>
 bool argcmp(const std::pair<T, T> a, const std::pair<T, T> b) {
     static_assert((dx == 0 or dy == 0) and (std::abs(dx) + std::abs(dy) == 1),
@@ -51,10 +53,6 @@ bool argcmp(const std::pair<T, T> a, const std::pair<T, T> b) {
     if (s1 != s2) {
         return s1 < s2;
     }
-
-    auto cross = [](__int128 x1, __int128 y1, __int128 x2, __int128 y2) -> __int128 {
-        return x1 * y2 - y1 * x2;
-    };
 
     __int128 c = cross(x1, y1, x2, y2);
     if (cw) {
