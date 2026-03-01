@@ -26,18 +26,18 @@ class RollingHash {
 
 public:
     /**
-     * @brief (a * b) MOD 2^61 - 1 を、オーバーフローなしで計算
+     * @brief (a*b) MOD 2^61-1 を、オーバーフローなしで計算
      */
     // inline : べた張り展開（関数呼び出しのたびにその関数のメモリの位置に移動しなくてよい）
-    // static（メンバ関数）: RollingHash::mul(...) のように、オブジェクトを生成しなくても利用可能。ただし、非 static メンバに触れることはできない。結局、インスタンスに紐づかない簡単な計算ルーチンである（けど、クラスの仲間として置いている）ことを明示しておくことができる。
+    // static（メンバ関数）: RollingHash::mul(...) のように、オブジェクトを生成しなくても利用可能。ただし、非 static メンバに触れることはできない。結局、インスタンスに紐づかない簡単な計算ルーチンである（けど、クラスの仲間として置いている）ことを明示。
     static inline ull mul(ull a, ull b) {
         ull aq = a >> 31; // 上位 31 ビット（a を 2^31 で割った商）
         ull ar = a & ((1UL << 31) - 1); // 下位 31 ビット（b を 2^31 で割った余り）
         ull bq = b >> 31;
         ull br = b & ((1UL << 31) - 1);
-        // -> a * b = aq * bq * 2^62
-                    // + (aq * br + ar * bq) * 2^31
-                    // + ar * br
+        // -> a*b = aq*bq*2^62
+                    // + (aq*br + ar*bq) * 2^31
+                    // + ar*br
         
         ull mid = aq * br + ar * bq; // -> 2^30 で割った商と余りを考えてみる（2^31 * 2^30 == 2^61 だから）
         ull midq = mid >> 30; // 上位 30 ビット（mid を 2^30 で割った商）
@@ -46,7 +46,7 @@ public:
         ull ans = aq * bq * 2 + midq + (midr << 31) + ar * br;
 
         // ans の MOD 2^61 - 1 を求めたい
-        // ans = ansq * 2^61 + ansr とすると、ans ≡ ansq + ansr
+        // ans = ansq*2^61 + ansr とすると、ans ≡ ansq + ansr
         // ans < 2^64 より、ansq < 2^3 だから、
         // ansq + ansr < 2^3 + 2^61
         // ansq + ansr - 2^61 < 2^3
@@ -62,7 +62,7 @@ public:
         if (!initialized) {
             std::mt19937_64 mt{ std::random_device{}() };
             std::uniform_int_distribution<long long> ran(0, std::numeric_limits<long long>::max());
-            base = ran(mt) % MOD; // 基底を（ランダムに）設定。もちろん MOD 未満で取ってくる。
+            base = ran(mt) % MOD; // 基底を（ランダムに）設定。MOD 未満で取ってくる。
             initialized = true;
         }
 
@@ -90,7 +90,7 @@ public:
     /**
      * @brief 部分文字列 S[l, r) のハッシュ値を計算
      */
-    // const : メンバを変更することを許さないようにする（もし変えようとしていたら、エラーを吐いてくれる）。つまり、読み取り専用デアルことを明示的に宣言する。参照系、更新系のどちらかが一目でわかって嬉しい。
+    // const : メンバを変更することを許さないようにする（もし変えようとしていたら、エラーを吐いてくれる）。つまり、読み取り専用であることを明示的に宣言する。参照系、更新系のどちらかが一目でわかって嬉しい。
     ull get(int l, int r) const {
         assert(l <= r);
         ull res = hash[r] + MOD - mul(hash[l], power[r - l]);
@@ -125,7 +125,6 @@ public:
      * @brief 既存の文字列に新しい文字列を結合し、ハッシュテーブルを再構成（M 延長して、idx の N 以降を構築する）。
      */ 
     void rebuild(const std::string& T) {
-
         int prevN = N;
         int M = (int)T.size();
         S += T; // S の更新
