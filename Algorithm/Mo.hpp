@@ -31,7 +31,7 @@ struct Mo {
             }
             int x_block = x.l / block;
             // 偶数区間は昇順、奇数区間は降順
-            return (x_block & 1) ? (x.r > y.r) :(x.r < y.r);
+            return (x_block & 1) ? (x.r > y.r) : (x.r < y.r);
         });
 
         int cur_l = 0, cur_r = 0;

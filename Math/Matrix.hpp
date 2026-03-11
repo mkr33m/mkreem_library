@@ -7,68 +7,84 @@
 // 行列の構造体
 template <typename Ops>
 struct Matrix {
+private:
     using T = typename Ops::T;
     int N, M;
-    std::vector<std::vector<T>> mat;
+    std::vector<std::vector<T>> val;
 
+public:
     Matrix() : N(0), M(0) {}
-    Matrix(int N, int M) : N(N), M(M), mat(N, std::vector<T>(M, Ops::zero())) {}
+    Matrix(int N, int M) : N(N), M(M), val(N, std::vector<T>(M, Ops::zero())) {}
     static Matrix identity(int N) {
-        Matrix I(N, N);
+        Matrix<Ops> I(N, N);
         for (int i = 0; i < N; i++) {
-            I.mat[i][i] = Ops::one();
+            I.val[i][i] = Ops::one();
         }
         return I;
     }
-};
-
-// 行列×行列
-template <typename Ops>
-Matrix<Ops> mat_mul(const Matrix<Ops>& A, const Matrix<Ops>& B) {
-    using T = typename Ops::T;
-    assert(A.M == B.N);
-    Matrix<Ops> C(A.N, B.M);
-
-    for (int i = 0; i < A.N; i++) {
-        for (int k = 0; k < A.M; k++) {
-            T aik = A.mat[i][k];
-            for (int j = 0; j < B.M; j++) {
-                C.mat[i][j] = Ops::add(C.mat[i][j], Ops::mul(aik, B.mat[k][j]));
+    int rows() const { return N; }
+    int cols() const { return M; }
+    void set(int i, int j, T v) {
+        assert(0 <= i && i < N);
+        assert(0 <= j && j < M);
+        val[i][j] = v;
+    }
+    T get(int i, int j) const {
+        assert(0 <= i && i < N);
+        assert(0 <= j && j < M);
+        return val[i][j];
+    }
+    Matrix operator*(const Matrix& other) const {
+        assert(M == other.N);
+        Matrix res(N, other.M);
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < M; k++) {
+                T aik = val[i][k];
+                for (int j = 0; j < other.M; j++) {
+                    res.val[i][j] = Ops::add(res.val[i][j], Ops::mul(aik, other.val[k][j]));
+                }
             }
         }
+        return res;
     }
-    return C;
-}
+    Matrix& operator*=(const Matrix& other) {
+        *this = (*this) * other;
+        return *this;
+    }
+    Matrix operator^(long long n) const {
+        assert(N == M);
+        assert(n >= 0);
+        Matrix base = *this;
+        Matrix res = Matrix::identity(N);
+        while (n > 0) {
+            if (n & 1) {
+                res *= base;
+            }
+            base = base * base;
+            n >>= 1;
+        }
+        return res;
+    }
+    Matrix& operator^=(long long n) {
+        *this = (*this) ^ n;
+        return *this;
+    }
+};
 
 // 行列×ベクトル
 template <typename Ops>
 std::vector<typename Ops::T> mat_mul_vec(const Matrix<Ops>& A, const std::vector<typename Ops::T>& x) {
     using T = typename Ops::T;
-    assert(A.M == (int)x.size());
-    std::vector<T> y(A.N, Ops::zero());
-    for (int i = 0; i < A.N; i++) {
+    assert(A.cols() == (int)x.size());
+    std::vector<T> y(A.rows(), Ops::zero());
+    for (int i = 0; i < A.rows(); i++) {
         T res = Ops::zero();
-        for (int k = 0; k < (int)x.size(); k++) {
-            res = Ops::add(res, Ops::mul(A.mat[i][k], x[k]));
+        for (int k = 0; k < A.cols(); k++) {
+            res = Ops::add(res, Ops::mul(A.get(i, k), x[k]));
         }
         y[i] = res;
     }
     return y;
-}
-
-// 行列累乗
-template <typename Ops>
-Matrix<Ops> mat_pow (Matrix<Ops> A, long long n) {
-    assert(A.N == A.M);
-    Matrix<Ops> res = Matrix<Ops>::identity(A.N);
-    while (n > 0) {
-        if (n & 1) {
-            res = mat_mul(res, A);
-        }
-        A = mat_mul(A, A);
-        n >>= 1;
-    }
-    return res;
 }
 
 #endif // Matrix_HPP

@@ -18,7 +18,7 @@ struct Doubling<void, op, e> {
         }
         for (int b = 1; b < 60; b++) {
             for (int i = 0; i < N; i++) {
-                next[b][i] = next[b - 1][ next[b - 1][i] ];
+                next[b][i] = next[b - 1][next[b - 1][i]];
             }
         }
     }
