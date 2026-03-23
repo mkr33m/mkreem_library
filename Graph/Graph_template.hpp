@@ -89,7 +89,6 @@ public:
             is_weighted = true;
         }
     }
-
     void read(const int& M, bool weighted = false, bool directed = false, int padding = 1) {
         for (int i = 0; i < M; i++) {
             int u, v; std::cin >> u >> v;
@@ -107,11 +106,9 @@ public:
             }
         }
     }
-
-    std::vector<Edge>& operator[](const int& v) {
-        return G[v];
-    }
-
+    int size() const { return N; }
+    const std::vector<Edge>& operator[](int v) const { return G[v]; }
+    std::vector<Edge>& operator[](int v) { return G[v]; }
     std::vector<Edge> edges() {
         std::vector<Edge> es(M);
         for (int v = 0; v < N; v++) {
@@ -120,27 +117,6 @@ public:
             }
         }
         return es;
-    }
-
-    // is_bipartite 関数 ===========================================
-    /**
-     * @brief グラフgが二部グラフかどうかを判定する
-     */
-    bool is_bipartite(int v, int v_color = 0) {
-        color[v] = v_color;
-        for (const auto& e : G[v]) {
-            int nv = e.to;
-            if (color[nv] != -1) { // 隣接頂点の色がすでに確定している
-                if (color[nv] == v_color) {
-                    return false;
-                }
-                continue;
-            }
-            if (!is_bipartite(nv, 1 - v_color)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     // 木の直径 ===========================================
@@ -365,7 +341,7 @@ public:
         }
         int K = (int)parent.size();
         for (int i = 0; i < K; i ++) {
-            if ((K >> i) & 1) {
+            if ((k >> i) & 1) {
                 v = parent[i][v];
             }
         }

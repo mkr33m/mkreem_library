@@ -3,187 +3,167 @@
 
 #include <vector>
 #include <cassert>
-#include <functional>
-#include <iostream>
 
-template <typename Monoid>
-class Segtree {
-
-using T = typename Monoid::S;
-std::vector<T> seg_; // 1-indexed で管理
-int N_;
-int seg_N_;
-
-using F = std::function<bool(const T&)>; // 二分探索の判定関数
-
-int min_pow(int N) const {
-    int res = 1;
-    while (res < N) {
-        res <<= 1;
-    }
-    return res;
-}
-
-void update_node(int i) {
-    int left_child_idx = i << 1;
-    int right_child_idx = (i << 1) + 1;
-    seg_[i] = Monoid::op(seg_[left_child_idx], seg_[right_child_idx]);
-}
+template <typename S, S (*op)(S, S), S (*e)()>
+struct Segtree {
+private:
+    int p;
+    int siz; // 配列の長さ
+    int N; // 配列の長さ以上の 2 冪
+    std::vector<S> seg;
 
 public:
-    Segtree(const std::vector<T>& data) : N_(data.size()) {
-        seg_N_ = min_pow(N_);
-        seg_.assign(2 * seg_N_, Monoid::e());
-
-        for (int i = 0; i < N_; i++) {
-            seg_[seg_N_ + i] = data[i];
+    Segtree(int siz) : siz(siz), p(0) {
+        while (siz > (1 << p)) {
+            p++;
         }
-        for (int i = seg_N_ - 1; i >= 1; i--) {
-            update_node(i);
+        N = (1 << p);
+        seg.assign(2 * N, e());
+    }
+    Segtree(const std::vector<S>& vec) : siz((int)vec.size()), p(0) {
+        while (siz > (1 << p)) {
+            p++;
+        }
+        N = (1 << p);
+        seg.assign(2 * N, e());
+        for (int i = 0; i < siz; i++) {
+            seg[i + N] = vec[i];
+        }
+        for (int i = N - 1; i >= 1; i--) {
+            seg[i] = op(seg[(i << 1) | 0], seg[(i << 1) | 1]);
         }
     }
-    Segtree(int N, T initial_value) : Segtree(std::vector<T>(N, initial_value)) {}
-    Segtree(int N) : Segtree(std::vector<T>(N, T())) {}
-    Segtree() : seg_(), N_(0), seg_N_(0) {}
 
-    void set(int i, T x) {
-        assert(0 <= i && i < N_);
-
-        i += seg_N_;
-        seg_[i] = x;
-
-        while (i > 1) { // 親を辿って更新していく
+    S get(int i) {
+        assert(0 <= i);
+        assert(i < siz);
+        i += N;
+        return seg[i];
+    }
+    void set(int i, S s) {
+        assert(0 <= i);
+        assert(i < siz);
+        i += N;
+        seg[i] = s;
+        while (i > 1) {
             i >>= 1;
-            update_node(i);
+            seg[i] = op(seg[(i << 1) | 0], seg[(i << 1) | 1]);
         }
     }
-
-    T prod(int l, int r) const {
-        assert(0 <= l && l <= r && r <= N_);
-
-        T left_val = Monoid::e(), right_val = Monoid::e();
-        l += seg_N_, r += seg_N_;
+    void add(int i, S s) {
+        assert(0 <= i);
+        assert(i < siz);
+        i += N;
+        seg[i] = op(seg[i], s);
+        while (i > 1) {
+            i >>= 1;
+            seg[i] = op(seg[i << 1], seg[(i << 1) | 1]);
+        }
+    }
+    S prod(int l, int r) { // [l,r)
+        assert(0 <= l);
+        assert(l <= r);
+        assert(r <= siz);
+        S resL = e(), resR = e();
+        for (l += N, r += N; l < r; l >>= 1, r >>= 1) {
+            // 交換法則を仮定しなくてよい
+            if (l & 1) {
+                resL = op(resL, seg[l++]);
+            }
+            if (r & 1) {
+                resR = op(seg[--r], resR);
+            }
+        }
+        return op(resL, resR);
+    }
+    /**
+     * @brief f(prod[L,r))=true となる最大の r を返す
+     */
+    int max_right(int L, auto f) {
+        assert(0 <= L);
+        assert(L <= siz);
+        assert(f(e()));
+        if (L == siz) {
+            return siz;
+        }
+        int l = L + N, r = siz + N;
+        std::vector<int> nodes, right_nodes; // [l,siz) のノード列
         while (l < r) {
             if (l & 1) {
-                // 奇数 -> 足してからずらす
-                left_val = Monoid::op(left_val, seg_[l++]);
+                nodes.push_back(l++);
             }
-            if (r & 1) { 
-                // 偶数 -> ずらしてから足す（開区間だから）
-                right_val = Monoid::op(seg_[--r], right_val);
+            if (r & 1) {
+                right_nodes.push_back(--r);
             }
-            
             l >>= 1, r >>= 1;
         }
-        return Monoid::op(left_val, right_val);
-    }
-
-    T all_prod() const {
-        return seg_[1];
-    }
-
-    T get(int i) const {
-        assert(0 <= i && i < N_);
-
-        return seg_[seg_N_ + i];
-    }
-
-    template <typename F>
-    int max_right(int l, const F& f) const {
-        assert(0 <= l && l < N_);
-        assert(f(Monoid::e()));
-
-        if (!f(seg_[l + seg_N_])) { // r が存在しない
-            return l; // (== r)
+        for (int i = (int)right_nodes.size() - 1; i >= 0; i--) {
+            nodes.push_back(right_nodes[i]);
         }
-
-        l += seg_N_;
-        T prod = Monoid::e();
-        int r = l;
-        int next_r = r + 1;
-
-        while (1) {
-            if (!(next_r & 1)) { // 偶数なら、親ノードへ
-                next_r >>= 1;
+        S sm = e();
+        for (int k = 0; k < (int)nodes.size(); k++) {
+            int i = nodes[k];
+            S nxt = op(sm, seg[i]);
+            if (f(nxt)) {
+                sm = nxt;
+                continue;
             }
-            T next_prod = Monoid::op(prod, seg_[next_r]);
-            if (!f(next_prod)) {
-                while (next_r < seg_N_ && !f(next_prod)) {
-                    next_r <<= 1; // 条件を満たしてくれるまで、左の子を辿っていく
-                    next_prod = Monoid::op(prod, seg_[next_r]);
-                }
-                if (!f(next_prod)) {
-                    break;
+            // seg[i] から下っていく
+            while (i < N) {
+                int li = i << 1, ri = (i << 1) | 1;
+                nxt = op(sm, seg[li]);
+                if (f(nxt)) {
+                    sm = nxt;
+                    i = ri;
+                } else {
+                    i = li;
                 }
             }
-            r = next_r; // r を更新
-            prod = next_prod; // prod を更新
-            next_r = r + 1; // 次のノード
-
-            if ((next_r & (next_r - 1)) == 0) { // 2 冪になったら終了
-                break;
-            }
+            return i - N;
         }
-
-        // r が葉にたどり着くまで潜っていく
-        while (r < seg_N_) {
-            r <<= 1;
-            r++;
-        }
-
-        r -= seg_N_;
-
-        return r + 1; // 開区間に戻す
+        return siz;
     }
-
-    template <typename F> 
-    int min_left(int r, const F& f) {
-        assert(0 <= r && r <= N_);
-        assert(f(Monoid::e()));
-
-        if (r == 0 || !f(seg_[r - 1 + seg_N_])) { // l が存在しない
-            return r; // (== l)
+    /**
+     * @brief f(prod[l,R))=true となる最小の l を返す
+     */
+    int min_left(int R, auto f) {
+        assert(0 <= R);
+        assert(R <= siz);
+        assert(f(e()));
+        if (R == 0) {
+            return 0;
         }
-
-        r += seg_N_;
-        T prod = Monoid::e();
-        int l = r;
-        int next_l = l - 1;
-
-        while (1) {
-            if (next_l & 1) { // 奇数なら、親ノードへ
-                next_l >>= 1;
+        int l = 0 + N, r = R + N;
+        // [0,r) の場合、左側から回収されるノードはない
+        std::vector<int> nodes; 
+        while (l < r) {
+            if (r & 1) {
+                nodes.push_back(--r);
             }
-            T next_prod = Monoid::op(prod, seg_[next_l]);
-            if (!f(next_prod)) {
-                while (next_l < seg_N_ && !f(next_prod)) {
-                    next_l <<= 1; // 条件を満たしてくれるまで、右の子を辿っていく
-                    next_l++;
-                    next_prod = Monoid::op(prod, seg_[next_l]);
-                }
-                if (!f(next_prod)) {
-                    break;
+            l >>= 1, r >>= 1;
+        }
+        S sm = e();
+        for (int k = 0; k < (int)nodes.size(); k++) {
+            int i = nodes[k];
+            S nxt = op(seg[i], sm); // 非可換でも OK
+            if (f(nxt)) {
+                sm = nxt;
+                continue;
+            }
+            while (i < N) {
+                int li = (i << 1), ri = (i << 1) | 1;
+                nxt = op(seg[ri], sm);
+                if (f(nxt)) {
+                    sm = nxt;
+                    i = li;
+                } else {
+                    i = ri;
                 }
             }
-            l = next_l; // l を更新
-            prod = next_prod; // prod を更新
-            next_l = l - 1; // 次のノード
-
-            if (((next_l + 1) & next_l) == 0) { // 2^n - 1 の形になったら終了
-                break;
-            }
+            return i - N + 1;
         }
-
-        // r が葉にたどり着くまで潜っていく
-        while (l < seg_N_) {
-            l <<= 1;
-        }
-
-        l -= seg_N_;
-
-        return l; // 開区間に戻す
+        return 0;
     }
-
 };
 
 #endif // Segtree_HPP

@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <vector>
+#include "../Others/Ops.hpp"
 
 // 行列の構造体
 template <typename Ops>
@@ -86,5 +87,51 @@ std::vector<typename Ops::T> mat_mul_vec(const Matrix<Ops>& A, const std::vector
     }
     return y;
 }
+
+// ここからアフィン変換
+template<typename T = int>
+Matrix<AddMulOps<T>> shift(T dx, T dy) {
+    Matrix<AddMulOps<T>> A = Matrix<AddMulOps<T>>::identity(3);
+    A.set(0, 2, dx);
+    A.set(1, 2, dy);
+    return A;
+}
+// 時計回り
+template<typename T = int>
+Matrix<AddMulOps<T>> rot_cw() {
+    Matrix<AddMulOps<T>> A(3, 3);
+    A.set(0, 1, 1);
+    A.set(1, 0, -1);
+    A.set(2, 2, 1);
+    return A;
+}
+// 反時計回り
+template<typename T = int>
+Matrix<AddMulOps<T>> rot_ccw() {
+    Matrix<AddMulOps<T>> A(3, 3);
+    A.set(0, 1, -1);
+    A.set(1, 0, 1);
+    A.set(2, 2, 1);
+    return A;
+}
+// x=p に関する反転
+template<typename T = int>
+Matrix<AddMulOps<T>> reflect_x_eq(T p) { 
+    Matrix<AddMulOps<T>> A = Matrix<AddMulOps<T>>::identity(3);
+    A.set(0, 0, -1);
+    A.set(0, 2, 2 * p);
+    return A;
+}
+// y=p に関する反転
+template<typename T = int>
+Matrix<AddMulOps<T>> reflect_y_eq(T p) { 
+    Matrix<AddMulOps<T>> A = Matrix<AddMulOps<T>>::identity(3);
+    A.set(1, 1, -1);
+    A.set(1, 2, 2 * p);
+    return A;
+}
+
+template <typename T>
+using Mat = Matrix<AddMulOps<T>>;
 
 #endif // Matrix_HPP
