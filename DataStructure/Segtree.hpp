@@ -13,18 +13,18 @@ private:
     std::vector<S> seg;
 
 public:
-    Segtree(int siz) : siz(siz), p(0) {
+    Segtree(int siz) : p(0), siz(siz) {
         while (siz > (1 << p)) {
             p++;
         }
-        N = (1 << p);
+        N = 1 << p;
         seg.assign(2 * N, e());
     }
-    Segtree(const std::vector<S>& vec) : siz((int)vec.size()), p(0) {
+    Segtree(const std::vector<S>& vec) : p(0), siz((int)vec.size()) {
         while (siz > (1 << p)) {
             p++;
         }
-        N = (1 << p);
+        N = 1 << p;
         seg.assign(2 * N, e());
         for (int i = 0; i < siz; i++) {
             seg[i + N] = vec[i];
