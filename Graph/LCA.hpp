@@ -21,7 +21,7 @@ public:
         }
         par.assign(LOG, std::vector<int>(N, -1));
         for (int v = 0; v < N; v++) {
-            par[0][v] = tree.get_par(v);
+            par[0][v] = tree.get_parent(v);
         }
         for (int i = 1; i < LOG; i++) {
             for (int v = 0; v < N; v++) {
@@ -62,6 +62,12 @@ public:
         return tree.get_depth(u) + tree.get_depth(v) - 2 * tree.get_depth(lca(u, v));
     }
     /**
+     * @brief u, v 間の重み付き距離を返す
+     */
+    T get_weighted_dist(int u, int v) {
+        return tree.get_weighted_depth(u) + tree.get_weighted_depth(v) - 2 * tree.get_weighted_depth(lca(u, v));
+    }
+    /**
      * @brief u, v 間に p があるかを判定する
      */
     bool is_on_path(int u, int v, int p) {
@@ -97,24 +103,11 @@ public:
         int du = tree.get_depth(u) - tree.get_depth(w);
         int dv = tree.get_depth(v) - tree.get_depth(w);
         int dist = du + dv;
-        if (k > dist) {
-            return -1;
-        }
+        assert(k <= dist);
         if (k <= du) {
             return kth_ancestor(u, k);
         }
         return kth_ancestor(v, dist - k);
-    }
-    /**
-     * @brief u が v の祖先のとき、u->v パス上で u の子を返す
-     */
-    int get_child_on_path(int u, int v) {
-        if (u == v) {
-            return -1;
-        }
-        assert(is_ancestor(u, v));
-        int diff = tree.get_depth(v) - tree.get_depth(u);
-        return kth_ancestor(v, diff - 1);
     }
 };
 

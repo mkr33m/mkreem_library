@@ -14,11 +14,12 @@ private:
     using Edge = typename Graph<T>::Edge;
     int root;
     int N;
-    std::vector<int> par, depth;
+    std::vector<int> parent, depth, siz;
+    std::vector<T> weighted_depth;
     bool done_build;
 
 public:
-    Tree(int N, int root = 0) : Graph<T>(N), root(root), N(N), par(N, -1), depth(N, -1), done_build(false) {}
+    Tree(int N, int root = 0) : Graph<T>(N), root(root), N(N), parent(N, -1), depth(N, -1), siz(N, 0), weighted_depth(N, T(0)), done_build(false) {}
     void read(bool weighted = false, bool directed = false, int padding = 1) {
         Graph<T>::read(N - 1, weighted, directed, padding);
         if (!done_build) {
@@ -27,25 +28,33 @@ public:
         }
     }
     int get_root() const { return root; }
-    int get_par(int v) const { return par[v]; }
+    int get_parent(int v) const { return parent[v]; }
     int get_depth(int v) const { return depth[v]; }
+    int get_size(int v) const { return siz[v]; }
+    T get_weighted_depth(int v) const { return weighted_depth[v]; }
+    int size() const { return N; }
 
     void build() {
         if (done_build) {
             return;
         }
         done_build = true;
-        auto dfs = [&](auto dfs, int v, int p, int d) -> void {
-            par[v] = p;
+        auto dfs = [&](auto dfs, int v, int p, int d, T wd) -> void {
+            parent[v] = p;
             depth[v] = d;
+            weighted_depth[v] = wd;
+            int cnt = 0;
             for (const auto& e : (*this)[v]) {
                 if (e.to == p) {
                     continue;
                 }
-                dfs(dfs, e.to, v, d + 1);
+                dfs(dfs, e.to, v, d + 1, wd + e.cost);
+                cnt += siz[e.to];
             }
+            cnt++;
+            siz[v] = cnt;
         };
-        dfs(dfs, root, -1, 0);
+        dfs(dfs, root, -1, 0, T(0));
     }
 
     // 木の直径 ===========================================

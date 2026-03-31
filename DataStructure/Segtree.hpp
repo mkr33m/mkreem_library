@@ -76,6 +76,9 @@ public:
         }
         return op(resL, resR);
     }
+    S all_prod() {
+        return prod(0, siz);
+    }
     /**
      * @brief f(prod[L,r))=true となる最大の r を返す
      */

@@ -4,9 +4,9 @@
 #include <cassert>
 #include <vector>
 
-template <class Graph, class T, class Merge, class AddEdge, class AddRoot>
+template <class Tree, class T, class Merge, class AddEdge, class AddRoot>
 struct RerootingDP {
-    Graph& G;
+    Tree& G;
     Merge merge;
     AddEdge add_edge;
     AddRoot add_vertex;
@@ -15,7 +15,7 @@ struct RerootingDP {
     int N;
     std::vector<T> bottom_up_dp;
     std::vector<T> ans;
-    RerootingDP(Graph& G, Merge merge, AddEdge add_edge, AddRoot add_vertex, T id)
+    RerootingDP(Tree& G, Merge merge, AddEdge add_edge, AddRoot add_vertex, T id)
         : G(G), merge(merge), add_edge(add_edge), add_vertex(add_vertex), id(id), N(G.size()), bottom_up_dp(N, id), ans(N, id) {
             calc_bottom_up(0, -1);
             calc_top_down(0, -1, id);

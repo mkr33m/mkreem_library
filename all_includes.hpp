@@ -20,6 +20,7 @@
 #include "Graph/EulerTour_Group.hpp"
 #include "Graph/EulerTour_Monoid.hpp"
 #include "Graph/Graph.hpp"
+#include "Graph/LCA.hpp"
 #include "Graph/Tree.hpp"
 #include "Math/Binom.hpp"
 #include "Math/BinomMod.hpp"
@@ -28,6 +29,7 @@
 #include "Math/enum_divisors.hpp"
 #include "Math/extended_gcd.hpp"
 #include "Math/is_prime.hpp"
+#include "Math/kth_root_integer.hpp"
 #include "Math/math.hpp"
 #include "Math/osa_k.hpp"
 #include "Math/prime_factorize_map.hpp"
@@ -43,5 +45,7 @@
 #include "String/Grid.hpp"
 #include "String/MP.hpp"
 #include "String/RollingHash.hpp"
+#include "String/lcp_array.hpp"
+#include "String/suffix_array.hpp"
 
 #endif // all_includes_HPP
