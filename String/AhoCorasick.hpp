@@ -2,19 +2,14 @@
 #define AhoCorasick_HPP
 
 #include <array>
+#include <iostream>
 #include <queue>
 #include <string>
 #include <vector>
 
-/**
- * 各頂点について、
- * その頂点に対応する文字列を S としたとき
- * S の全 suffix（ただし S を除く）を見て、
- * P に属しているもののうち最長
- * へのリンクを持つ必要がある
- */
 template <int siz, int base, bool store_matches = false> // 文字列の種類数
 struct AhoCorasick {
+private:
     struct Node {
         /**
          * @param accept なんらかの文字列の終端となっているか
@@ -36,8 +31,14 @@ struct AhoCorasick {
         }
     };
     std::vector<Node> nodes;
+    int M;
     std::vector<int> ID;
-    AhoCorasick(int N) : ID(N, -1) {
+    bool built;
+public:
+    /**
+     * @param M 文字列集合数
+     */
+    AhoCorasick(int M) : M(M), ID(M, -1), built(false) {
         nodes.emplace_back(Node());
     }
     /**
@@ -60,14 +61,18 @@ struct AhoCorasick {
             nodes[pos].idxes.push_back(idx);
         }
         ID[idx] = pos;
-    };
-    /**
-     * @brief idx 番目の文字列に対応する頂点番号を返す
-     */
-    int getID(int idx) {
-        return ID[idx];
+    }
+    void read() {
+        assert(!built);
+        for (int i = 0; i < M; i++) {
+            std::string S; std::cin >> S;
+            add(S, i);
+        }
+        build();
     }
     void build() {
+        assert(!built);
+        built = true;
         std::queue<int> q;
         for (int i = 0; i < siz; i++) {
             int c = nodes[0].nxt[i];
@@ -95,7 +100,7 @@ struct AhoCorasick {
             for (int i = 0; i < siz; i++) {
                 int c = nodes[v].nxt[i];
                 bool child = nodes[v].is_child[i];
-                if (c != -1 && child) { // 遷移先がある（子が存在する）
+                if (c != -1 && child) { // 遷移先がある（ただし、子が存在するという意味で）
                     // 親 v の failure_link から i に対応する文字進んだ状態が、子 c の failure_link
                     nodes[c].failure_link = nodes[f].nxt[i];
                     q.emplace(c);
@@ -106,6 +111,36 @@ struct AhoCorasick {
                 }
             }
         }
+    }
+    /**
+     * @brief idx 番目の文字列に対応する頂点番号を返す
+     */
+    int getID(int idx) {
+        return ID[idx];
+    }
+    /**
+     * @brief Trie 木上の状態数を返す
+     */
+    int size() {
+        return (int)nodes.size();
+    }
+    /**
+     * @brief 状態 pos から i で遷移したときの遷移先を返す
+     */
+    int to(int pos, int i) const {
+        return nodes[pos].nxt[i];
+    };
+    const std::vector<int>& get_idxes(int pos) const {
+        return nodes[pos].idxes;
+    }
+    int get_cnt(int pos) const {
+        return nodes[pos].cnt;
+    }
+    bool is_accept(int pos) const {
+        return nodes[pos].accept;
+    }
+    int failure_link(int pos) const {
+        return nodes[pos].failure_link;
     }
 };
 
