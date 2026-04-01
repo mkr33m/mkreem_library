@@ -115,13 +115,13 @@ public:
     /**
      * @brief idx 番目の文字列に対応する頂点番号を返す
      */
-    int getID(int idx) {
+    int getID(int idx) const {
         return ID[idx];
     }
     /**
      * @brief Trie 木上の状態数を返す
      */
-    int size() {
+    int size() const {
         return (int)nodes.size();
     }
     /**
@@ -129,7 +129,7 @@ public:
      */
     int to(int pos, int i) const {
         return nodes[pos].nxt[i];
-    };
+    }
     const std::vector<int>& get_idxes(int pos) const {
         return nodes[pos].idxes;
     }
