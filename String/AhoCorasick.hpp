@@ -126,20 +126,32 @@ public:
         return (int)nodes.size();
     }
     /**
-     * @brief 状態 pos から i で遷移したときの遷移先を返す
+     * @brief ノード pos から i で遷移したときの遷移先を返す
      */
     int to(int pos, int i) const {
         return nodes[pos].nxt[i];
     }
+    /**
+     * @brief ノード pos を始点とした failure_link 鎖上の accept ノードに対応する文字列（の添え字）を返す
+     */
     const std::vector<int>& get_idxes(int pos) const {
         return nodes[pos].idxes;
     }
+    /**
+     * @brief ノード pos を始点とした failure_link 鎖上の accept ノード数を返す
+     */
     int get_cnt(int pos) const {
         return nodes[pos].cnt;
     }
+    /**
+     * @brief ノード pos が accept かどうかを返す
+     */
     bool is_accept(int pos) const {
         return nodes[pos].accept;
     }
+    /**
+     * @brief ノード pos の failure_link を返す
+     */
     int failure_link(int pos) const {
         return nodes[pos].failure_link;
     }
