@@ -47,5 +47,6 @@
 #include "String/RollingHash.hpp"
 #include "String/lcp_array.hpp"
 #include "String/suffix_array.hpp"
+#include "String/AhoCorasick.hpp"
 
 #endif // all_includes_HPP

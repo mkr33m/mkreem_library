@@ -103,7 +103,9 @@ public:
         int du = tree.get_depth(u) - tree.get_depth(w);
         int dv = tree.get_depth(v) - tree.get_depth(w);
         int dist = du + dv;
-        assert(k <= dist);
+        if (k > dist) {
+            return -1;
+        }
         if (k <= du) {
             return kth_ancestor(u, k);
         }
