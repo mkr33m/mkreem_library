@@ -2,6 +2,7 @@
 #define AhoCorasick_HPP
 
 #include <array>
+#include <cassert>
 #include <iostream>
 #include <queue>
 #include <string>
